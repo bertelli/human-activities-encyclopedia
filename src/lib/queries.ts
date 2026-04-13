@@ -115,7 +115,31 @@ export async function getActivityBySlug(slug: string) {
     parent = p ?? null;
   }
 
-  return { ...activity, tools, glossary, children, parent };
+  const siblings = await db.execute<{
+    name: string;
+    slug: string;
+  }>(sql`
+    SELECT name, slug FROM activities
+    WHERE category_id = (SELECT id FROM categories WHERE slug = ${activity.categorySlug})
+    ORDER BY LOWER(name) ASC
+  `);
+  const idx = siblings.findIndex((s) => s.slug === activity.slug);
+  const prev =
+    idx > 0
+      ? {
+          name: String(siblings[idx - 1].name),
+          slug: String(siblings[idx - 1].slug),
+        }
+      : null;
+  const next =
+    idx >= 0 && idx < siblings.length - 1
+      ? {
+          name: String(siblings[idx + 1].name),
+          slug: String(siblings[idx + 1].slug),
+        }
+      : null;
+
+  return { ...activity, tools, glossary, children, parent, prev, next };
 }
 
 export async function searchActivities(q: string) {

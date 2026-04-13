@@ -135,9 +135,10 @@ async function CategoryBody({ slug }: { slug: string }) {
                       <li key={c.id}>
                         <Link
                           href={`/activity/${c.slug}`}
-                          className="block pl-12 py-1 text-[#757575] no-underline hover:text-black hover:underline"
+                          className="flex items-center gap-3 py-1 text-[#757575] no-underline hover:text-black hover:underline"
                         >
-                          {c.name}
+                          <span className="w-[40px] shrink-0" aria-hidden />
+                          <span>{c.name}</span>
                         </Link>
                       </li>
                     ))}
