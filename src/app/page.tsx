@@ -7,11 +7,6 @@ export default function Home() {
   return (
     <div className="p-6">
       <header className="mb-6">
-        <div aria-hidden className="flex flex-col gap-4 mb-6">
-          {["The", "Incomplete", "Atlas", "of", "Doing"].map((word) => (
-            <VoxelTitle key={word} text={word} />
-          ))}
-        </div>
         <h1
           className="atlas-title m-0 mb-8 text-black"
           style={{
@@ -27,10 +22,16 @@ export default function Home() {
       </header>
 
       <Suspense
-        fallback={<p className="text-[#757575] mt-6">Loading…</p>}
+        fallback={<p className="text-[#757575]">Loading…</p>}
       >
         <BrowserShell />
       </Suspense>
+
+      <footer aria-hidden className="flex flex-col gap-4 mt-16">
+        {["The", "Incomplete", "Atlas", "of", "Doing"].map((word) => (
+          <VoxelTitle key={word} text={word} />
+        ))}
+      </footer>
     </div>
   );
 }
