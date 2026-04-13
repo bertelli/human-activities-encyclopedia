@@ -30,10 +30,19 @@ body {
 }
 
 .atlas-title {
-  font-size: clamp(72px, 18vw, 280px);
-  line-height: 0.95;
+  font-size: clamp(160px, 12vw, 280px);
+  line-height: 0.9;
   letter-spacing: -4px;
-  font-weight: 500;
+  font-weight: 700;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 640px) {
+  .atlas-title {
+    font-size: 80px;
+    letter-spacing: -2px;
+  }
 }
 
 ::selection {

@@ -87,7 +87,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         </div>
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <h1 className="m-0 font-normal text-black">{activity.name}</h1>
+            <h1 className="m-0 font-normal text-black text-5xl leading-[0.9]">{activity.name}</h1>
             <p className="m-0 mt-1 text-[#757575]">
               {activity.glossary.length} terms · {activity.tools.length} tools
               {activity.children.length > 0 &&
