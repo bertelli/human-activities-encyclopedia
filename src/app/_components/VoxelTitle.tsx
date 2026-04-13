@@ -23,7 +23,7 @@ const GLYPHS: Record<string, string[]> = {
 };
 
 const ROWS = 7;
-const CELL_PX = 28;
+const CELL_PX = 18;
 const DEPTH = 5; // voxels deep — letter stands proud
 
 // Camera tilted DOWN (negative X pitch) so the TOP of each cube faces the
