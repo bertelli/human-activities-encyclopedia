@@ -2,73 +2,79 @@
 
 import { useEffect, useRef } from "react";
 
-// Each letter is its own 3D voxel object: volumetric cubes with iso shading,
-// no rotation, baseline-aligned so every letter lines up horizontally.
+// Bitmap font: each glyph is a 5-wide × 7-tall grid (I is 3-wide).
+// 'X' = filled cube, '.' = empty.
+const GLYPHS: Record<string, string[]> = {
+  A: [".XXX.", "X...X", "X...X", "XXXXX", "X...X", "X...X", "X...X"],
+  C: [".XXXX", "X....", "X....", "X....", "X....", "X....", ".XXXX"],
+  D: ["XXXX.", "X...X", "X...X", "X...X", "X...X", "X...X", "XXXX."],
+  E: ["XXXXX", "X....", "X....", "XXXX.", "X....", "X....", "XXXXX"],
+  F: ["XXXXX", "X....", "X....", "XXXX.", "X....", "X....", "X...."],
+  G: [".XXXX", "X....", "X....", "X..XX", "X...X", "X...X", ".XXXX"],
+  H: ["X...X", "X...X", "X...X", "XXXXX", "X...X", "X...X", "X...X"],
+  I: ["XXX", ".X.", ".X.", ".X.", ".X.", ".X.", "XXX"],
+  L: ["X....", "X....", "X....", "X....", "X....", "X....", "XXXXX"],
+  M: ["X...X", "XX.XX", "X.X.X", "X.X.X", "X...X", "X...X", "X...X"],
+  N: ["X...X", "XX..X", "X.X.X", "X.X.X", "X..XX", "X...X", "X...X"],
+  O: [".XXX.", "X...X", "X...X", "X...X", "X...X", "X...X", ".XXX."],
+  P: ["XXXX.", "X...X", "X...X", "XXXX.", "X....", "X....", "X...."],
+  S: [".XXXX", "X....", "X....", ".XXX.", "....X", "....X", "XXXX."],
+  T: ["XXXXX", "..X..", "..X..", "..X..", "..X..", "..X..", "..X.."],
+};
 
-const FONT_PX = 20;
-const CELL_PX = 6;
-const DEPTH = 3;
-const ASCENT_PX = Math.round(FONT_PX * 0.78);
-const DESCENT_PX = Math.round(FONT_PX * 0.22);
-const RASTER_H = ASCENT_PX + DESCENT_PX;
+const ROWS = 7;
+const CELL_PX = 24;
+const DEPTH = 7;
 
-function VoxelLetter({ ch }: { ch: string }) {
-  const ref = useRef<HTMLCanvasElement>(null);
+// Steep top-down view: camera looking down onto the letters.
+const TILT = 1.1;
+const TC = Math.cos(TILT);
+const TS = Math.sin(TILT);
+const ANGLE = -0.35;
+const CA = Math.cos(ANGLE);
+const SA = Math.sin(ANGLE);
 
-  useEffect(() => {
-    const cv = ref.current;
-    if (!cv) return;
-    const ctx = cv.getContext("2d");
-    if (!ctx) return;
-
-    // 1. Rasterize this single letter.
-    const off = document.createElement("canvas");
-    const offCtx = off.getContext("2d")!;
-    offCtx.font = `700 ${FONT_PX}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
-    const W = Math.max(1, Math.ceil(offCtx.measureText(ch).width));
-    off.width = W;
-    off.height = RASTER_H;
-    offCtx.fillStyle = "white";
-    offCtx.fillRect(0, 0, W, RASTER_H);
-    offCtx.fillStyle = "black";
-    offCtx.font = `700 ${FONT_PX}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
-    offCtx.textBaseline = "alphabetic";
-    offCtx.fillText(ch, 0, ASCENT_PX);
-
-    const img = offCtx.getImageData(0, 0, W, RASTER_H).data;
-
-    // 2. Collect voxels from opaque pixels.
-    const vset = new Set<string>();
-    const vox: Array<[number, number, number]> = [];
-    for (let y = 0; y < RASTER_H; y++) {
-      for (let x = 0; x < W; x++) {
-        const i = (y * W + x) * 4;
-        if (img[i] < 128) {
-          for (let z = 0; z < DEPTH; z++) {
-            const key = `${x},${-y},${z}`;
-            if (!vset.has(key)) {
-              vset.add(key);
-              vox.push([x, -y, z]);
-            }
+function buildVoxels(rows: string[]): {
+  set: Set<string>;
+  list: Array<[number, number, number]>;
+  w: number;
+} {
+  const set = new Set<string>();
+  const list: Array<[number, number, number]> = [];
+  const w = rows[0]?.length ?? 0;
+  for (let r = 0; r < rows.length; r++) {
+    for (let c = 0; c < rows[r].length; c++) {
+      if (rows[r][c] === "X") {
+        for (let z = 0; z < DEPTH; z++) {
+          const y = ROWS - 1 - r; // row 0 (top of glyph) -> y = ROWS-1
+          const key = `${c},${y},${z}`;
+          if (!set.has(key)) {
+            set.add(key);
+            list.push([c, y, z]);
           }
         }
       }
     }
+  }
+  return { set, list, w };
+}
 
-    // 3. Canvas size: same height for every letter (RASTER_H + depth offset),
-    // width = letter width + depth offset. Baseline is constant.
-    const tilt = 0.45;
-    const tc = Math.cos(tilt);
-    const ts = Math.sin(tilt);
-    const angle = -0.35;
-    const ca = Math.cos(angle);
-    const sa = Math.sin(angle);
+function VoxelLetter({ ch }: { ch: string }) {
+  const ref = useRef<HTMLCanvasElement>(null);
+  const glyph = GLYPHS[ch];
 
-    const depthOffsetX = Math.ceil(DEPTH * Math.abs(sa)) + 1;
-    const depthOffsetY = Math.ceil(DEPTH * Math.abs(ts)) + 1;
+  useEffect(() => {
+    const cv = ref.current;
+    if (!cv || !glyph) return;
+    const ctx = cv.getContext("2d");
+    if (!ctx) return;
 
-    const spanX = W + depthOffsetX;
-    const spanY = RASTER_H + depthOffsetY;
+    const { set: vset, list: vox, w: W } = buildVoxels(glyph);
+
+    const dx = Math.ceil(DEPTH * Math.abs(SA));
+    const dy = Math.ceil(DEPTH * Math.abs(TS));
+    const spanX = W + dx;
+    const spanY = ROWS + dy;
     const Cw = spanX * CELL_PX;
     const Ch = spanY * CELL_PX;
     cv.width = Cw;
@@ -100,14 +106,13 @@ function VoxelLetter({ ch }: { ch: string }) {
       if (!topVis && !botVis && !leftVis && !rightVis && !frontVis && !backVis)
         continue;
 
-      const rx = x * ca - z * sa;
-      const rz = x * sa + z * ca;
+      const rx = x * CA - z * SA;
+      const rz = x * SA + z * CA;
       const screenX = rx * CELL_PX;
-      // Baseline: y = 0 row sits near bottom, at depth-offset above bottom.
-      // Raster y maps to voxel -y; so voxel y ∈ [−(RASTER_H − 1), 0].
-      // screenY: we want y=0 (baseline) at Ch − depthOffsetY*CELL_PX.
-      const screenY = (-(y * tc - rz * ts) + depthOffsetY) * CELL_PX;
-      const depthK = y * ts + rz * tc;
+      // Y up: larger y → higher on screen (smaller sy). Baseline y=0 sits
+      // near bottom of canvas (at Ch - dy*CELL_PX).
+      const screenY = Ch - dy * CELL_PX - (y * TC - rz * TS) * CELL_PX;
+      const depthK = y * TS + rz * TC;
       ps.push({
         sx: Math.round(screenX),
         sy: Math.round(screenY),
@@ -121,12 +126,10 @@ function VoxelLetter({ ch }: { ch: string }) {
     }
     ps.sort((a, b) => b.depth - a.depth);
 
-    const rightOnScreen = ca >= 0 ? "right" : "left";
-    const leftOnScreen = ca >= 0 ? "left" : "right";
-    const zRightOnScreen = -sa >= 0 ? "front" : "back";
-    const zLeftOnScreen = -sa >= 0 ? "back" : "front";
-
-    const BLOCK = CELL_PX;
+    const rightOnScreen = CA >= 0 ? "right" : "left";
+    const leftOnScreen = CA >= 0 ? "left" : "right";
+    const zRightOnScreen = -SA >= 0 ? "front" : "back";
+    const zLeftOnScreen = -SA >= 0 ? "back" : "front";
 
     for (const p of ps) {
       const rFaceVisA =
@@ -139,29 +142,33 @@ function VoxelLetter({ ch }: { ch: string }) {
       const rFaceVis = rFaceVisA || rFaceVisB;
       const lFaceVis = lFaceVisA || lFaceVisB;
 
-      for (let dy = 0; dy < BLOCK; dy++)
-        for (let dx = 0; dx < BLOCK; dx++) {
-          const x = p.sx + dx;
-          const y = p.sy + dy - BLOCK;
+      for (let pdy = 0; pdy < CELL_PX; pdy++) {
+        for (let pdx = 0; pdx < CELL_PX; pdx++) {
+          // Place block so (p.sx, p.sy) is the bottom-left of this cube on
+          // the iso diamond top face (like CategoryIcon centering).
+          const x = p.sx + pdx;
+          const y = p.sy - CELL_PX + pdy;
           if (x < 0 || x >= Cw || y < 0 || y >= Ch) continue;
-          const uY = dy / BLOCK;
-          const uX = dx / BLOCK;
+          const uY = pdy / CELL_PX;
+          const uX = pdx / CELL_PX;
           let color: string;
           if (uY < 0.4 && p.topVis) {
-            color = ((dx + dy) & 1) === 0 ? "#ffffff" : "#d0d0d0";
+            color = ((pdx + pdy) & 1) === 0 ? "#ffffff" : "#d0d0d0";
           } else if (uX < 0.5 && lFaceVis) {
-            color = ((dx + dy) & 1) === 0 ? "#888888" : "#707070";
+            color = ((pdx + pdy) & 1) === 0 ? "#888888" : "#707070";
           } else if (uX >= 0.5 && rFaceVis) {
-            color = ((dx + dy) & 1) === 0 ? "#505050" : "#383838";
+            color = ((pdx + pdy) & 1) === 0 ? "#505050" : "#383838";
           } else {
             color = "#000000";
           }
           ctx.fillStyle = color;
           ctx.fillRect(x, y, 1, 1);
         }
+      }
     }
-  }, [ch]);
+  }, [ch, glyph]);
 
+  if (!glyph) return null;
   return (
     <canvas
       ref={ref}
@@ -174,12 +181,15 @@ function VoxelLetter({ ch }: { ch: string }) {
 }
 
 export function VoxelTitle({ text }: { text: string }) {
-  const chars = Array.from(text);
+  const chars = Array.from(text.toUpperCase());
   return (
-    <div className="flex items-end flex-wrap gap-x-2">
+    <div className="flex items-end flex-wrap">
       {chars.map((ch, i) =>
         ch === " " ? (
-          <span key={i} style={{ width: FONT_PX * CELL_PX * 0.3 }} />
+          <span
+            key={`sp-${i}`}
+            style={{ width: CELL_PX * 2, display: "inline-block" }}
+          />
         ) : (
           <VoxelLetter key={`${ch}-${i}`} ch={ch} />
         )
