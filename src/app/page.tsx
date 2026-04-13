@@ -22,7 +22,13 @@ export default function Home() {
       </header>
 
       <Suspense
-        fallback={<p className="text-[#757575]">Loading…</p>}
+        fallback={
+          <div>
+            <div className="w-full border border-black bg-white text-[#757575] pl-3 pr-10 py-2 box-border">
+              Loading…
+            </div>
+          </div>
+        }
       >
         <BrowserShell />
       </Suspense>
