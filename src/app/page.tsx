@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { getCategories } from "@/lib/queries";
 import { HomeSearch } from "./_components/HomeSearch";
+import { CategoryIcon } from "./_components/CategoryIcon";
 
 export default function Home() {
   return (
@@ -35,9 +36,14 @@ async function Categories() {
           <li key={c.id} className="border-t border-black">
             <Link
               href={`/c/${c.slug}`}
-              className="flex justify-between py-3 text-black no-underline hover:underline"
+              className="flex justify-between items-center py-3 text-black no-underline hover:underline"
             >
-              <span>{c.name}</span>
+              <span className="flex items-center gap-3">
+                <span className="w-14 h-14 flex items-center justify-center shrink-0">
+                  <CategoryIcon name={c.name} size="sm" />
+                </span>
+                <span>{c.name}</span>
+              </span>
               <span className="text-[#757575]">{c.count}</span>
             </Link>
           </li>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCategoryBySlug } from "@/lib/queries";
+import { CategoryIcon } from "@/app/_components/CategoryIcon";
 
 export async function generateMetadata({
   params,
@@ -74,11 +75,16 @@ async function CategoryBody({ slug }: { slug: string }) {
 
   return (
     <>
-      <header className="mt-6 mb-4 pb-4 border-b border-black">
-        <h1 className="m-0 font-normal text-black">{cat.name}</h1>
-        <p className="m-0 mt-1 text-[#757575]">
-          {cat.activities.length} activities
-        </p>
+      <header className="mt-6 mb-4 pb-4 border-b border-black flex items-center gap-4">
+        <div className="shrink-0">
+          <CategoryIcon name={cat.name} size="lg" />
+        </div>
+        <div>
+          <h1 className="m-0 font-normal text-black">{cat.name}</h1>
+          <p className="m-0 mt-1 text-[#757575]">
+            {cat.activities.length} activities
+          </p>
+        </div>
       </header>
 
       <nav className="mb-4 flex flex-wrap gap-2">

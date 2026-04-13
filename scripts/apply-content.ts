@@ -11,9 +11,6 @@ async function main() {
     SELECT a.id, a.name, c.name AS category_name
     FROM activities a
     JOIN categories c ON c.id = a.category_id
-    WHERE (a.icon IS NULL OR a.icon = '' OR a.icon = '•')
-       OR NOT EXISTS (SELECT 1 FROM tools t WHERE t.activity_id = a.id)
-       OR NOT EXISTS (SELECT 1 FROM glossary_terms g WHERE g.activity_id = a.id)
     ORDER BY a.id
   `);
 
@@ -28,7 +25,7 @@ async function main() {
 
     await db
       .update(schema.activities)
-      .set({ icon: content.icon })
+      .set({ description: content.description })
       .where(eq(schema.activities.id, id));
 
     await db.delete(schema.tools).where(eq(schema.tools.activityId, id));

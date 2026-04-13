@@ -25,6 +25,7 @@ export const activities = pgTable(
     name: text("name").notNull(),
     slug: text("slug").notNull(),
     icon: text("icon").notNull().default(""),
+    description: text("description").notNull().default(""),
     categoryId: integer("category_id")
       .notNull()
       .references(() => categories.id, { onDelete: "cascade" }),

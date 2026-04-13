@@ -82,6 +82,12 @@ async function ActivityBody({ slug }: { slug: string }) {
         </p>
       </header>
 
+      {activity.description && (
+        <section className="mb-8">
+          <p className="m-0 text-black">{activity.description}</p>
+        </section>
+      )}
+
       {activity.children.length > 0 && (
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-normal text-black">Sub-activities</h2>
