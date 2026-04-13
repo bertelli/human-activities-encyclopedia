@@ -25,7 +25,7 @@ export default function CategoryPage({
   params: Promise<{ slug: string }>;
 }) {
   return (
-    <div className="max-w-[1280px] mx-auto px-8 py-6">
+    <div className="p-6">
       <Link href="/" className="text-black no-underline hover:underline">
         ← Atlas
       </Link>
@@ -109,15 +109,18 @@ async function CategoryBody({ slug }: { slug: string }) {
             >
               <Link
                 href={`/activity/${p.slug}`}
-                className="block py-3 text-black no-underline hover:underline"
+                className="flex items-center gap-3 py-3 text-black no-underline hover:underline"
               >
-                {p.name}
-                {children.length > 0 && (
-                  <span className="text-[#757575]">
-                    {" "}
-                    ({children.length} sub)
-                  </span>
-                )}
+                <CategoryIcon name={p.name} size="xs" animated={false} />
+                <span>
+                  {p.name}
+                  {children.length > 0 && (
+                    <span className="text-[#757575]">
+                      {" "}
+                      ({children.length} sub)
+                    </span>
+                  )}
+                </span>
               </Link>
               {children.length > 0 && (
                 <ul className="list-none p-0 m-0 pb-2">

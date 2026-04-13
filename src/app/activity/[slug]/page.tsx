@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getActivityBySlug } from "@/lib/queries";
+import { CategoryIcon } from "@/app/_components/CategoryIcon";
 
 export async function generateMetadata({
   params,
@@ -24,7 +25,7 @@ export default function ActivityPage({
   params: Promise<{ slug: string }>;
 }) {
   return (
-    <div className="max-w-[1280px] mx-auto px-8 py-6">
+    <div className="p-6">
       <Link href="/" className="text-black no-underline hover:underline">
         ← Atlas
       </Link>
@@ -60,20 +61,25 @@ async function ActivityBody({ slug }: { slug: string }) {
         >
           {activity.categoryName}
         </Link>
-        {activity.parent && (
-          <>
-            {" / "}
-            <Link
-              href={`/activity/${activity.parent.slug}`}
-              className="text-[#757575] no-underline hover:underline"
-            >
-              {activity.parent.name}
-            </Link>
-          </>
-        )}
+        {activity.parent &&
+          activity.parent.name.toLowerCase() !==
+            activity.categoryName.toLowerCase() && (
+            <>
+              {" / "}
+              <Link
+                href={`/activity/${activity.parent.slug}`}
+                className="text-[#757575] no-underline hover:underline"
+              >
+                {activity.parent.name}
+              </Link>
+            </>
+          )}
       </nav>
 
       <header className="mt-2 mb-6 pb-4 border-b border-black">
+        <div className="flex justify-center mb-3">
+          <CategoryIcon name={activity.name} size="lg" />
+        </div>
         <h1 className="m-0 font-normal text-black">{activity.name}</h1>
         <p className="m-0 mt-1 text-[#757575]">
           {activity.glossary.length} terms · {activity.tools.length} tools

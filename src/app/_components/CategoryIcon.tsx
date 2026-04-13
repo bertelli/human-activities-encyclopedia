@@ -1,18 +1,20 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { getVoxelModel } from "@/lib/voxelModels";
+import { getVoxelModel, getStaticAngle } from "@/lib/voxelModels";
 
 export function CategoryIcon({
   name,
   size = "sm",
+  animated = true,
 }: {
   name: string;
-  size?: "sm" | "lg";
+  size?: "sm" | "lg" | "xs";
+  animated?: boolean;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
-  const displayPx = size === "lg" ? 260 : 56;
-  const internalPx = size === "lg" ? 200 : 96;
+  const displayPx = size === "lg" ? 260 : size === "xs" ? 36 : 56;
+  const internalPx = size === "lg" ? 200 : size === "xs" ? 60 : 96;
 
   useEffect(() => {
     const cv = ref.current;
@@ -30,7 +32,7 @@ export function CategoryIcon({
       const r = Math.hypot(x, y, z);
       if (r > modelRadius) modelRadius = r;
     }
-    let angle = 0;
+    let angle = animated ? 0 : getStaticAngle(name);
     let raf = 0;
 
     const render = () => {
@@ -148,6 +150,10 @@ export function CategoryIcon({
       }
     };
 
+    if (!animated) {
+      render();
+      return;
+    }
     const loop = () => {
       render();
       angle += 0.005; // slower rotation
@@ -155,7 +161,7 @@ export function CategoryIcon({
     };
     loop();
     return () => cancelAnimationFrame(raf);
-  }, [name]);
+  }, [name, animated]);
 
   return (
     <canvas

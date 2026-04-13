@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { CategoryIcon } from "./CategoryIcon";
 
 type Result = {
   id: number;
@@ -10,17 +11,27 @@ type Result = {
   category_name: string;
 };
 
-export function HomeSearch() {
+type Category = {
+  id: number;
+  name: string;
+  slug: string;
+  count: number;
+};
+
+export function HomeBrowser({ categories }: { categories: Category[] }) {
   const [q, setQ] = useState("");
   const [results, setResults] = useState<Result[]>([]);
+  const [searching, setSearching] = useState(false);
   const seq = useRef(0);
 
   useEffect(() => {
     const query = q.trim();
     if (query.length < 2) {
       setResults([]);
+      setSearching(false);
       return;
     }
+    setSearching(true);
     const mySeq = ++seq.current;
     const controller = new AbortController();
     const t = setTimeout(async () => {
@@ -31,7 +42,10 @@ export function HomeSearch() {
         );
         if (!res.ok) return;
         const data = (await res.json()) as { results: Result[] };
-        if (seq.current === mySeq) setResults(data.results);
+        if (seq.current === mySeq) {
+          setResults(data.results);
+          setSearching(false);
+        }
       } catch {}
     }, 150);
     return () => {
@@ -39,6 +53,8 @@ export function HomeSearch() {
       clearTimeout(t);
     };
   }, [q]);
+
+  const showResults = q.trim().length >= 2;
 
   return (
     <div>
@@ -64,13 +80,13 @@ export function HomeSearch() {
         )}
       </div>
 
-      {q.trim().length >= 2 && (
+      {showResults ? (
         <section className="mt-6">
           <h2 className="m-0 mb-2 font-normal text-black">
             Results
             <span className="text-[#757575]"> ({results.length})</span>
           </h2>
-          {results.length === 0 ? (
+          {searching && results.length === 0 ? null : results.length === 0 ? (
             <p className="m-0 text-[#757575] border-t border-black pt-3">
               No activity matches &quot;{q.trim()}&quot;.
             </p>
@@ -90,6 +106,28 @@ export function HomeSearch() {
             </ul>
           )}
         </section>
+      ) : (
+        <nav className="mt-6">
+          <h2 className="m-0 mb-2 font-normal text-black">Categories</h2>
+          <ul className="list-none p-0 m-0">
+            {categories.map((c) => (
+              <li key={c.id} className="border-t border-black">
+                <Link
+                  href={`/c/${c.slug}`}
+                  className="flex justify-between items-center py-3 text-black no-underline hover:underline"
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="w-14 h-14 flex items-center justify-center shrink-0">
+                      <CategoryIcon name={c.name} size="sm" />
+                    </span>
+                    <span>{c.name}</span>
+                  </span>
+                  <span className="text-[#757575]">{c.count}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       )}
     </div>
   );

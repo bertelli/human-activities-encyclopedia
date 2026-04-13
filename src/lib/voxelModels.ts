@@ -389,23 +389,555 @@ const M = {
   },
 };
 
-const KEYWORDS: Array<[RegExp, keyof typeof M]> = [
-  [/^sports?\b|athletic|fitness|martial/i, "sports"],
-  [/^games?\b|puzzl|board/i, "games"],
-  [/arts?\s*&\s*crafts?|craft|paint|draw|fiber/i, "arts"],
-  [/collect/i, "collecting"],
-  [/nature|science|animal|garden|plant/i, "nature"],
-  [/tech|making|automot|motor|engineer|tool/i, "technology"],
-  [/mind|spirit|mystic|meditat|wellness/i, "mind"],
-  [/music|audio|sound|dance/i, "music"],
-  [/writ|literat|education|research|book/i, "writing"],
-  [/perform|theat|stage|media|communic/i, "performance"],
-  [/photo|camera|film/i, "photography"],
-  [/food|drink|cook|beer|wine/i, "food"],
+// ──────────────────────────────────────────────────────────────
+// Additional activity-level archetypes
+// ──────────────────────────────────────────────────────────────
+const EXTRA = {
+  // Ball sports (soccer, basketball, volleyball, bowling)
+  ball: () => filledSphere(6),
+
+  // Racket (tennis, badminton, pickleball, squash)
+  racket: () => {
+    const out: Vox[] = [];
+    // oval head in X-Y plane
+    for (let x = -4; x <= 4; x++)
+      for (let y = 0; y <= 8; y++)
+        for (let z = -1; z <= 1; z++) {
+          const d = Math.hypot(x / 4, (y - 4) / 4);
+          if (d <= 1 && d >= 0.75) out.push([x, y, z]);
+        }
+      // strings
+    for (let x = -3; x <= 3; x++)
+      for (let y = 1; y <= 7; y++) {
+        if ((x & 1) === 0 || (y & 1) === 0) out.push([x, y, 0]);
+      }
+    // handle
+    for (let y = -7; y <= 0; y++)
+      for (let x = -1; x <= 1; x++) out.push([x, y, 0]);
+    return out;
+  },
+
+  // Bat / golf club / stick
+  bat: () => {
+    const out: Vox[] = [];
+    for (let y = -7; y <= 7; y++) {
+      const r = y < -2 ? 1 : 1 + Math.floor((y + 2) / 3);
+      for (let x = -r; x <= r; x++)
+        for (let z = -r; z <= r; z++) {
+          if (Math.hypot(x, z) <= r) out.push([x, y, z]);
+        }
+    }
+    return out;
+  },
+
+  // Bicycle wheel / rim with spokes
+  wheel: () => {
+    const out: Vox[] = [];
+    const R = 7;
+    // rim (torus cross-section)
+    for (let x = -R - 1; x <= R + 1; x++)
+      for (let y = -R - 1; y <= R + 1; y++) {
+        const d = Math.hypot(x, y);
+        if (d > R + 0.5 || d < R - 1) continue;
+        for (let z = -1; z <= 1; z++) out.push([x, y, z]);
+      }
+    // spokes
+    for (let i = 0; i < 8; i++) {
+      const a = (i / 8) * Math.PI * 2;
+      for (let r = 1; r < R - 1; r++) {
+        const sx = Math.round(Math.cos(a) * r);
+        const sy = Math.round(Math.sin(a) * r);
+        out.push([sx, sy, 0]);
+      }
+    }
+    // hub
+    for (let x = -1; x <= 1; x++)
+      for (let y = -1; y <= 1; y++)
+        for (let z = -1; z <= 1; z++) out.push([x, y, z]);
+    return out;
+  },
+
+  // Arrow + bow (archery)
+  bow: () => {
+    const out: Vox[] = [];
+    // curved bow (arc)
+    for (let y = -7; y <= 7; y++) {
+      const xs = Math.round(Math.sqrt(Math.max(0, 50 - y * y)) - 4);
+      for (let x = xs; x <= xs + 1; x++)
+        for (let z = -1; z <= 1; z++) out.push([x, y, z]);
+    }
+    // string
+    for (let y = -7; y <= 7; y++) out.push([-4, y, 0]);
+    // arrow shaft
+    for (let x = -3; x <= 6; x++) out.push([x, 0, 0]);
+    // arrowhead
+    out.push([7, 0, 0], [7, 1, 0], [7, -1, 0]);
+    // fletching
+    out.push([-3, 1, 0], [-3, -1, 0], [-4, 2, 0], [-4, -2, 0]);
+    return out;
+  },
+
+  // Chess king/rook silhouette
+  chessPiece: () => {
+    const out: Vox[] = [];
+    // base
+    for (let y = -5; y <= -3; y++)
+      for (let x = -3; x <= 3; x++)
+        for (let z = -3; z <= 3; z++) {
+          if (Math.hypot(x, z) <= 3) out.push([x, y, z]);
+        }
+    // body taper
+    for (let y = -2; y <= 2; y++)
+      for (let x = -2; x <= 2; x++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x, z) <= 2) out.push([x, y, z]);
+        }
+    // neck
+    for (let y = 3; y <= 5; y++)
+      for (let x = -3; x <= 3; x++)
+        for (let z = -3; z <= 3; z++) {
+          if (Math.hypot(x, z) <= 3) out.push([x, y, z]);
+        }
+    // crown battlements
+    for (let i = 0; i < 4; i++) {
+      const a = (i / 4) * Math.PI * 2;
+      const bx = Math.round(Math.cos(a) * 3);
+      const bz = Math.round(Math.sin(a) * 3);
+      out.push([bx, 6, bz], [bx, 7, bz]);
+    }
+    return out;
+  },
+
+  // Game controller (gaming)
+  controller: () => {
+    const out: Vox[] = [];
+    // body: wide oval
+    for (let x = -6; x <= 6; x++)
+      for (let y = -3; y <= 2; y++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x / 6, y / 3) > 1) continue;
+          out.push([x, y, z]);
+        }
+    // d-pad (+ cross)
+    for (let i = -1; i <= 1; i++) {
+      out.push([-4 + i, 1, 3]);
+      out.push([-4, 1 + i, 3]);
+    }
+    // buttons on right
+    out.push([3, 2, 3], [5, 2, 3], [4, 1, 3], [4, 3, 3]);
+    return out;
+  },
+
+  // Pencil (drawing, writing subcategories)
+  pencil: () => {
+    const out: Vox[] = [];
+    // shaft (hexagonal-ish prism)
+    for (let y = -4; y <= 6; y++)
+      for (let x = -1; x <= 1; x++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(x, z) > 1.3) continue;
+          out.push([x, y, z]);
+        }
+    // eraser (bottom)
+    for (let y = -6; y <= -5; y++)
+      for (let x = -1; x <= 1; x++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(x, z) > 1.3) continue;
+          out.push([x, y, z]);
+        }
+    // ferrule (metal band)
+    for (let x = -1; x <= 1; x++)
+      for (let z = -1; z <= 1; z++) out.push([x, -4.5 | 0, z]);
+    // wooden tip (cone)
+    for (let i = 0; i < 3; i++) {
+      const r = 1 - i * 0.4;
+      for (let x = -1; x <= 1; x++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(x, z) > r) continue;
+          out.push([x, 7 + i, z]);
+        }
+    }
+    // point
+    out.push([0, 10, 0]);
+    return out;
+  },
+
+  // Vase / pottery
+  vase: () => {
+    const out: Vox[] = [];
+    for (let y = -5; y <= 6; y++) {
+      const t = (y + 5) / 11;
+      const r = 2 + 2 * Math.sin(t * Math.PI * 1.2);
+      for (let x = -4; x <= 4; x++)
+        for (let z = -4; z <= 4; z++) {
+          const d = Math.hypot(x, z);
+          if (d > r + 0.3 || d < r - 0.8) continue;
+          out.push([x, y, z]);
+        }
+    }
+    return out;
+  },
+
+  // Yarn ball with needles (knitting/crochet)
+  yarnBall: () => {
+    const out: Vox[] = [];
+    // ball
+    for (let x = -4; x <= 4; x++)
+      for (let y = -4; y <= 4; y++)
+        for (let z = -4; z <= 4; z++) {
+          const d = Math.hypot(x, y, z);
+          if (d > 4 || d < 3.2) continue;
+          out.push([x, y, z]);
+        }
+    // filled interior
+    for (let x = -3; x <= 3; x++)
+      for (let y = -3; y <= 3; y++)
+        for (let z = -3; z <= 3; z++)
+          if (Math.hypot(x, y, z) <= 3) out.push([x, y, z]);
+    // two needles sticking out diagonally
+    for (let t = 0; t < 7; t++) {
+      out.push([3 + t, 3 + t, 0]);
+      out.push([-3 - t, 3 + t, 0]);
+    }
+    return out;
+  },
+
+  // Piano keyboard
+  piano: () => {
+    const out: Vox[] = [];
+    // white keys: 10 wide
+    for (let i = 0; i < 10; i++)
+      for (let y = -2; y <= 0; y++)
+        for (let z = -3; z <= 3; z++) out.push([-5 + i, y, z]);
+    // black keys on top (5 black keys for 7 whites, pattern 2-3-2)
+    const blackX = [-4, -3, -1, 0, 1];
+    for (const bx of blackX)
+      for (let z = -3; z <= 0; z++) out.push([bx, 1, z]);
+    // body below
+    for (let x = -5; x <= 4; x++)
+      for (let y = -4; y <= -3; y++)
+        for (let z = -3; z <= 3; z++) out.push([x, y, z]);
+    return out;
+  },
+
+  // Cooking pot
+  pot: () => {
+    const out: Vox[] = [];
+    // body (cylinder hollow)
+    for (let y = -3; y <= 2; y++)
+      for (let x = -5; x <= 5; x++)
+        for (let z = -5; z <= 5; z++) {
+          const d = Math.hypot(x, z);
+          if (d > 5 || d < 4) continue;
+          out.push([x, y, z]);
+        }
+    // floor
+    for (let x = -5; x <= 5; x++)
+      for (let z = -5; z <= 5; z++) {
+        if (Math.hypot(x, z) <= 5) out.push([x, -3, z]);
+      }
+    // handles
+    for (let y = 0; y <= 2; y++) {
+      out.push([6, y, 0]);
+      out.push([-6, y, 0]);
+    }
+    out.push([7, 1, 0], [-7, 1, 0]);
+    // lid dome
+    for (let x = -5; x <= 5; x++)
+      for (let z = -5; z <= 5; z++) {
+        const d = Math.hypot(x, z);
+        if (d > 5) continue;
+        const h = Math.round(Math.sqrt(Math.max(0, 25 - d * d)) * 0.5);
+        out.push([x, 3 + h, z]);
+      }
+    // lid knob
+    out.push([0, 6, 0], [0, 7, 0]);
+    return out;
+  },
+
+  // Tent (camping)
+  tent: () => {
+    const out: Vox[] = [];
+    for (let y = -4; y <= 4; y++) {
+      const r = 5 - y;
+      if (r <= 0) break;
+      for (let x = -r; x <= r; x++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.abs(x) === r || y === -4) out.push([x, y, z]);
+        }
+    }
+    // door flap
+    for (let y = -4; y <= 0; y++) out.push([0, y, 2]);
+    return out;
+  },
+
+  // Backpack (hiking)
+  backpack: () => {
+    const out: Vox[] = [];
+    // main body (rounded rect)
+    for (let x = -3; x <= 3; x++)
+      for (let y = -5; y <= 5; y++)
+        for (let z = -2; z <= 2; z++) {
+          const corner =
+            (Math.abs(x) > 2 && Math.abs(y) > 4) ||
+            (Math.abs(x) > 2 && (y < -4.5 || y > 4.5));
+          if (corner) continue;
+          out.push([x, y, z]);
+        }
+    // top handle
+    for (let x = -1; x <= 1; x++) out.push([x, 6, 0]);
+    out.push([-1, 7, 0], [1, 7, 0]);
+    // straps
+    for (let y = -5; y <= 5; y++) {
+      out.push([-3, y, 3]);
+      out.push([3, y, 3]);
+    }
+    // front pocket detail
+    for (let x = -2; x <= 2; x++)
+      for (let y = -3; y <= -1; y++) out.push([x, y, 3]);
+    return out;
+  },
+
+  // Telescope (astronomy)
+  telescope: () => {
+    const out: Vox[] = [];
+    // barrel (long cylinder)
+    for (let y = -2; y <= 8; y++)
+      for (let x = -2; x <= 2; x++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x, z) > 2) continue;
+          out.push([x, y, z]);
+        }
+    // eyepiece (narrower extension)
+    for (let y = 9; y <= 11; y++)
+      for (let x = -1; x <= 1; x++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(x, z) > 1.3) continue;
+          out.push([x, y, z]);
+        }
+    // tripod legs (3 diagonal supports)
+    for (let t = 0; t < 6; t++) {
+      out.push([3 + t, -3 - t, 0]);
+      out.push([-3 - t, -3 - t, 0]);
+      out.push([0, -3 - t, 3 + t]);
+    }
+    // mount cross
+    for (let x = -2; x <= 2; x++) out.push([x, -3, 0]);
+    return out;
+  },
+
+  // Fishing rod
+  fishing: () => {
+    const out: Vox[] = [];
+    // rod (diagonal thin)
+    for (let t = -6; t <= 8; t++) {
+      out.push([t, t * 0.6 | 0, 0]);
+    }
+    // reel (small disc)
+    for (let x = -4; x <= -2; x++)
+      for (let y = -4; y <= -2; y++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x + 3, y + 3) > 1.5) continue;
+          out.push([x, y, z]);
+        }
+    // line dropping down
+    for (let y = 5; y >= -6; y--) out.push([9, y, 0]);
+    // hook
+    out.push([9, -7, 0], [10, -7, 0], [10, -6, 0]);
+    return out;
+  },
+
+  // Fist / glove (martial arts, boxing)
+  fist: () => {
+    const out: Vox[] = [];
+    for (let x = -3; x <= 3; x++)
+      for (let y = -3; y <= 3; y++)
+        for (let z = -3; z <= 3; z++) {
+          if (Math.hypot(x, y, z) <= 3.5) out.push([x, y, z]);
+        }
+    // knuckle bumps
+    for (let x = -2; x <= 2; x += 2) out.push([x, 3, 3]);
+    // wrist
+    for (let y = -6; y <= -3; y++)
+      for (let x = -2; x <= 2; x++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x, z) <= 2.3) out.push([x, y, z]);
+        }
+    return out;
+  },
+
+  // Meditation stones (stacked stack of flat stones)
+  stones: () => {
+    const out: Vox[] = [];
+    const stones: Array<[number, number]> = [
+      [5, -5], [4, -3], [3, -1], [4, 1], [3, 3], [2, 5],
+    ];
+    for (const [r, y] of stones) {
+      for (let x = -r; x <= r; x++)
+        for (let z = -r; z <= r; z++) {
+          if (Math.hypot(x, z) > r) continue;
+          out.push([x, y, z]);
+          out.push([x, y - 1, z]);
+        }
+    }
+    return out;
+  },
+
+  // Plant in pot (gardening)
+  plant: () => {
+    const out: Vox[] = [];
+    // pot (trapezoid)
+    for (let y = -5; y <= -2; y++) {
+      const r = 4 - Math.abs(y + 3) * 0;
+      for (let x = -r; x <= r; x++)
+        for (let z = -r; z <= r; z++) {
+          if (Math.hypot(x, z) <= r) out.push([x, y, z]);
+        }
+    }
+    // leaves (several curved arcs coming out)
+    for (let i = 0; i < 6; i++) {
+      const a = (i / 6) * Math.PI * 2;
+      for (let r = 1; r <= 5; r++) {
+        const sx = Math.round(Math.cos(a) * r * 0.5);
+        const sz = Math.round(Math.sin(a) * r * 0.5);
+        const sy = r;
+        out.push([sx, sy - 1, sz]);
+      }
+    }
+    // central stem
+    for (let y = -2; y <= 5; y++) out.push([0, y, 0]);
+    return out;
+  },
+
+  // Binoculars (birdwatching)
+  binoculars: () => {
+    const out: Vox[] = [];
+    // two parallel cylinders
+    for (const cx of [-3, 3]) {
+      for (let y = -3; y <= 3; y++)
+        for (let x = -2; x <= 2; x++)
+          for (let z = -2; z <= 2; z++) {
+            if (Math.hypot(x, z) > 2) continue;
+            out.push([cx + x, y, z]);
+          }
+    }
+    // bridge connecting them
+    for (let x = -3; x <= 3; x++)
+      for (let y = 0; y <= 1; y++) out.push([x, y, 0]);
+    return out;
+  },
+
+  // Beer/wine bottle
+  bottle: () => {
+    const out: Vox[] = [];
+    // body (cylinder)
+    for (let y = -6; y <= 1; y++)
+      for (let x = -2; x <= 2; x++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x, z) > 2.3) continue;
+          out.push([x, y, z]);
+        }
+    // shoulder
+    for (let y = 1; y <= 3; y++) {
+      const r = 2.3 - (y - 1) * 0.7;
+      for (let x = -2; x <= 2; x++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x, z) > r) continue;
+          out.push([x, y, z]);
+        }
+    }
+    // neck
+    for (let y = 4; y <= 7; y++)
+      for (let x = -1; x <= 1; x++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(x, z) > 1) continue;
+          out.push([x, y, z]);
+        }
+    // cap
+    for (let y = 8; y <= 9; y++)
+      for (let x = -1; x <= 1; x++)
+        for (let z = -1; z <= 1; z++) out.push([x, y, z]);
+    return out;
+  },
+};
+
+const M_ALL = { ...M, ...EXTRA } as const;
+
+// ──────────────────────────────────────────────────────────────
+// Keyword → model mapping. First match wins. Order matters: put
+// specific matches before generic ones.
+// ──────────────────────────────────────────────────────────────
+const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
+  // specific sports / activities
+  [/chess|checker|go\b|backgammon/i, "chessPiece"],
+  [/rubik/i, "games"],
+  [/cycl|bik(e|ing)|roller\s*skat|skateboard/i, "wheel"],
+  [/golf|baseball|cricket|hocke|axe\s*throw/i, "bat"],
+  [/tennis|badminton|pickleball|squash|racquet|racket|ping\s*pong|pong/i, "racket"],
+  [/bowl|billiard|pool\b|darts/i, "ball"],
+  [/bow|archery|arrow/i, "bow"],
+  [/box(ing)?|kickbox|judo|karate|taekwon|jiu[\s-]?jitsu|wrestl|martial|fencing/i, "fist"],
+  [/fish/i, "fishing"],
+  [/archery/i, "bow"],
+  [/camp/i, "tent"],
+  [/hik|backpack|trek|mountain/i, "backpack"],
+  [/bird|watch/i, "binoculars"],
+  [/telescop|astron|stargaz/i, "telescope"],
+  [/yoga|meditat|mindfulness|acroyoga/i, "stones"],
+  [/plant|garden|bonsai|hydropon|mycolog|forage|aquascap/i, "plant"],
+  [/controll|gaming|video\s*game|esport|larp|role[\s-]?play|cosplay/i, "controller"],
+  [/pottery|ceramic|glassblow|sculpt|candle\s*mak/i, "vase"],
+  [/knit|crochet|embroid|quilt|sew|yarn|cross[\s-]?stitch|macrame/i, "yarnBall"],
+  [/piano|keyboard|dj/i, "piano"],
+  [/guitar|violin|cello|bass|instrument|band|sing|choir|record/i, "music"],
+  [/cook|bak|bread|brew|kombucha|coffee|tea/i, "pot"],
+  [/wine|beer|spirit|cocktail/i, "bottle"],
+  [/draw|paint|sketch|callig|pyrograph|illustrat|anim|nail\s*art/i, "pencil"],
+  [/car\b|auto|drift|racing|motorcy|motor/i, "wheel"],
+  [/photo|camera|film|video/i, "photography"],
+  [/writ|journal|blog|poetry|liter|read/i, "writing"],
+  [/gun|airsoft|paintball|hunt|shoot/i, "bow"],
+  [/climb|boulder/i, "stones"],
+  [/ski|snowboard|surf|kite/i, "bat"],
+  [/swim|dive|kayak|canoe|sail|paddl/i, "fishing"],
+  [/run|jog|marathon|sprint/i, "ball"],
+  [/weight|lift|gym|body|calisth|fitness|dumbbell|barbell/i, "sports"],
+  [/board\s*games?|card|poker|jigsaw|puzzle/i, "games"],
+  [/collect|antique|coin|stamp|ephemer/i, "collecting"],
+  [/3d\s*print|blacksmith|metalwork|lockp|lego|model|electron/i, "technology"],
+  [/genealogy|research|astrology|geocach|ghost|lang|learn/i, "writing"],
+  [/comed|act|stand[\s-]?up|theat|mime|danc/i, "performance"],
+  [/home\s*impro|diy|woodwork|leather|soap|origami|scrapbook/i, "arts"],
+
+  // fall back to macro categories
+  [/^sports?\b|athletic/i, "sports"],
+  [/^games?\b/i, "games"],
+  [/arts?\s*&\s*crafts?|craft/i, "arts"],
+  [/nature|science|animal/i, "nature"],
+  [/tech|making|engineer|tool/i, "technology"],
+  [/mind|spirit|mystic/i, "mind"],
+  [/music|audio|sound/i, "music"],
+  [/perform|media|communic/i, "performance"],
+  [/photo/i, "photography"],
+  [/food|drink/i, "food"],
 ];
 
+// Deterministic, per-name angle offset so static icons all face a
+// different direction and don't look identical.
+function seedAngle(name: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < name.length; i++) {
+    h ^= name.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return ((h >>> 0) % 360) * (Math.PI / 180);
+}
+
 export function getVoxelModel(name: string): Vox[] {
-  for (const [re, key] of KEYWORDS) if (re.test(name)) return M[key]();
-  // fallback: a simple cube
-  return M.games();
+  for (const [re, key] of KEYWORDS) if (re.test(name)) return M_ALL[key]();
+  return M_ALL.games();
+}
+
+export function getStaticAngle(name: string): number {
+  return seedAngle(name);
 }
