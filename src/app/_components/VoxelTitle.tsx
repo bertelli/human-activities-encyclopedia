@@ -87,7 +87,7 @@ function VoxelLetter({ ch }: { ch: string }) {
         }
       }
     }
-    const pad = 0.5;
+    const pad = 0.15;
     const Cw = Math.ceil((maxSx - minSx + pad * 2) * CELL_PX);
     const Ch = Math.ceil((maxSy - minSy + pad * 2) * CELL_PX);
     cv.width = Cw;
