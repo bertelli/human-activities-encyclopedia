@@ -24,7 +24,7 @@ export default function ActivityPage({
   params: Promise<{ slug: string }>;
 }) {
   return (
-    <div className="max-w-[720px] mx-auto px-4 py-6">
+    <div className="max-w-[1280px] mx-auto px-8 py-6">
       <Link href="/" className="text-black no-underline hover:underline">
         ← Atlas
       </Link>

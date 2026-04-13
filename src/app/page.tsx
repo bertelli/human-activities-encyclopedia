@@ -6,7 +6,7 @@ import { CategoryIcon } from "./_components/CategoryIcon";
 
 export default function Home() {
   return (
-    <div className="max-w-[720px] mx-auto px-4 py-6">
+    <div className="max-w-[1280px] mx-auto px-8 py-6">
       <header className="mb-6">
         <h1 className="m-0 font-normal text-black">Human Activity Atlas</h1>
         <p className="m-0 mt-1 text-[#757575]">

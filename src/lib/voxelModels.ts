@@ -110,25 +110,30 @@ function cylinderX(
 }
 
 const M = {
-  // Sports — soccer ball: filled sphere with pentagonal dimples
+  // Sports — dumbbell: two weight discs + connecting bar
   sports: () => {
-    const ball = filledSphere(6);
-    // carve hex/pentagon dimples at 6 compass points
-    const dimples: Array<[number, number, number]> = [
-      [0, 6, 0], [0, -6, 0],
-      [6, 0, 0], [-6, 0, 0],
-      [0, 0, 6], [0, 0, -6],
-    ];
-    const remove = new Set<string>();
-    for (const [cx, cy, cz] of dimples) {
-      for (let dx = -1; dx <= 1; dx++)
-        for (let dy = -1; dy <= 1; dy++)
-          for (let dz = -1; dz <= 1; dz++) {
-            if (Math.hypot(dx, dy, dz) > 1.5) continue;
-            remove.add(`${cx + dx},${cy + dy},${cz + dz}`);
+    const out: Vox[] = [];
+    // weight discs (cylinders along X axis, flat faces perpendicular to X)
+    const disc = (xMin: number, xMax: number, r: number) => {
+      for (let x = xMin; x <= xMax; x++)
+        for (let y = -r; y <= r; y++)
+          for (let z = -r; z <= r; z++) {
+            if (Math.hypot(y, z) <= r) out.push([x, y, z]);
           }
-    }
-    return ball.filter(([x, y, z]) => !remove.has(`${x},${y},${z}`));
+    };
+    // left weight (two-plate stack)
+    disc(-7, -6, 4);
+    disc(-5, -4, 3);
+    // right weight
+    disc(4, 5, 3);
+    disc(6, 7, 4);
+    // bar
+    for (let x = -4; x <= 4; x++)
+      for (let y = -1; y <= 1; y++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(y, z) <= 1.3) out.push([x, y, z]);
+        }
+    return out;
   },
 
   // Games — Rubik's cube: 3×3×3 of solid sub-cubes with 1-voxel gap
@@ -153,19 +158,36 @@ const M = {
     return out;
   },
 
-  // Arts & Crafts — paintbrush: long thin diagonal handle + fat bristle head
+  // Arts & Crafts — toolbox: shell + hinged lid + arc carry handle
   arts: () => {
     const out: Vox[] = [];
-    // diagonal handle from lower-left to upper-right
-    for (let t = -6; t <= 2; t++) {
-      const h = 1;
-      for (let dx = -h; dx <= h; dx++)
-        for (let dz = -h; dz <= h; dz++) out.push([t + dx, t + dz, 0]);
+    // toolbox body shell (hollow box)
+    for (let x = -5; x <= 5; x++)
+      for (let y = -4; y <= 1; y++)
+        for (let z = -3; z <= 3; z++) {
+          const atEdge =
+            +(x === -5 || x === 5) +
+            +(y === -4) +
+            +(z === -3 || z === 3);
+          if (atEdge >= 1) out.push([x, y, z]);
+        }
+    // solid lid
+    for (let x = -5; x <= 5; x++)
+      for (let z = -3; z <= 3; z++) out.push([x, 1, z]);
+    // arc handle on top
+    for (let x = -4; x <= 4; x++) {
+      const lift = Math.round(Math.cos((x / 4) * (Math.PI / 2)) * 2.5);
+      out.push([x, 2 + lift, 0]);
+      out.push([x, 2 + lift, -1]);
+      out.push([x, 2 + lift, 1]);
     }
-    // wider ferrule + bristles at upper-right end
-    for (let x = 3; x <= 6; x++)
-      for (let y = 3; y <= 6; y++)
-        for (let z = -2; z <= 2; z++) out.push([x, y, z]);
+    // handle posts connecting to lid
+    out.push([-4, 2, 0], [-4, 2, -1], [-4, 2, 1]);
+    out.push([4, 2, 0], [4, 2, -1], [4, 2, 1]);
+    // a few visible tools sticking out (a screwdriver shaft + hammer head bump)
+    for (let y = 1; y <= 3; y++) out.push([-2, y, 2]); // screwdriver shaft
+    out.push([-2, 4, 2]); // handle tip
+    for (let x = 1; x <= 3; x++) out.push([x, 2, -2]); // hammer head peeking
     return out;
   },
 

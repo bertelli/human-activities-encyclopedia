@@ -25,7 +25,7 @@ export default function CategoryPage({
   params: Promise<{ slug: string }>;
 }) {
   return (
-    <div className="max-w-[720px] mx-auto px-4 py-6">
+    <div className="max-w-[1280px] mx-auto px-8 py-6">
       <Link href="/" className="text-black no-underline hover:underline">
         ← Atlas
       </Link>
@@ -75,16 +75,14 @@ async function CategoryBody({ slug }: { slug: string }) {
 
   return (
     <>
-      <header className="mt-6 mb-4 pb-4 border-b border-black flex items-center gap-4">
-        <div className="shrink-0">
+      <header className="mt-6 mb-4 pb-4 border-b border-black">
+        <div className="flex justify-center mb-3">
           <CategoryIcon name={cat.name} size="lg" />
         </div>
-        <div>
-          <h1 className="m-0 font-normal text-black">{cat.name}</h1>
-          <p className="m-0 mt-1 text-[#757575]">
-            {cat.activities.length} activities
-          </p>
-        </div>
+        <h1 className="m-0 font-normal text-black">{cat.name}</h1>
+        <p className="m-0 mt-1 text-[#757575]">
+          {cat.activities.length} activities
+        </p>
       </header>
 
       <nav className="mb-4 flex flex-wrap gap-2">
