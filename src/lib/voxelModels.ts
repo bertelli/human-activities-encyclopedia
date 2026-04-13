@@ -820,6 +820,119 @@ const EXTRA = {
     return out;
   },
 
+  // Skis — pair of parallel planks with upturned tips + poles
+  skis: () => {
+    const out: Vox[] = [];
+    for (const z of [-3, 2]) {
+      for (let x = -8; x <= 8; x++) {
+        // upward-curved tip at +X end
+        const y = x >= 6 ? Math.round((x - 6) * 1.2) : 0;
+        for (let zw = 0; zw <= 1; zw++) out.push([x, y, z + zw]);
+      }
+      // binding (raised block in middle)
+      for (let y = 1; y <= 2; y++)
+        for (let x = -1; x <= 1; x++)
+          for (let zw = 0; zw <= 1; zw++) out.push([x, y, z + zw]);
+    }
+    // ski poles (two vertical sticks)
+    for (const z of [-5, 5]) {
+      for (let y = -2; y <= 7; y++) out.push([2, y, z]);
+      // pole grips on top
+      for (let x = 1; x <= 3; x++) out.push([x, 7, z]);
+      // basket at bottom
+      for (let x = 1; x <= 3; x++) out.push([x, -2, z]);
+    }
+    return out;
+  },
+
+  // Axe — long handle + wedge-shaped head
+  axe: () => {
+    const out: Vox[] = [];
+    // handle (long vertical shaft)
+    for (let y = -8; y <= 5; y++)
+      for (let x = -1; x <= 1; x++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(x, z) > 1.3) continue;
+          out.push([x, y, z]);
+        }
+    // axe head (wedge-shaped, wider at cutting edge)
+    for (let y = 3; y <= 7; y++) {
+      const spread = 5 - Math.abs(y - 5); // widest at y=5
+      for (let z = -spread; z <= spread; z++)
+        for (let x = -1; x <= 2; x++) out.push([x, y, z]);
+    }
+    // cutting edge (sharper back)
+    for (let y = 4; y <= 6; y++)
+      for (let z = -6; z <= 6; z++) {
+        const taper = Math.abs(y - 5);
+        if (Math.abs(z) > 6 - taper) continue;
+        out.push([3, y, z]);
+      }
+    // handle grip (thicker bottom)
+    for (let y = -8; y <= -6; y++)
+      for (let x = -2; x <= 2; x++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(x, z * 1.5) > 2) continue;
+          out.push([x, y, z]);
+        }
+    return out;
+  },
+
+  // Rifle / gun (airsoft, paintball, shooting, hunting)
+  gun: () => {
+    const out: Vox[] = [];
+    // barrel
+    for (let x = -3; x <= 8; x++)
+      for (let y = -1; y <= 1; y++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(y, z) > 1.3) continue;
+          out.push([x, y, z]);
+        }
+    // receiver body
+    for (let x = -4; x <= 2; x++)
+      for (let y = -2; y <= 1; y++)
+        for (let z = -2; z <= 2; z++) out.push([x, y, z]);
+    // grip
+    for (let y = -6; y <= -2; y++)
+      for (let x = -2; x <= 0; x++)
+        for (let z = -1; z <= 1; z++) out.push([x, y, z]);
+    // stock
+    for (let x = -7; x <= -4; x++)
+      for (let y = -3; y <= 1; y++)
+        for (let z = -1; z <= 1; z++) out.push([x, y, z]);
+    // scope on top
+    for (let x = -1; x <= 2; x++)
+      for (let y = 2; y <= 3; y++)
+        for (let z = -1; z <= 1; z++) out.push([x, y, z]);
+    // front sight bump
+    out.push([6, 2, 0], [7, 2, 0]);
+    return out;
+  },
+
+  // Yoga mat — rolled up cylinder on one end, unrolled section
+  mat: () => {
+    const out: Vox[] = [];
+    // rolled-up portion on +X end (hollow cylinder, axis along Y)
+    for (let y = -3; y <= 3; y++)
+      for (let x = 3; x <= 7; x++)
+        for (let z = -3; z <= 3; z++) {
+          const d = Math.hypot(x - 5, z);
+          if (d > 2.3 || d < 1.3) continue;
+          out.push([x, y, z]);
+        }
+    // unrolled flat section extending in -X
+    for (let y = -3; y <= 3; y++)
+      for (let x = -8; x <= 3; x++)
+        for (let z = -1; z <= 1; z++) out.push([x, y, z]);
+    // tie strap around the roll
+    for (let z = -3; z <= 3; z++) {
+      const d = Math.hypot(0, z);
+      if (d > 2.5 || d < 1.5) continue;
+      for (let x = 5; x <= 5; x++) out.push([x, 0, z]);
+    }
+    return out;
+  },
+
   // Beer/wine bottle
   bottle: () => {
     const out: Vox[] = [];
@@ -865,7 +978,8 @@ const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
   [/chess|checker|go\b|backgammon/i, "chessPiece"],
   [/rubik/i, "games"],
   [/cycl|bik(e|ing)|roller\s*skat|skateboard/i, "wheel"],
-  [/golf|baseball|cricket|hocke|axe\s*throw/i, "bat"],
+  [/axe\s*throw|axe\b|hatchet|chop/i, "axe"],
+  [/golf|baseball|cricket|hocke/i, "bat"],
   [/tennis|badminton|pickleball|squash|racquet|racket|ping\s*pong|pong/i, "racket"],
   [/bowl|billiard|pool\b|darts/i, "ball"],
   [/bow|archery|arrow/i, "bow"],
@@ -876,7 +990,8 @@ const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
   [/hik|backpack|trek|mountain/i, "backpack"],
   [/bird|watch/i, "binoculars"],
   [/telescop|astron|stargaz/i, "telescope"],
-  [/yoga|meditat|mindfulness|acroyoga/i, "stones"],
+  [/yoga|pilates|acroyoga/i, "mat"],
+  [/meditat|mindfulness|zen/i, "stones"],
   [/plant|garden|bonsai|hydropon|mycolog|forage|aquascap/i, "plant"],
   [/controll|gaming|video\s*game|esport|larp|role[\s-]?play|cosplay/i, "controller"],
   [/pottery|ceramic|glassblow|sculpt|candle\s*mak/i, "vase"],
@@ -889,9 +1004,10 @@ const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
   [/car\b|auto|drift|racing|motorcy|motor/i, "wheel"],
   [/photo|camera|film|video/i, "photography"],
   [/writ|journal|blog|poetry|liter|read/i, "writing"],
-  [/gun|airsoft|paintball|hunt|shoot/i, "bow"],
+  [/gun|rifle|pistol|airsoft|paintball|hunt|shoot|target/i, "gun"],
   [/climb|boulder/i, "stones"],
-  [/ski|snowboard|surf|kite/i, "bat"],
+  [/alpine|downhill|ski(ing)?|nordic|cross[\s-]?country/i, "skis"],
+  [/snowboard|surf|kite|wake|paddle\s*board/i, "bat"],
   [/swim|dive|kayak|canoe|sail|paddl/i, "fishing"],
   [/run|jog|marathon|sprint/i, "ball"],
   [/weight|lift|gym|body|calisth|fitness|dumbbell|barbell/i, "sports"],

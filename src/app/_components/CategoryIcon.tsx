@@ -156,9 +156,10 @@ export function CategoryIcon({
       render();
       return;
     }
+    const direction = Math.random() < 0.5 ? -1 : 1;
     const loop = () => {
       render();
-      angle += 0.005; // slower rotation
+      angle += 0.005 * direction;
       raf = requestAnimationFrame(loop);
     };
     loop();
