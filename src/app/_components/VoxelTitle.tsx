@@ -21,7 +21,7 @@ const GLYPHS: Record<string, string[]> = {
 };
 
 const ROWS = 7;
-const CELL_PX = 18;
+const CELL_PX = 12;
 const DEPTH = 5;
 
 const TILT = -0.55;
