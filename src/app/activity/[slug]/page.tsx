@@ -51,70 +51,31 @@ async function ActivityBody({ slug }: { slug: string }) {
 
   return (
     <>
-      <div className="flex items-start justify-between gap-4">
-        <nav className="text-black">
-          <Link href="/" className="text-black no-underline hover:underline">
-            ← Atlas
-          </Link>
-          {" / "}
-          <Link
-            href={`/c/${activity.categorySlug}`}
-            className="text-black no-underline hover:underline"
-          >
-            {activity.categoryName}
-          </Link>
-          {activity.parent &&
-            activity.parent.name.toLowerCase() !==
-              activity.categoryName.toLowerCase() && (
-              <>
-                {" / "}
-                <Link
-                  href={`/activity/${activity.parent.slug}`}
-                  className="text-black no-underline hover:underline"
-                >
-                  {activity.parent.name}
-                </Link>
-              </>
-            )}
-        </nav>
-
-        <div className="flex gap-2 shrink-0">
-          {activity.prev ? (
-            <Link
-              href={`/activity/${activity.prev.slug}`}
-              title={activity.prev.name}
-              aria-label={`Previous: ${activity.prev.name}`}
-              className="border border-black px-3 py-1 text-black no-underline hover:bg-black hover:text-white leading-none"
-            >
-              ←
-            </Link>
-          ) : (
-            <span
-              aria-hidden
-              className="border border-[#757575] px-3 py-1 text-[#757575] leading-none"
-            >
-              ←
-            </span>
+      <nav className="text-black">
+        <Link href="/" className="text-black no-underline hover:underline">
+          Home
+        </Link>
+        {" / "}
+        <Link
+          href={`/c/${activity.categorySlug}`}
+          className="text-black no-underline hover:underline"
+        >
+          {activity.categoryName}
+        </Link>
+        {activity.parent &&
+          activity.parent.name.toLowerCase() !==
+            activity.categoryName.toLowerCase() && (
+            <>
+              {" / "}
+              <Link
+                href={`/activity/${activity.parent.slug}`}
+                className="text-black no-underline hover:underline"
+              >
+                {activity.parent.name}
+              </Link>
+            </>
           )}
-          {activity.next ? (
-            <Link
-              href={`/activity/${activity.next.slug}`}
-              title={activity.next.name}
-              aria-label={`Next: ${activity.next.name}`}
-              className="border border-black px-3 py-1 text-black no-underline hover:bg-black hover:text-white leading-none"
-            >
-              →
-            </Link>
-          ) : (
-            <span
-              aria-hidden
-              className="border border-[#757575] px-3 py-1 text-[#757575] leading-none"
-            >
-              →
-            </span>
-          )}
-        </div>
-      </div>
+      </nav>
 
       <header className="mt-2 mb-6 pb-4 border-b border-black">
         <div className="flex justify-center mb-3">
@@ -124,12 +85,52 @@ async function ActivityBody({ slug }: { slug: string }) {
             size="lg"
           />
         </div>
-        <h1 className="m-0 font-normal text-black">{activity.name}</h1>
-        <p className="m-0 mt-1 text-[#757575]">
-          {activity.glossary.length} terms · {activity.tools.length} tools
-          {activity.children.length > 0 &&
-            ` · ${activity.children.length} sub-activities`}
-        </p>
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <h1 className="m-0 font-normal text-black">{activity.name}</h1>
+            <p className="m-0 mt-1 text-[#757575]">
+              {activity.glossary.length} terms · {activity.tools.length} tools
+              {activity.children.length > 0 &&
+                ` · ${activity.children.length} sub-activities`}
+            </p>
+          </div>
+          <div className="flex gap-2 shrink-0">
+            {activity.prev ? (
+              <Link
+                href={`/activity/${activity.prev.slug}`}
+                title={activity.prev.name}
+                aria-label={`Previous: ${activity.prev.name}`}
+                className="border border-black w-10 h-10 flex items-center justify-center text-black no-underline hover:bg-black hover:text-white"
+              >
+                ←
+              </Link>
+            ) : (
+              <span
+                aria-hidden
+                className="border border-[#757575] w-10 h-10 flex items-center justify-center text-[#757575]"
+              >
+                ←
+              </span>
+            )}
+            {activity.next ? (
+              <Link
+                href={`/activity/${activity.next.slug}`}
+                title={activity.next.name}
+                aria-label={`Next: ${activity.next.name}`}
+                className="border border-black w-10 h-10 flex items-center justify-center text-black no-underline hover:bg-black hover:text-white"
+              >
+                →
+              </Link>
+            ) : (
+              <span
+                aria-hidden
+                className="border border-[#757575] w-10 h-10 flex items-center justify-center text-[#757575]"
+              >
+                →
+              </span>
+            )}
+          </div>
+        </div>
       </header>
 
       {activity.description && (

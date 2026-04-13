@@ -27,7 +27,7 @@ export default function CategoryPage({
   return (
     <div className="p-6">
       <Link href="/" className="text-black no-underline hover:underline">
-        ← Atlas
+        Home
       </Link>
       <Suspense fallback={<p className="text-[#757575] mt-6">Loading…</p>}>
         <CategoryContent params={params} />
