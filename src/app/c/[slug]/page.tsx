@@ -26,11 +26,13 @@ export default function CategoryPage({
 }) {
   return (
     <div className="p-6">
-      <Link href="/" className="text-black no-underline hover:underline">
-        Home
-      </Link>
-      <Suspense fallback={<p className="text-[#757575] mt-6">Loading…</p>}>
-        <CategoryContent params={params} />
+      <Suspense fallback={<p className="m-0 text-[#757575]">Loading…</p>}>
+        <>
+          <Link href="/" className="text-black no-underline hover:underline">
+            Home
+          </Link>
+          <CategoryContent params={params} />
+        </>
       </Suspense>
     </div>
   );

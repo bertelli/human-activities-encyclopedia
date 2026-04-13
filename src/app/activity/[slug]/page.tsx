@@ -27,7 +27,7 @@ export default function ActivityPage({
   return (
     <div className="p-6">
       <Suspense
-        fallback={<p className="text-[#757575] mt-6">Loading…</p>}
+        fallback={<p className="m-0 text-[#757575]">Loading…</p>}
       >
         <ActivityContent params={params} />
       </Suspense>
