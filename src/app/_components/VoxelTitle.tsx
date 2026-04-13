@@ -23,17 +23,20 @@ const GLYPHS: Record<string, string[]> = {
 };
 
 const ROWS = 7;
-const CELL_PX = 24;
-const DEPTH = 7;
+const CELL_PX = 28;
+const DEPTH = 5; // voxels deep — letter stands proud
 
-// Steep top-down view: camera looking down onto the letters.
-const TILT = 1.1;
+// Camera tilted DOWN (negative X pitch) so the TOP of each cube faces the
+// viewer — i.e. the letter is truly seen from above.
+const TILT = -0.55;
 const TC = Math.cos(TILT);
 const TS = Math.sin(TILT);
 const ANGLE = -0.35;
 const CA = Math.cos(ANGLE);
 const SA = Math.sin(ANGLE);
 
+// Standing letters: bitmap col → X, bitmap row → Y (row 0 = top = largest Y),
+// extruded in Z by DEPTH voxels.
 function buildVoxels(rows: string[]): {
   set: Set<string>;
   list: Array<[number, number, number]>;
@@ -45,12 +48,13 @@ function buildVoxels(rows: string[]): {
   for (let r = 0; r < rows.length; r++) {
     for (let c = 0; c < rows[r].length; c++) {
       if (rows[r][c] === "X") {
+        const x = c;
+        const y = ROWS - 1 - r;
         for (let z = 0; z < DEPTH; z++) {
-          const y = ROWS - 1 - r; // row 0 (top of glyph) -> y = ROWS-1
-          const key = `${c},${y},${z}`;
+          const key = `${x},${y},${z}`;
           if (!set.has(key)) {
             set.add(key);
-            list.push([c, y, z]);
+            list.push([x, y, z]);
           }
         }
       }
@@ -71,12 +75,28 @@ function VoxelLetter({ ch }: { ch: string }) {
 
     const { set: vset, list: vox, w: W } = buildVoxels(glyph);
 
-    const dx = Math.ceil(DEPTH * Math.abs(SA));
-    const dy = Math.ceil(DEPTH * Math.abs(TS));
-    const spanX = W + dx;
-    const spanY = ROWS + dy;
-    const Cw = spanX * CELL_PX;
-    const Ch = spanY * CELL_PX;
+    // Screen-space bounds for canvas sizing.
+    let minSx = Infinity,
+      maxSx = -Infinity,
+      minSy = Infinity,
+      maxSy = -Infinity;
+    for (let x = 0; x <= W; x++) {
+      for (let y = 0; y <= ROWS; y++) {
+        for (const z of [0, DEPTH]) {
+          const rx = x * CA - z * SA;
+          const rz = x * SA + z * CA;
+          const sx = rx;
+          const sy = -(y * TC - rz * TS);
+          if (sx < minSx) minSx = sx;
+          if (sx > maxSx) maxSx = sx;
+          if (sy < minSy) minSy = sy;
+          if (sy > maxSy) maxSy = sy;
+        }
+      }
+    }
+    const pad = 0.5;
+    const Cw = Math.ceil((maxSx - minSx + pad * 2) * CELL_PX);
+    const Ch = Math.ceil((maxSy - minSy + pad * 2) * CELL_PX);
     cv.width = Cw;
     cv.height = Ch;
 
@@ -108,15 +128,13 @@ function VoxelLetter({ ch }: { ch: string }) {
 
       const rx = x * CA - z * SA;
       const rz = x * SA + z * CA;
-      const screenX = rx * CELL_PX;
-      // Y up: larger y → higher on screen (smaller sy). Baseline y=0 sits
-      // near bottom of canvas (at Ch - dy*CELL_PX).
-      const screenY = Ch - dy * CELL_PX - (y * TC - rz * TS) * CELL_PX;
-      const depthK = y * TS + rz * TC;
+      const screenX = (rx - minSx + pad) * CELL_PX;
+      const screenY = (-(y * TC - rz * TS) - minSy + pad) * CELL_PX;
+      const depth = y * TS + rz * TC;
       ps.push({
         sx: Math.round(screenX),
         sy: Math.round(screenY),
-        depth: depthK,
+        depth,
         topVis,
         leftVis,
         rightVis,
@@ -144,10 +162,8 @@ function VoxelLetter({ ch }: { ch: string }) {
 
       for (let pdy = 0; pdy < CELL_PX; pdy++) {
         for (let pdx = 0; pdx < CELL_PX; pdx++) {
-          // Place block so (p.sx, p.sy) is the bottom-left of this cube on
-          // the iso diamond top face (like CategoryIcon centering).
-          const x = p.sx + pdx;
-          const y = p.sy - CELL_PX + pdy;
+          const x = p.sx - Math.floor(CELL_PX / 2) + pdx;
+          const y = p.sy - Math.floor(CELL_PX / 2) + pdy;
           if (x < 0 || x >= Cw || y < 0 || y >= Ch) continue;
           const uY = pdy / CELL_PX;
           const uX = pdx / CELL_PX;
