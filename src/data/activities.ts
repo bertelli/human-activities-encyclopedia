@@ -10,7 +10,7 @@ export const DATA: ActivityData[] = [
   {
     name: "3D Printing",
     category: "Making & Tech",
-    icon: "🖨️",
+    icon: "",
     tools: ["FDM/SLA/SLS printer", "Filament (PLA, PETG, ABS, TPU)", "Slicer software (Cura, PrusaSlicer)", "Bed adhesive", "Calipers", "Spatula/scraper", "Deburring tool", "Post-processing sandpaper", "Resin (for SLA)", "UV curing lamp"],
     glossary: {
       "FDM": "Fused Deposition Modeling – melts filament layer by layer",
@@ -30,7 +30,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Acroyoga",
     category: "Fitness & Wellness",
-    icon: "🤸",
+    icon: "",
     tools: ["Yoga mat", "Spotter", "Comfortable stretch clothing", "Open flat space", "Crash mat (for advanced work)"],
     glossary: {
       "Base": "Person on the ground supporting the flyer",
@@ -46,7 +46,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Acting",
     category: "Performing Arts",
-    icon: "🎭",
+    icon: "",
     tools: ["Script", "Monologue material", "Acting coach", "Mirror", "Recording device", "Headshots", "Resume template", "Scene partners"],
     glossary: {
       "Monologue": "Solo speech performed by one actor",
@@ -64,7 +64,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Action Figures",
     category: "Collecting",
-    icon: "🦸",
+    icon: "",
     tools: ["Display cases", "UV-protective cases", "Cotton gloves", "Soft brushes", "Acrylic risers", "Figure stands", "Price guides"],
     glossary: {
       "MOC": "Mint On Card – still sealed in original packaging",
@@ -80,7 +80,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Airsoft",
     category: "Sports",
-    icon: "🔫",
+    icon: "",
     tools: ["AEG/GBB/spring gun", "BBs (0.20g–0.45g)", "Eye protection (ANSI rated)", "Face mask", "Tactical vest/gear", "Battery & charger", "Speed loader", "Chrono (velocity meter)"],
     glossary: {
       "AEG": "Automatic Electric Gun – battery-powered automatic",
@@ -96,7 +96,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Animation",
     category: "Arts & Media",
-    icon: "🎬",
+    icon: "",
     tools: ["Drawing tablet (Wacom, iPad)", "Animation software (Animate, Toon Boom, Blender)", "Light box", "Pencils & paper", "Peg bar", "Frame-by-frame reference", "Color palette tools"],
     glossary: {
       "Keyframe": "Major pose defining the start/end of a motion",
@@ -113,7 +113,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Ant Keeping",
     category: "Animals & Nature",
-    icon: "🐜",
+    icon: "",
     tools: ["Formicarium (ant farm)", "Test tube setup", "Outworld (foraging area)", "Forceps", "Humidity gauge", "Heating mat", "Feeding dishes", "Escape prevention (Fluon/PTFE)"],
     glossary: {
       "Queen": "Reproductive female that starts and leads the colony",
@@ -129,7 +129,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Antiquing & Artefacts",
     category: "Collecting",
-    icon: "🏺",
+    icon: "",
     tools: ["UV light (blacklight)", "Magnifying loupe", "Price guides", "White gloves", "Soft cloth", "Reference books", "Authentication certificates"],
     glossary: {
       "Provenance": "Documented ownership history of an item",
@@ -145,7 +145,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Aquascaping",
     category: "Animals & Nature",
-    icon: "🌿",
+    icon: "",
     tools: ["Aquarium tank", "CO2 system", "Planted tank substrate (ADA Amazonia)", "Fertilizers", "Aquascape scissors & tweezers", "Filter", "LED grow light", "Hardscape (rocks, driftwood)"],
     glossary: {
       "Iwagumi": "Japanese minimalist aquascape using only rocks",
@@ -161,7 +161,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Archery",
     category: "Sports",
-    icon: "🏹",
+    icon: "",
     tools: ["Recurve/compound/longbow", "Arrows (carbon/aluminum/wood)", "Quiver", "Arm guard", "Finger tab or release aid", "Target face", "Arrow rest", "Bow stringer", "Stabilizer"],
     glossary: {
       "Draw weight": "Force (in lbs) required to pull bow to full draw",
@@ -178,7 +178,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Astrology",
     category: "Spiritual & Mystical",
-    icon: "♈",
+    icon: "",
     tools: ["Birth chart software (Astro.com)", "Ephemeris", "Astrology journals", "Planetary symbol reference", "Aspect grid"],
     glossary: {
       "Natal chart": "Map of planetary positions at time of birth",
@@ -194,7 +194,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Astronomy",
     category: "Science",
-    icon: "🔭",
+    icon: "",
     tools: ["Telescope (refractor/reflector/SCT)", "Eyepieces", "Star atlas", "Red flashlight", "Mount (alt-az/equatorial)", "Finder scope", "Astrophotography camera", "Barlow lens", "Planetarium app"],
     glossary: {
       "Aperture": "Diameter of telescope's light-gathering lens/mirror",
@@ -211,7 +211,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Audiophile",
     category: "Music & Audio",
-    icon: "🎧",
+    icon: "",
     tools: ["Amplifier", "DAC (digital-to-analog converter)", "Headphones (open/closed back)", "Speakers", "Speaker cables", "RCA interconnects", "Record player", "Phono preamp", "Acoustic treatment panels"],
     glossary: {
       "DAC": "Digital-to-Analog Converter – turns digital signal to audio",
@@ -228,7 +228,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Auto Detailing",
     category: "Automotive",
-    icon: "🚗",
+    icon: "",
     tools: ["Foam cannon", "Pressure washer", "Dual-action polisher", "Microfiber towels", "Clay bar", "Iron remover", "Ceramic coating", "Car wax", "Interior detailing brushes", "Wet/dry vacuum"],
     glossary: {
       "Swirl marks": "Fine circular scratches from improper washing",
@@ -245,7 +245,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Auto Racing",
     category: "Motorsports",
-    icon: "🏎️",
+    icon: "",
     tools: ["Race helmet", "HANS device", "Racing suit (Nomex)", "Gloves & boots", "Racing harness", "Roll cage", "Fire suppression system", "Data logger", "Racing tires"],
     glossary: {
       "Understeer": "Car turning less than steering input (pushing wide)",
@@ -261,7 +261,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Axe Throwing",
     category: "Sports",
-    icon: "🪓",
+    icon: "",
     tools: ["Throwing axes (single/double bit)", "Target (wood rounds)", "Lane markers", "Measuring tape", "Axes sharpening stone"],
     glossary: {
       "Double bit": "Axe with two blades on opposite sides",
@@ -276,7 +276,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Backgammon",
     category: "Board Games",
-    icon: "🎲",
+    icon: "",
     tools: ["Backgammon board", "15 checkers per player", "2 pairs of dice", "Doubling cube", "Dice cup"],
     glossary: {
       "Pip": "Single unit of movement",
@@ -292,7 +292,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Backpacking",
     category: "Outdoors",
-    icon: "🎒",
+    icon: "",
     tools: ["Backpack (50–70L)", "Tent/tarp", "Sleeping bag", "Sleeping pad", "Water filter (Sawyer Squeeze, Katadyn)", "Trekking poles", "Navigation (map, compass, GPS)", "Stove & fuel", "First aid kit", "Bear canister/hang bag"],
     glossary: {
       "Base weight": "Pack weight excluding consumables (food, water, fuel)",
@@ -309,7 +309,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Badminton",
     category: "Racket Sports",
-    icon: "🏸",
+    icon: "",
     tools: ["Racket", "Shuttlecocks (feather/nylon)", "Court shoes", "Net", "Stringing machine", "Overgrip", "Wristband"],
     glossary: {
       "Shuttlecock": "The feathered or plastic projectile used in play",
@@ -325,7 +325,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Baking",
     category: "Food & Drink",
-    icon: "🥐",
+    icon: "",
     tools: ["Stand mixer", "Kitchen scale", "Measuring cups & spoons", "Rolling pin", "Bench scraper", "Silicone molds", "Baking pans", "Pastry brush", "Thermometer", "Cooling rack", "Piping bags"],
     glossary: {
       "Proof": "Yeast dough's final rise before baking",
@@ -341,7 +341,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Beekeeping",
     category: "Animals & Nature",
-    icon: "🍯",
+    icon: "",
     tools: ["Langstroth hive", "Bee suit & veil", "Smoker", "Hive tool", "Frame grip", "Queen excluder", "Honey extractor", "Uncapping knife", "Feeders"],
     glossary: {
       "Queen": "Single reproductive female running the colony",
@@ -358,7 +358,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Billiards / Pool",
     category: "Sports",
-    icon: "🎱",
+    icon: "",
     tools: ["Pool cue", "Cue chalk", "Rack (triangle/diamond)", "Bridge stick", "Billiard balls (set)", "Pool table brush"],
     glossary: {
       "Cue ball": "The white ball struck by the cue",
@@ -375,7 +375,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Birdwatching",
     category: "Animals & Nature",
-    icon: "🦅",
+    icon: "",
     tools: ["Binoculars (8x42 recommended)", "Field guide (Peterson, Sibley)", "eBird app", "Notebook", "Camera with telephoto lens", "Scope (for distant viewing)", "Birding hat"],
     glossary: {
       "Lifer": "A species seen for the very first time",
@@ -391,7 +391,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Blacksmithing",
     category: "Making & Crafts",
-    icon: "⚒️",
+    icon: "",
     tools: ["Forge (coal/propane/induction)", "Anvil", "Hammer (cross peen, rounding)", "Tongs", "Hardy tools", "Slack tub (water quench)", "Swage block", "Punch & drift", "Angle grinder"],
     glossary: {
       "Heat treatment": "Controlled heating/cooling to change steel properties",
@@ -408,7 +408,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Board Games",
     category: "Games",
-    icon: "♟️",
+    icon: "",
     tools: ["Game boards", "Dice sets", "Player tokens", "Card sleeves", "Organizer inserts", "Rule reference cards", "Score pads", "Timer"],
     glossary: {
       "Euro game": "Strategy game emphasizing resource management over conflict",
@@ -424,7 +424,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Bodybuilding",
     category: "Fitness & Wellness",
-    icon: "💪",
+    icon: "",
     tools: ["Barbell & plates", "Dumbbells", "Cable machine", "Resistance bands", "Gym belt", "Wrist wraps", "Meal prep containers", "Kitchen scale", "Protein shaker"],
     glossary: {
       "Hypertrophy": "Muscle growth through training stimulus",
@@ -441,7 +441,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Bonsai",
     category: "Gardening",
-    icon: "🌳",
+    icon: "",
     tools: ["Bonsai scissors", "Wire cutters", "Concave cutters", "Bonsai wire (aluminum/copper)", "Bonsai soil (akadama, pumice, lava rock)", "Training pots", "Root hook", "Jin pliers"],
     glossary: {
       "Nebari": "Surface root spread at base of trunk",
@@ -458,7 +458,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Book Collecting",
     category: "Collecting",
-    icon: "📚",
+    icon: "",
     tools: ["Mylar book covers", "Acid-free boxes", "White cotton gloves", "Bookends", "Price guides (Collected Books by Allen & Patricia Ahearn)", "UV light", "Magnifying loupe"],
     glossary: {
       "First edition": "The first printing of a book",
@@ -474,7 +474,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Bowling",
     category: "Sports",
-    icon: "🎳",
+    icon: "",
     tools: ["Bowling ball (reactive resin/urethane/plastic)", "Bowling shoes", "Thumb slug", "Grip tape", "Rosin bag", "Finger inserts", "Ball bag"],
     glossary: {
       "Strike": "Knocking all 10 pins on first ball",
@@ -491,7 +491,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Boxing",
     category: "Martial Arts & Combat",
-    icon: "🥊",
+    icon: "",
     tools: ["Boxing gloves", "Hand wraps", "Heavy bag", "Speed bag", "Jump rope", "Headgear", "Mouthguard", "Body protector", "Sparring mitts"],
     glossary: {
       "Jab": "Quick straight punch with lead hand",
@@ -508,7 +508,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Brazilian Jiu-Jitsu",
     category: "Martial Arts & Combat",
-    icon: "🥋",
+    icon: "",
     tools: ["Gi (kimono)", "Belt", "No-gi rashguard & shorts", "Grappling dummy", "Mat space", "Mouth guard"],
     glossary: {
       "Guard": "Defensive position with legs controlling opponent",
@@ -525,7 +525,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Breadmaking",
     category: "Food & Drink",
-    icon: "🍞",
+    icon: "",
     tools: ["Dutch oven", "Bench scraper", "Banneton (proofing basket)", "Lame (scoring blade)", "Kitchen scale", "Dough thermometer", "Stand mixer with dough hook", "Bread pan"],
     glossary: {
       "Sourdough starter": "Wild yeast culture used to leaven bread",
@@ -542,7 +542,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Bullet Journaling",
     category: "Lifestyle & Organization",
-    icon: "📓",
+    icon: "",
     tools: ["Dotted notebook (Leuchtturm1917, Rhodia)", "Fine-liner pens (Micron, Staedtler)", "Brush pens", "Ruler", "Washi tape", "Stencils", "Highlighters", "Stamps"],
     glossary: {
       "Rapid logging": "Quick capture system using symbols for tasks/events/notes",
@@ -558,7 +558,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Calisthenics",
     category: "Fitness & Wellness",
-    icon: "🤸",
+    icon: "",
     tools: ["Pull-up bar", "Parallel bars", "Gymnastics rings", "Resistance bands", "Dip bars", "Parallettes", "Chalk"],
     glossary: {
       "Planche": "Horizontal hold with body parallel to ground supported by arms",
@@ -574,7 +574,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Calligraphy",
     category: "Arts & Crafts",
-    icon: "✒️",
+    icon: "",
     tools: ["Dip pen nib (Nikko G, Zebra G)", "Nib holder", "Ink (sumi, iron gall)", "Practice sheets", "Light pad", "Pointed/broad brush", "Watercolor for flourishing", "Guide sheets"],
     glossary: {
       "Ascender": "Stroke extending above the main body of a letter",
@@ -590,7 +590,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Camping",
     category: "Outdoors",
-    icon: "⛺",
+    icon: "",
     tools: ["Tent", "Sleeping bag", "Sleeping pad", "Camp stove", "Fuel canister", "Headlamp", "Cooler", "Tarp", "Camp chairs", "Fire starter", "Multi-tool"],
     glossary: {
       "Car camping": "Camping with vehicle access to campsite",
@@ -605,7 +605,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Candle Making",
     category: "Arts & Crafts",
-    icon: "🕯️",
+    icon: "",
     tools: ["Wax (soy, paraffin, beeswax)", "Candle wicks", "Fragrance/essential oils", "Dye chips", "Melting pot", "Thermometer", "Pour pitcher", "Molds/jars", "Wick centering tool"],
     glossary: {
       "Flash point": "Temperature at which fragrance oil can ignite",
@@ -621,7 +621,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Canoeing",
     category: "Water Sports",
-    icon: "🛶",
+    icon: "",
     tools: ["Canoe", "Paddle (single blade)", "PFD (life jacket)", "Helmet (whitewater)", "Dry bags", "Throw bag", "Kneeling pad", "Bow line"],
     glossary: {
       "Gunwale": "Top edge of canoe hull",
@@ -636,7 +636,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Car Tuning",
     category: "Automotive",
-    icon: "🔧",
+    icon: "",
     tools: ["OBD scanner", "ECU tuning software", "Laptop with tuning interface", "Wideband O2 sensor", "Boost gauge", "Dyno (dynamometer)", "Air/fuel ratio meter"],
     glossary: {
       "ECU": "Engine Control Unit – the car's brain computer",
@@ -652,7 +652,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Ceramics & Pottery",
     category: "Arts & Crafts",
-    icon: "🏺",
+    icon: "",
     tools: ["Potter's wheel", "Clay (stoneware, earthenware, porcelain)", "Kiln", "Trimming tools", "Needle tool", "Sponge", "Wire cutter", "Ribs", "Glaze & brushes"],
     glossary: {
       "Throwing": "Creating forms on a spinning potter's wheel",
@@ -669,7 +669,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Chess",
     category: "Board Games",
-    icon: "♟️",
+    icon: "",
     tools: ["Chess board & pieces", "Chess clock", "Notation pad", "Chess engine (Stockfish)", "Opening database", "Chess.com/Lichess account"],
     glossary: {
       "Gambit": "Sacrificing material for positional advantage",
@@ -686,7 +686,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Rock Climbing",
     category: "Outdoors & Sports",
-    icon: "🧗",
+    icon: "",
     tools: ["Climbing shoes", "Harness", "Belay device (ATC, GriGri)", "Locking carabiners", "Chalk bag", "Rope (dynamic)", "Quickdraws", "Cams & nuts (trad)", "Helmet", "Crash pad (bouldering)"],
     glossary: {
       "Lead climbing": "Climber clips rope to protection as they ascend",
@@ -703,7 +703,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Coffee Roasting",
     category: "Food & Drink",
-    icon: "☕",
+    icon: "",
     tools: ["Home roaster (drum/fluid bed)", "Green coffee beans", "Probe thermometer", "Scale", "Timer", "Cooling tray", "Airtight containers"],
     glossary: {
       "Green bean": "Unroasted coffee bean",
@@ -719,7 +719,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Coin Collecting",
     category: "Collecting",
-    icon: "🪙",
+    icon: "",
     tools: ["Coin albums/holders", "Cotton gloves", "Magnifying glass", "Coin grading scale reference", "Price guides (Red Book)", "Storage boxes", "NGC/PCGS slabs"],
     glossary: {
       "Obverse": "Heads side of the coin",
@@ -735,7 +735,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Cooking",
     category: "Food & Drink",
-    icon: "👨‍🍳",
+    icon: "",
     tools: ["Chef's knife", "Cutting board", "Cast iron skillet", "Stainless pots", "Instant-read thermometer", "Kitchen scale", "Wooden spoons", "Microplane grater", "Dutch oven"],
     glossary: {
       "Mise en place": "Everything in its place – prepping all ingredients before cooking",
@@ -752,7 +752,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Cosplaying",
     category: "Arts & Performing",
-    icon: "🎭",
+    icon: "",
     tools: ["Sewing machine", "EVA foam", "Heat gun", "Contact cement", "Acrylic paints", "Worbla (thermoplastic)", "Dremel tool", "Wig & wig head", "Body paint"],
     glossary: {
       "WIP": "Work In Progress – unfinished costume",
@@ -768,7 +768,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Crocheting",
     category: "Fiber Arts",
-    icon: "🧶",
+    icon: "",
     tools: ["Crochet hooks (various sizes)", "Yarn (various weights)", "Stitch markers", "Row counter", "Tapestry needles", "Scissors", "Blocking mats & pins"],
     glossary: {
       "Amigurumi": "Small crocheted stuffed toy characters",
@@ -785,7 +785,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Cross-stitch",
     category: "Fiber Arts",
-    icon: "🧵",
+    icon: "",
     tools: ["Aida cloth (14-count, 18-count)", "Embroidery floss", "Needles (tapestry)", "Embroidery hoop", "Pattern", "Scissors", "Needle minder"],
     glossary: {
       "Aida": "Evenweave fabric with visible holes for counted cross-stitch",
@@ -801,7 +801,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Cycling",
     category: "Sports",
-    icon: "🚴",
+    icon: "",
     tools: ["Road/MTB/gravel bike", "Helmet", "Cycling shoes & cleats", "Padded shorts", "GPS computer (Garmin)", "Water bottles", "Tube & pump", "Multi-tool", "Cycling jersey"],
     glossary: {
       "Cadence": "Pedaling revolutions per minute",
@@ -817,7 +817,7 @@ export const DATA: ActivityData[] = [
   {
     name: "DJing",
     category: "Music & Audio",
-    icon: "🎧",
+    icon: "",
     tools: ["DJ controller/turntables", "Mixer", "CDJs", "DJ software (Serato, Rekordbox, Traktor)", "Headphones", "Monitor speakers", "Laptop", "Vinyl records (for vinyl DJs)"],
     glossary: {
       "BPM": "Beats Per Minute – tempo of a track",
@@ -834,7 +834,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Darts",
     category: "Sports",
-    icon: "🎯",
+    icon: "",
     tools: ["Steel tip or soft tip darts", "Dartboard", "Flights", "Shafts/stems", "Dart case", "Scoreboard", "Oche (throwing line)"],
     glossary: {
       "Oche": "The throw line 7 ft 9.25 in from the board",
@@ -850,7 +850,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Disc Golf",
     category: "Sports",
-    icon: "🥏",
+    icon: "",
     tools: ["Driver disc", "Fairway driver", "Midrange disc", "Putter", "Disc golf bag", "Mini marker disc", "Towel"],
     glossary: {
       "Hyzer": "Throw with disc angled so the outside edge is lower",
@@ -866,7 +866,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Embroidery",
     category: "Fiber Arts",
-    icon: "🪡",
+    icon: "",
     tools: ["Embroidery hoop", "Embroidery floss", "Needles", "Fabric (linen, cotton)", "Transfer paper", "Scissors", "Thimble"],
     glossary: {
       "Satin stitch": "Parallel straight stitches filling an area smoothly",
@@ -882,7 +882,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Fishing",
     category: "Outdoors & Sports",
-    icon: "🎣",
+    icon: "",
     tools: ["Rod & reel", "Fishing line (mono/fluoro/braid)", "Terminal tackle (hooks, swivels)", "Lures & bait", "Tackle box", "Landing net", "Fishing license", "Polarized sunglasses", "Pliers"],
     glossary: {
       "Jigging": "Lifting and dropping a lure vertically",
@@ -899,7 +899,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Fitness",
     category: "Fitness & Wellness",
-    icon: "🏋️",
+    icon: "",
     tools: ["Barbell & plates", "Dumbbells", "Resistance bands", "Jump rope", "Gym shoes", "Lifting belt", "Foam roller", "Heart rate monitor"],
     glossary: {
       "Superset": "Two exercises performed back-to-back without rest",
@@ -915,7 +915,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Foraging",
     category: "Outdoors & Nature",
-    icon: "🍄",
+    icon: "",
     tools: ["Field guide (regional)", "Basket or mesh bag", "Knife", "Paper bags", "Hand lens", "Gloves", "Spore print paper", "GPS app"],
     glossary: {
       "Edibility": "Whether a plant/mushroom is safe to eat",
@@ -930,7 +930,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Gaming",
     category: "Games",
-    icon: "🎮",
+    icon: "",
     tools: ["Gaming PC/console", "Controller/keyboard/mouse", "Headset", "Gaming monitor", "Chair", "Capture card (streaming)", "Mousepad"],
     glossary: {
       "FPS": "First Person Shooter or Frames Per Second",
@@ -947,7 +947,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Gardening",
     category: "Nature & Outdoors",
-    icon: "🌱",
+    icon: "",
     tools: ["Trowel", "Pruners/secateurs", "Garden fork", "Hoe", "Watering can/hose", "Kneeling pad", "Gloves", "pH meter", "Compost bin", "Raised bed frames"],
     glossary: {
       "Deadheading": "Removing spent flowers to encourage more blooms",
@@ -963,7 +963,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Genealogy",
     category: "Research & Education",
-    icon: "🌲",
+    icon: "",
     tools: ["Ancestry.com", "FamilySearch.org", "DNA test kit", "Family tree software (Gramps)", "Vital records", "Census records", "Church records", "Archive access"],
     glossary: {
       "Vital records": "Birth, marriage, and death certificates",
@@ -979,7 +979,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Geocaching",
     category: "Outdoors",
-    icon: "📍",
+    icon: "",
     tools: ["GPS device or smartphone", "Geocaching app", "Pen", "Tweezers (for nano caches)", "Trade items (SWAG)", "Flashlight"],
     glossary: {
       "Cache": "Hidden container with logbook to sign",
@@ -995,7 +995,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Ghost Hunting",
     category: "Spiritual & Paranormal",
-    icon: "👻",
+    icon: "",
     tools: ["EMF meter", "Digital voice recorder (for EVP)", "Full-spectrum camera", "Infrared thermometer", "Motion sensors", "Spirit box", "Dowsing rods"],
     glossary: {
       "EVP": "Electronic Voice Phenomenon – voices captured on recording",
@@ -1010,7 +1010,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Glassblowing",
     category: "Arts & Crafts",
-    icon: "🫧",
+    icon: "",
     tools: ["Blowpipe", "Punty rod", "Marver table", "Gaffer (bench)", "Jacks", "Shears", "Annealing oven (lehr)", "Kiln", "Cullet (broken glass)"],
     glossary: {
       "Gather": "Ball of molten glass on the end of blowpipe",
@@ -1025,7 +1025,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Golf",
     category: "Sports",
-    icon: "⛳",
+    icon: "",
     tools: ["Driver", "Fairway woods", "Irons (3–9)", "Wedges (pitching, sand, lob)", "Putter", "Golf bag", "Golf shoes", "Glove", "Rangefinder", "Tees & balls"],
     glossary: {
       "Handicap": "Numerical measure of golfer's ability",
@@ -1042,7 +1042,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Gymnastics",
     category: "Sports & Fitness",
-    icon: "🤸",
+    icon: "",
     tools: ["Gymnastics mat", "Uneven bars", "Balance beam", "Vault", "Horizontal bar", "Rings", "Pommel horse", "Chalk", "Grips", "Pit foam"],
     glossary: {
       "Kip": "Movement swinging body from below to above a bar",
@@ -1059,7 +1059,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Ham Radio",
     category: "Technology",
-    icon: "📡",
+    icon: "",
     tools: ["Transceiver", "Antenna (dipole, yagi)", "Coaxial cable", "SWR meter", "Antenna tuner", "Power supply", "Logging software", "Morse code key"],
     glossary: {
       "QSO": "A radio contact between stations",
@@ -1075,7 +1075,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Hiking",
     category: "Outdoors",
-    icon: "🥾",
+    icon: "",
     tools: ["Hiking boots/trail runners", "Trekking poles", "Day pack", "Water filter/purification tablets", "Navigation (map, compass, GPS)", "First aid kit", "Rain jacket", "Sun hat", "Snacks"],
     glossary: {
       "Switchback": "Zigzag trail section ascending a steep slope",
@@ -1091,7 +1091,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Home Improvement",
     category: "Making & DIY",
-    icon: "🔨",
+    icon: "",
     tools: ["Drill & bits", "Circular saw", "Level", "Tape measure", "Stud finder", "Caulk gun", "Paint rollers", "Ladder", "Multimeter (electrical)", "Pipe wrench (plumbing)"],
     glossary: {
       "Load-bearing wall": "Wall supporting structural weight from above",
@@ -1107,7 +1107,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Homebrewing",
     category: "Food & Drink",
-    icon: "🍺",
+    icon: "",
     tools: ["Fermentor (bucket/carboy)", "Airlock & stopper", "Hydrometer", "Auto-siphon & tubing", "Sanitizer (Star San)", "Bottle capper & caps", "Thermometer", "Brewing kettle", "Wort chiller"],
     glossary: {
       "Wort": "Unfermented beer – sweet liquid from grains",
@@ -1124,7 +1124,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Horseback Riding",
     category: "Animals & Sports",
-    icon: "🐎",
+    icon: "",
     tools: ["Saddle (English/Western)", "Bridle & bit", "Riding boots", "Helmet", "Jodhpurs/breeches", "Crop", "Grooming kit", "Saddle pad"],
     glossary: {
       "Gait": "Pattern of horse movement (walk, trot, canter, gallop)",
@@ -1140,7 +1140,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Hunting",
     category: "Outdoors",
-    icon: "🦌",
+    icon: "",
     tools: ["Firearm or bow", "Ammunition/arrows", "Hunter orange vest", "Binoculars", "Rangefinder", "Game calls", "Scent eliminator", "Field dressing knife", "Game bags"],
     glossary: {
       "Rut": "Deer breeding season when bucks are most active",
@@ -1156,7 +1156,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Hydroponics",
     category: "Gardening",
-    icon: "💧",
+    icon: "",
     tools: ["Grow tent", "LED grow lights", "Nutrient solution", "pH meter", "EC meter", "Net pots", "Growing medium (clay pebbles, rockwool)", "Air pump & stones", "Reservoir"],
     glossary: {
       "DWC": "Deep Water Culture – roots suspended in oxygenated nutrient water",
@@ -1172,7 +1172,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Ice Hockey",
     category: "Sports",
-    icon: "🏒",
+    icon: "",
     tools: ["Skates", "Stick", "Helmet with cage/visor", "Shoulder pads", "Elbow pads", "Gloves", "Shin guards", "Hockey pants", "Cup", "Puck"],
     glossary: {
       "Icing": "Shooting puck from own half across opponent's goal line",
@@ -1188,7 +1188,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Jewelry Making",
     category: "Arts & Crafts",
-    icon: "💍",
+    icon: "",
     tools: ["Round nose pliers", "Flat nose pliers", "Wire cutters", "Bench block", "Hammer", "Mandrel", "Torch (soldering)", "Pickle solution", "Silver/gold wire", "Beads & gemstones"],
     glossary: {
       "Bezel": "Metal frame surrounding and holding a gemstone",
@@ -1204,7 +1204,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Jigsaw Puzzles",
     category: "Games",
-    icon: "🧩",
+    icon: "",
     tools: ["Puzzle board with cover", "Sorting trays", "Puzzle glue", "Good lighting lamp", "Puzzle roll-up mat"],
     glossary: {
       "Knob & hole": "Traditional interlocking piece shapes",
@@ -1218,7 +1218,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Journaling",
     category: "Lifestyle & Wellness",
-    icon: "📔",
+    icon: "",
     tools: ["Notebook (Moleskine, Leuchtturm)", "Good pens (Pilot G2, Uni-ball)", "Washi tape", "Stickers", "Watercolors", "Date stamp"],
     glossary: {
       "Stream of consciousness": "Writing whatever comes to mind without editing",
@@ -1232,7 +1232,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Judo",
     category: "Martial Arts & Combat",
-    icon: "🥋",
+    icon: "",
     tools: ["Judogi (gi)", "Belt", "Tatami mats", "Grappling dummy"],
     glossary: {
       "Uke": "Person being thrown in a technique",
@@ -1249,7 +1249,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Kayaking",
     category: "Water Sports",
-    icon: "🛶",
+    icon: "",
     tools: ["Kayak (sit-in/sit-on-top)", "Double-blade paddle", "PFD", "Spray skirt (for sea kayak)", "Helmet (whitewater)", "Dry bags", "Bilge pump", "Float bags"],
     glossary: {
       "Brace": "Paddle support stroke preventing capsizing",
@@ -1264,7 +1264,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Kitesurfing",
     category: "Watersports",
-    icon: "🪁",
+    icon: "",
     tools: ["Kite (leading edge inflatable)", "Bar & lines", "Harness", "Kiteboard", "Wetsuit", "Helmet", "Impact vest", "Quick-release safety system"],
     glossary: {
       "Wind window": "3D space in which a kite can fly",
@@ -1279,7 +1279,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Knitting",
     category: "Fiber Arts",
-    icon: "🧶",
+    icon: "",
     tools: ["Knitting needles (straight/circular/DPN)", "Yarn", "Stitch markers", "Row counter", "Tapestry needle", "Blocking mats", "Cable needle"],
     glossary: {
       "Knit stitch": "Basic front-of-work stitch (smooth V appearance)",
@@ -1296,7 +1296,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Kombucha Brewing",
     category: "Food & Drink",
-    icon: "🍵",
+    icon: "",
     tools: ["Glass jar (1 gallon+)", "SCOBY", "Starter liquid", "Black/green tea", "Sugar", "pH strips", "Cloth cover & rubber band", "Swing-top bottles (F2)"],
     glossary: {
       "SCOBY": "Symbiotic Culture Of Bacteria and Yeast – the living culture",
@@ -1311,7 +1311,7 @@ export const DATA: ActivityData[] = [
   {
     name: "LARPing",
     category: "Gaming & Performance",
-    icon: "⚔️",
+    icon: "",
     tools: ["LARP-safe foam weapon", "Costume/armor", "Shield", "In-game currency", "Character sheet", "Rulebook", "Safety pins"],
     glossary: {
       "Boffer": "Foam-padded LARP weapon",
@@ -1327,7 +1327,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Leather Crafting",
     category: "Arts & Crafts",
-    icon: "👜",
+    icon: "",
     tools: ["Swivel knife", "Stamping tools", "Mallet", "Stitching chisels/pricking irons", "Leather needles & waxed thread", "Edge beveler", "Burnishing tools", "Leather conditioner", "Rotary punch"],
     glossary: {
       "Vegetable tanned leather": "Leather tanned with natural plant materials – allows tooling",
@@ -1343,7 +1343,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Lego Building",
     category: "Making & Crafts",
-    icon: "🧱",
+    icon: "",
     tools: ["LEGO bricks", "Brick separator", "Part catalogues (BrickLink)", "Sorting containers", "Building base plates", "Pick-a-brick cups"],
     glossary: {
       "AFOL": "Adult Fan Of Lego",
@@ -1359,7 +1359,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Lock Picking",
     category: "Skills & Hobbies",
-    icon: "🔐",
+    icon: "",
     tools: ["Tension wrench set", "Hook picks", "Rake picks", "Diamond picks", "Transparent practice lock", "Progressive pin tumbler locks", "Practice padlocks"],
     glossary: {
       "SPP": "Single Pin Picking – setting one pin at a time",
@@ -1375,7 +1375,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Macrame",
     category: "Fiber Arts",
-    icon: "🪢",
+    icon: "",
     tools: ["Macrame cord (cotton/jute)", "Dowel rod or ring", "Scissors", "Comb", "Tape measure", "S-hooks for hanging", "Mounting board"],
     glossary: {
       "Lark's head knot": "Mounting knot attaching cord to dowel",
@@ -1391,7 +1391,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Meditation",
     category: "Fitness & Wellness",
-    icon: "🧘",
+    icon: "",
     tools: ["Meditation cushion (zafu)", "Timer app", "Mala beads", "Incense", "Meditation bench", "Blanket"],
     glossary: {
       "Samatha": "Calming meditation focusing on a single object",
@@ -1407,7 +1407,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Metal Detecting",
     category: "Outdoors & Collecting",
-    icon: "🔍",
+    icon: "",
     tools: ["Metal detector (Minelab, Garrett)", "Digging tool/pinpointer", "Finds pouch", "Knee pads", "Headphones", "Research maps"],
     glossary: {
       "Discrimination": "Setting detector to ignore certain metals",
@@ -1422,7 +1422,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Metalworking",
     category: "Making & Crafts",
-    icon: "⚙️",
+    icon: "",
     tools: ["Angle grinder", "MIG/TIG welder", "Lathe", "Mill", "Drill press", "Vise", "Calipers", "Files", "Taps & dies", "Safety gear (gloves, shield)"],
     glossary: {
       "Milling": "Machining material with rotating cutting tools",
@@ -1438,7 +1438,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Mycology",
     category: "Nature & Science",
-    icon: "🍄",
+    icon: "",
     tools: ["Pressure cooker (sterilization)", "Still air box or laminar flow hood", "Agar plates", "Syringes", "Spawn bags", "Fruiting chamber", "Humidity tent", "Field guide"],
     glossary: {
       "Mycelium": "Fungal root network of thread-like hyphae",
@@ -1454,7 +1454,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Nail Art",
     category: "Beauty & Self-care",
-    icon: "💅",
+    icon: "",
     tools: ["Gel/regular polish", "UV/LED lamp", "Nail art brushes", "Dotting tools", "Stamping plates & scraper", "Nail foils", "Nail tape", "Top coat/base coat"],
     glossary: {
       "Gel polish": "UV-cured polish lasting 2–3 weeks",
@@ -1470,7 +1470,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Origami",
     category: "Paper Arts",
-    icon: "🦢",
+    icon: "",
     tools: ["Square paper (kami, washi, foil)", "Bone folder", "Tweezers (for tiny folds)", "Wet folding paper", "Grid paper for design"],
     glossary: {
       "Valley fold": "Folding paper toward you, creating a valley",
@@ -1486,7 +1486,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Paintball",
     category: "Sports",
-    icon: "🎯",
+    icon: "",
     tools: ["Paintball marker (gun)", "Hopper/loader", "Tank (CO2/HPA)", "Mask/goggle system", "Paintballs", "Barrel cover", "Pod pack & pods", "Cleaner cloth"],
     glossary: {
       "HPA": "High Pressure Air – modern propellant system",
@@ -1502,7 +1502,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Painting",
     category: "Arts",
-    icon: "🎨",
+    icon: "",
     tools: ["Canvas/paper/board", "Brushes (various shapes/sizes)", "Palette", "Palette knife", "Easel", "Mediums (linseed oil, gesso)", "Varnish", "Brush cleaner"],
     glossary: {
       "Gesso": "White primer preparing canvas for paint",
@@ -1518,7 +1518,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Paragliding",
     category: "Extreme Sports",
-    icon: "🪂",
+    icon: "",
     tools: ["Paraglider wing", "Harness", "Reserve parachute", "Helmet", "Vario (variometer)", "Radio", "GPS", "Wind meter"],
     glossary: {
       "Thermal": "Rising column of warm air used to gain altitude",
@@ -1534,7 +1534,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Photography",
     category: "Arts & Media",
-    icon: "📷",
+    icon: "",
     tools: ["Camera (DSLR/mirrorless/film)", "Lenses", "Tripod", "Memory cards", "External flash/speedlight", "Filters (ND, polarizer)", "Editing software (Lightroom, Photoshop)", "Camera bag"],
     glossary: {
       "Aperture": "Lens opening size controlling depth of field (f/stops)",
@@ -1551,7 +1551,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Pickleball",
     category: "Racket Sports",
-    icon: "🏓",
+    icon: "",
     tools: ["Paddle (graphite/composite/wood)", "Pickleball (polymer ball)", "Court shoes", "Net (34 inches center)", "Protective eyewear"],
     glossary: {
       "Kitchen": "Non-volley zone 7 feet from the net",
@@ -1566,7 +1566,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Podcasting",
     category: "Media & Communication",
-    icon: "🎙️",
+    icon: "",
     tools: ["USB/XLR microphone", "Audio interface (XLR)", "Headphones", "Recording software (Audacity, GarageBand)", "Acoustic treatment (foam panels)", "Pop filter", "Podcast hosting (Buzzsprout, Anchor)"],
     glossary: {
       "RSS feed": "Web feed distributing podcast episodes to directories",
@@ -1582,7 +1582,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Poker",
     category: "Games",
-    icon: "🃏",
+    icon: "",
     tools: ["Playing cards", "Poker chips set", "Dealer button", "Card shuffler", "Felt table top", "Timer (tournament)", "Bankroll management spreadsheet"],
     glossary: {
       "Pot odds": "Ratio of pot size to cost of calling",
@@ -1598,7 +1598,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Powerlifting",
     category: "Fitness & Sports",
-    icon: "🏋️",
+    icon: "",
     tools: ["Barbell", "Plates (bumper/iron)", "Power rack/squat rack", "Lifting belt", "Knee sleeves/wraps", "Wrist wraps", "Deadlift shoes/slippers", "Chalk"],
     glossary: {
       "The big three": "Squat, bench press, and deadlift",
@@ -1614,7 +1614,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Pyrography",
     category: "Arts & Crafts",
-    icon: "🔥",
+    icon: "",
     tools: ["Wood burning pen/unit", "Wire nibs (shading/detailing)", "Basswood/birch panels", "Graphite transfer paper", "Sandpaper", "Sealer/finish"],
     glossary: {
       "Burning tip/nib": "Metal tip conducting heat for burning",
@@ -1629,7 +1629,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Quilting",
     category: "Fiber Arts",
-    icon: "🪡",
+    icon: "",
     tools: ["Sewing machine", "Rotary cutter & mat", "Quilting ruler", "Fabric scissors", "Pins & clips", "Iron & pressing mat", "Batting", "Quilting frame/hoop"],
     glossary: {
       "Quilt sandwich": "Layers of top, batting, and backing",
@@ -1645,7 +1645,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Reading",
     category: "Education & Leisure",
-    icon: "📖",
+    icon: "",
     tools: ["Books", "E-reader (Kindle)", "Reading light", "Bookmarks", "Reading journal", "Library card", "Goodreads account"],
     glossary: {
       "TBR": "To Be Read – accumulated list of books to read",
@@ -1660,7 +1660,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Record Collecting",
     category: "Music & Collecting",
-    icon: "💿",
+    icon: "",
     tools: ["Turntable (direct drive/belt drive)", "Phono preamp", "Speakers or headphones", "Record cleaning brush", "Anti-static inner sleeves", "Outer poly sleeves", "Stylus cleaning fluid", "Record storage crates"],
     glossary: {
       "RPM": "Revolutions per minute – 33⅓, 45, or 78 for different formats",
@@ -1676,7 +1676,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Rock Collecting",
     category: "Nature & Collecting",
-    icon: "🪨",
+    icon: "",
     tools: ["Rock hammer", "Chisel", "Hand lens (10x loupe)", "Field guide", "Collecting bags", "Safety goggles", "GPS", "Field notebook"],
     glossary: {
       "Mineral": "Naturally occurring inorganic crystalline substance",
@@ -1692,7 +1692,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Role-Playing Games",
     category: "Gaming",
-    icon: "🐉",
+    icon: "",
     tools: ["Rulebook", "Dice set (d4, d6, d8, d10, d12, d20)", "Character sheet", "Miniatures", "Battle map", "GM screen", "Campaign notebook"],
     glossary: {
       "GM/DM": "Game Master/Dungeon Master – person running the game",
@@ -1708,7 +1708,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Roller Skating",
     category: "Sports",
-    icon: "🛼",
+    icon: "",
     tools: ["Quad skates or inline skates", "Helmet", "Wrist guards", "Knee pads", "Elbow pads", "Skate tool", "Toe stops or brakes"],
     glossary: {
       "Quad skates": "Four-wheeled skates in 2×2 arrangement",
@@ -1723,7 +1723,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Rubik's Cube",
     category: "Puzzles",
-    icon: "🧊",
+    icon: "",
     tools: ["3x3 speed cube (Gan, MoYu)", "Cube lubricant (Traxxas, Maru)", "Timer (Stackmat)", "Cube bag", "Scramble app"],
     glossary: {
       "OLL": "Orientation of Last Layer",
@@ -1739,7 +1739,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Running",
     category: "Sports & Fitness",
-    icon: "🏃",
+    icon: "",
     tools: ["Running shoes", "GPS watch", "Running socks", "Moisture-wicking clothes", "Hydration vest/belt", "Foam roller", "Compression socks", "Running app (Strava, Garmin)"],
     glossary: {
       "Cadence": "Steps per minute",
@@ -1755,7 +1755,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Sailing",
     category: "Water Sports",
-    icon: "⛵",
+    icon: "",
     tools: ["Sailboat", "PFD", "VHF radio", "Charts & compass", "Winch handle", "Foul weather gear", "Flares", "Anchor & rode", "Binoculars"],
     glossary: {
       "Tack": "Turning bow through the wind",
@@ -1772,7 +1772,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Scrapbooking",
     category: "Paper Arts & Crafts",
-    icon: "✂️",
+    icon: "",
     tools: ["Scrapbook album", "Cardstock", "Patterned paper", "Adhesive (dots, tape runner)", "Scissors & craft knife", "Stamps & ink", "Embellishments", "Die-cut machine (Cricut)"],
     glossary: {
       "Layout": "Completed double page spread in a scrapbook",
@@ -1787,7 +1787,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Scuba Diving",
     category: "Water Sports",
-    icon: "🤿",
+    icon: "",
     tools: ["BCD (buoyancy control device)", "Regulator", "Tank", "Wetsuit/drysuit", "Mask", "Fins", "Dive computer", "SMB (surface marker buoy)", "Dive light", "Underwater camera"],
     glossary: {
       "Nitrogen narcosis": "Intoxicating effect of nitrogen at depth",
@@ -1803,7 +1803,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Sculpting",
     category: "Arts",
-    icon: "🗿",
+    icon: "",
     tools: ["Clay (polymer, air dry, oil-based, ceramic)", "Wire armature", "Sculpting tools (loop, ribbon, wire-end)", "Silicone molds", "Epoxy putty", "Rotary carving tool", "Calipers"],
     glossary: {
       "Armature": "Internal skeleton supporting a sculpture",
@@ -1818,7 +1818,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Sewing",
     category: "Fiber Arts",
-    icon: "🧵",
+    icon: "",
     tools: ["Sewing machine", "Serger/overlocker", "Rotary cutter & mat", "Fabric scissors", "Seam ripper", "Dressmaker's pins", "Iron & pressing cloth", "Pattern paper"],
     glossary: {
       "Seam allowance": "Extra fabric beyond stitching line",
@@ -1834,7 +1834,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Singing",
     category: "Music & Performing Arts",
-    icon: "🎤",
+    icon: "",
     tools: ["Microphone", "Audio interface", "In-ear monitors", "Voice recorder", "Piano/keyboard (for practice)", "Pitch pipe", "DAW software"],
     glossary: {
       "Chest voice": "Lower register with resonance felt in the chest",
@@ -1850,7 +1850,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Skateboarding",
     category: "Board Sports",
-    icon: "🛹",
+    icon: "",
     tools: ["Deck", "Trucks", "Wheels", "Bearings", "Grip tape", "Hardware (nuts & bolts)", "Skate tool", "Wax"],
     glossary: {
       "Ollie": "Basic jump trick popping board off the ground",
@@ -1867,7 +1867,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Skiing",
     category: "Winter Sports",
-    icon: "⛷️",
+    icon: "",
     tools: ["Skis", "Ski boots", "Bindings", "Poles", "Helmet", "Goggles", "Ski jacket & pants", "Base layers", "Gloves"],
     glossary: {
       "Carving": "Turning using ski edges with minimal skidding",
@@ -1883,7 +1883,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Skydiving",
     category: "Extreme Sports",
-    icon: "🪂",
+    icon: "",
     tools: ["Parachute container system", "Main canopy", "Reserve canopy", "AAD (automatic activation device)", "Altimeter", "Helmet", "Jumpsuit", "Goggles"],
     glossary: {
       "AFF": "Accelerated Freefall – common skydiving training program",
@@ -1898,7 +1898,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Soap Making",
     category: "Arts & Crafts",
-    icon: "🧼",
+    icon: "",
     tools: ["Scale", "Stick blender", "Safety goggles & gloves", "Stainless/silicone pot", "Soap molds", "Thermometer", "Sodium hydroxide (lye)", "Oils (olive, coconut, shea)", "Fragrance/essential oils"],
     glossary: {
       "Saponification": "Chemical reaction between oils and lye creating soap",
@@ -1914,7 +1914,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Stand-up Comedy",
     category: "Performing Arts",
-    icon: "🎤",
+    icon: "",
     tools: ["Microphone", "Notebook", "Voice recorder", "Stage time (open mics)", "Video camera for review"],
     glossary: {
       "Set": "A comedian's prepared performance material",
@@ -1931,7 +1931,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Storm Chasing",
     category: "Science & Outdoors",
-    icon: "⛈️",
+    icon: "",
     tools: ["Weather apps & radar (RadarScope)", "GPS & maps", "Camera with telephoto lens", "Dashcam", "Radio (NOAA weather)", "Hail guards for vehicle", "Spotting scope"],
     glossary: {
       "Supercell": "Rotating thunderstorm capable of producing tornadoes",
@@ -1946,7 +1946,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Surfing",
     category: "Water Sports",
-    icon: "🏄",
+    icon: "",
     tools: ["Surfboard (shortboard/longboard/fish/foamie)", "Fins", "Leash", "Wax", "Wetsuit", "Rash guard", "Surf wax comb"],
     glossary: {
       "Duck dive": "Submerging board to get through breaking waves",
@@ -1963,7 +1963,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Swimming",
     category: "Sports & Fitness",
-    icon: "🏊",
+    icon: "",
     tools: ["Swim goggles", "Swim cap", "Kickboard", "Pull buoy", "Fins (training)", "Paddles", "Waterproof fitness tracker", "Drag suit"],
     glossary: {
       "Freestyle": "Front crawl – the fastest swim stroke",
@@ -1979,7 +1979,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Tarot",
     category: "Spiritual & Mystical",
-    icon: "🔮",
+    icon: "",
     tools: ["Tarot deck (Rider-Waite or preferred deck)", "Reading cloth", "Journal", "Guidebook", "Crystals (optional)", "Candles"],
     glossary: {
       "Major Arcana": "22 trump cards representing life's major themes",
@@ -1994,7 +1994,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Taxidermy",
     category: "Science & Nature",
-    icon: "🦊",
+    icon: "",
     tools: ["Scalpel & knives", "Fleshing tool", "Preservative (borax)", "Glass eyes", "Manniform (foam form)", "Sculpting epoxy", "Hide paste", "Mounting wire"],
     glossary: {
       "Fleshing": "Removing fat and flesh from a hide",
@@ -2009,7 +2009,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Tennis",
     category: "Racket Sports",
-    icon: "🎾",
+    icon: "",
     tools: ["Racket", "Tennis balls", "Overgrip", "Vibration dampener", "Tennis shoes", "Ball machine", "Stringing machine"],
     glossary: {
       "Ace": "Serve opponent cannot touch",
@@ -2026,7 +2026,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Terrariums",
     category: "Nature & Gardening",
-    icon: "🌿",
+    icon: "",
     tools: ["Glass container (open/closed)", "Pebbles/drainage layer", "Activated charcoal", "Substrate (potting mix)", "Long tweezers & tongs", "Misting bottle", "Small plants & mosses"],
     glossary: {
       "Closed terrarium": "Sealed container creating self-sustaining ecosystem",
@@ -2041,7 +2041,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Thrifting",
     category: "Collecting & Shopping",
-    icon: "🛍️",
+    icon: "",
     tools: ["Reusable tote bags", "Measuring tape", "Fabric testing (burn test for fibers)", "Price guide apps", "Phone for research/authentication"],
     glossary: {
       "Haul": "Collection of thrift finds from one trip",
@@ -2056,7 +2056,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Thru-hiking",
     category: "Outdoors",
-    icon: "🏔️",
+    icon: "",
     tools: ["Ultralight pack (30–50L)", "Shelter (tarp/tent/bivy)", "Sleeping bag/quilt", "Water filter", "Navigation tools", "Trekking poles", "Resupply box supplies", "Satellite communicator (Garmin inReach)"],
     glossary: {
       "NOBO/SOBO": "Northbound/Southbound – direction of travel on a trail",
@@ -2072,7 +2072,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Travel",
     category: "Lifestyle",
-    icon: "✈️",
+    icon: "",
     tools: ["Passport", "Travel insurance", "Day pack", "Packing cubes", "Universal adapter", "Offline maps (Maps.me)", "Noise-canceling headphones", "Money belt"],
     glossary: {
       "Slow travel": "Spending extended time in fewer places",
@@ -2087,7 +2087,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Urban Exploration",
     category: "Outdoors & Adventure",
-    icon: "🏚️",
+    icon: "",
     tools: ["Headlamp", "Respirator mask", "Sturdy boots", "Gloves", "First aid kit", "Camera", "Buddy (never go alone)", "Phone with offline maps"],
     glossary: {
       "Urbex": "Shorthand for urban exploration",
@@ -2102,7 +2102,7 @@ export const DATA: ActivityData[] = [
   {
     name: "VR Gaming",
     category: "Gaming & Tech",
-    icon: "🥽",
+    icon: "",
     tools: ["VR headset (Quest, PlayStation VR, Valve Index)", "Controllers", "Play space (6x6 ft minimum)", "PC (for PCVR)", "Charging cables", "Lens cloth"],
     glossary: {
       "Room scale": "Moving physically around play space in VR",
@@ -2117,7 +2117,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Video Game Developing",
     category: "Tech & Games",
-    icon: "👾",
+    icon: "",
     tools: ["Game engine (Unity, Unreal, Godot)", "Code editor (VS Code)", "Version control (Git)", "Art tools (Aseprite, Blender)", "Sound tools (FMOD, Audacity)", "Itch.io account"],
     glossary: {
       "Game loop": "Core cycle of receiving input, updating state, rendering",
@@ -2133,7 +2133,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Vintage Cars",
     category: "Automotive",
-    icon: "🚘",
+    icon: "",
     tools: ["Socket set", "Torque wrench", "Body hammers & dollies", "MIG welder", "Rust treatment", "Paint gun", "Rotisserie (for full restoration)", "Parts reference manuals"],
     glossary: {
       "Concours": "Pristine show-quality restoration",
@@ -2148,7 +2148,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Voice Acting",
     category: "Performing Arts & Media",
-    icon: "🎙️",
+    icon: "",
     tools: ["Condenser microphone", "Audio interface", "Pop filter", "Acoustic treatment", "Headphones", "DAW (Adobe Audition)", "Home studio space"],
     glossary: {
       "VO": "Voice over",
@@ -2164,7 +2164,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Volleyball",
     category: "Sports",
-    icon: "🏐",
+    icon: "",
     tools: ["Volleyball", "Net & poles", "Knee pads", "Court shoes", "Libero jersey (for libero position)"],
     glossary: {
       "Spike": "Powerful attacking hit from height",
@@ -2180,7 +2180,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Welding",
     category: "Making & Crafts",
-    icon: "🔥",
+    icon: "",
     tools: ["MIG welder", "TIG welder", "Stick/ARC welder", "Auto-darkening helmet", "Welding gloves", "Angle grinder", "Clamps & magnets", "Wire brush", "Chipping hammer"],
     glossary: {
       "MIG": "Metal Inert Gas – wire-fed semi-automatic welding",
@@ -2196,7 +2196,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Whittling",
     category: "Making & Crafts",
-    icon: "🪵",
+    icon: "",
     tools: ["Whittling knife", "Detail knife", "Strop & compound", "Basswood/butternut blanks", "Cut-resistant gloves", "Sandpaper", "Danish oil finish"],
     glossary: {
       "Basswood": "Soft pale wood ideal for beginners",
@@ -2212,7 +2212,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Wine Tasting & Making",
     category: "Food & Drink",
-    icon: "🍷",
+    icon: "",
     tools: ["Wine glasses (ISO)", "Decanter", "Wine key/corkscrew", "Aerator", "Vacuum pump stoppers", "Tasting notebook", "Fermenter & airlock (winemaking)", "Hydrometer", "Crush pad/press (winemaking)"],
     glossary: {
       "Tannins": "Compounds causing drying astringent sensation",
@@ -2228,7 +2228,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Witchcraft",
     category: "Spiritual & Mystical",
-    icon: "🔮",
+    icon: "",
     tools: ["Athame (ritual knife)", "Wand", "Cauldron", "Crystals", "Tarot deck", "Grimoire/Book of Shadows", "Candles", "Herbs & incense", "Altar"],
     glossary: {
       "Grimoire": "Magical workbook recording spells and rituals",
@@ -2244,7 +2244,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Woodworking",
     category: "Making & Crafts",
-    icon: "🪚",
+    icon: "",
     tools: ["Table saw", "Band saw", "Router", "Jointer & planer", "Hand planes", "Chisels", "Clamps", "Sandpaper & ROS (random orbit sander)", "Marking gauge", "Square"],
     glossary: {
       "Grain": "Direction of wood fiber growth",
@@ -2260,7 +2260,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Wrestling",
     category: "Martial Arts & Sports",
-    icon: "🤼",
+    icon: "",
     tools: ["Wrestling shoes", "Singlet", "Headgear", "Knee pads", "Mouth guard", "Wrestling mat"],
     glossary: {
       "Takedown": "Taking opponent from standing to the mat",
@@ -2276,7 +2276,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Writing",
     category: "Arts & Literature",
-    icon: "✍️",
+    icon: "",
     tools: ["Word processor (Scrivener, Word, Google Docs)", "Thesaurus & dictionary", "Style guide (Chicago, AP)", "Notebook", "Beta readers", "Editing software (Grammarly, ProWritingAid)"],
     glossary: {
       "POV": "Point of View – perspective narrative is told from",
@@ -2292,7 +2292,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Yoga",
     category: "Fitness & Wellness",
-    icon: "🧘",
+    icon: "",
     tools: ["Yoga mat", "Yoga blocks", "Strap", "Bolster", "Blanket", "Yoga wheel", "Comfortable clothing"],
     glossary: {
       "Asana": "Physical yoga posture",
@@ -2309,7 +2309,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Yo-Yoing",
     category: "Skill Toys",
-    icon: "🪀",
+    icon: "",
     tools: ["Responsive yo-yo (beginner)", "Unresponsive yo-yo (advanced)", "Extra strings (polyester)", "Bearing lubricant", "Bearing removal tool"],
     glossary: {
       "Responsive": "Yo-yo returning when you tug the string",
@@ -2324,7 +2324,7 @@ export const DATA: ActivityData[] = [
   {
     name: "Zumba",
     category: "Fitness & Dance",
-    icon: "💃",
+    icon: "",
     tools: ["Dance/aerobics shoes", "Comfortable workout clothes", "Water bottle", "Heart rate monitor"],
     glossary: {
       "Basic step": "Foundational side-to-side movement",

@@ -9,7 +9,7 @@ export type Content = {
 
 export const SPECIFIC: Record<string, Content> = {
   "photography": {
-    icon: "📷",
+    icon: "",
     tools: ["DSLR or mirrorless camera", "Prime and zoom lenses", "Tripod", "External flash", "Memory cards", "Camera bag", "Lens filters (UV, polarizer, ND)", "Editing software (Lightroom, Capture One)"],
     glossary: [
       ["Aperture", "Lens opening controlling light and depth of field, measured in f-stops"],
@@ -23,7 +23,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "360 photography": {
-    icon: "🌐",
+    icon: "",
     tools: ["360 camera (Insta360, GoPro Max)", "Monopod or invisible selfie stick", "Tripod with nadir cap", "Stitching software", "VR headset for review", "Neutral density filters"],
     glossary: [
       ["Equirectangular", "Flat projection of a spherical panorama, 2:1 ratio"],
@@ -35,7 +35,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "astrophotography": {
-    icon: "🌌",
+    icon: "",
     tools: ["Tracking equatorial mount", "Telescope or astrograph", "Dedicated astro camera or modified DSLR", "Autoguider", "Light pollution filter", "Intervalometer", "Dew heater", "PixInsight or Siril for processing"],
     glossary: [
       ["Integration time", "Total exposure from stacking many subs"],
@@ -48,7 +48,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "film photography": {
-    icon: "🎞️",
+    icon: "",
     tools: ["35mm or medium format camera", "Film rolls (color, B&W, slide)", "Light meter", "Developing tank", "Chemistry (developer, stop, fixer)", "Film scanner", "Changing bag"],
     glossary: [
       ["Latitude", "Film's tolerance for over/underexposure"],
@@ -61,7 +61,7 @@ export const SPECIFIC: Record<string, Content> = {
   },
 
   "skiing": {
-    icon: "🎿",
+    icon: "",
     tools: ["Skis", "Ski boots", "Ski poles", "Helmet", "Goggles", "Gloves", "Base layers and insulated jacket", "Wax and scrapers for tuning"],
     glossary: [
       ["Carving", "Turning on the edges with minimal sideways slip"],
@@ -75,7 +75,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "alpine skiing": {
-    icon: "⛷️",
+    icon: "",
     tools: ["Alpine skis", "Stiff alpine boots", "Bindings with DIN release", "Helmet", "Goggles", "Race suit (for slalom)", "Ski wax"],
     glossary: [
       ["Slalom", "Short-turn race between closely-spaced gates"],
@@ -87,7 +87,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "cross-country skiing": {
-    icon: "🎿",
+    icon: "",
     tools: ["XC skis (classic or skate)", "XC boots", "Poles sized to the discipline", "Grip wax or skins", "Glide wax", "Layered breathable clothing"],
     glossary: [
       ["Diagonal stride", "Classic technique kicking and gliding alternately"],
@@ -98,7 +98,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "ski jumping": {
-    icon: "⛷️",
+    icon: "",
     tools: ["Long specialized jumping skis", "Flexible jumping boots", "Aerodynamic suit", "Helmet", "Goggles", "Wax"],
     glossary: [
       ["K-point", "Construction point of a hill (target landing zone)"],
@@ -109,7 +109,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "freestyle skiing": {
-    icon: "🤸",
+    icon: "",
     tools: ["Twin-tip freestyle skis", "Softer freestyle boots", "Helmet with freestyle certification", "Impact shorts", "Park-specific wax"],
     glossary: [
       ["Moguls", "Bumps course with two aerial jumps"],
@@ -120,7 +120,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "snowboarding": {
-    icon: "🏂",
+    icon: "",
     tools: ["Snowboard", "Snowboard boots", "Bindings", "Helmet", "Goggles", "Wrist guards", "Base layers and shell"],
     glossary: [
       ["Goofy", "Stance with right foot forward"],
@@ -133,7 +133,7 @@ export const SPECIFIC: Record<string, Content> = {
   },
 
   "chess": {
-    icon: "♟️",
+    icon: "",
     tools: ["Chess set (pieces and board)", "Chess clock", "Scorebook or notation pad", "Opening and endgame books", "Chess engine (Stockfish)", "Online platform account (Lichess, Chess.com)"],
     glossary: [
       ["Fork", "One piece attacking two or more at once"],
@@ -147,7 +147,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "go": {
-    icon: "⚫",
+    icon: "",
     tools: ["19x19 Go board (goban)", "Black and white stones", "Stone bowls", "Timer/clock", "Joseki reference", "Game record sheets"],
     glossary: [
       ["Liberty", "Empty adjacent intersection of a stone or group"],
@@ -160,7 +160,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "poker": {
-    icon: "♠️",
+    icon: "",
     tools: ["Standard 52-card deck", "Poker chips", "Chip tray", "Dealer button", "Timer for blinds", "Cut cards"],
     glossary: [
       ["Pot odds", "Ratio of pot size to call cost"],
@@ -174,7 +174,7 @@ export const SPECIFIC: Record<string, Content> = {
   },
 
   "running": {
-    icon: "🏃",
+    icon: "",
     tools: ["Running shoes", "Moisture-wicking apparel", "GPS watch or phone app", "Heart rate monitor", "Foam roller", "Hydration belt or vest"],
     glossary: [
       ["Cadence", "Steps per minute"],
@@ -186,7 +186,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "cycling": {
-    icon: "🚴",
+    icon: "",
     tools: ["Road or gravel bicycle", "Helmet", "Cycling shoes and cleats", "Bib shorts and jersey", "Water bottles", "Bike computer/GPS", "Tools: multi-tool, pump, spare tube"],
     glossary: [
       ["Peloton", "Main group of cyclists in a race"],
@@ -199,7 +199,7 @@ export const SPECIFIC: Record<string, Content> = {
   },
 
   "chess improvement": {
-    icon: "♟️",
+    icon: "",
     tools: ["Chess engine", "Tactics trainer", "Opening repertoire book", "Master games database", "Analysis board"],
     glossary: [
       ["Blunder", "Serious mistake losing material or game"],
@@ -211,7 +211,7 @@ export const SPECIFIC: Record<string, Content> = {
   },
 
   "pottery": {
-    icon: "🏺",
+    icon: "",
     tools: ["Potter's wheel", "Clay", "Kiln", "Wedging table", "Ribs and sponges", "Trimming tools", "Glazes", "Calipers"],
     glossary: [
       ["Wedging", "Kneading clay to remove air pockets"],
@@ -224,7 +224,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "bookbinding": {
-    icon: "📚",
+    icon: "",
     tools: ["Bone folder", "Awl and needles", "Waxed linen thread", "Book press", "PVA glue", "Book cloth and boards", "Paring knife", "Head bands"],
     glossary: [
       ["Signature", "Folded group of pages sewn as a unit"],
@@ -236,7 +236,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "calligraphy": {
-    icon: "✒️",
+    icon: "",
     tools: ["Dip pen and nibs", "India ink", "Sumi ink", "Practice pads with guide lines", "Pencil and ruler", "Blotter paper"],
     glossary: [
       ["X-height", "Height of lowercase letters without ascenders"],
@@ -248,7 +248,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "knitting": {
-    icon: "🧶",
+    icon: "",
     tools: ["Knitting needles (straight, circular, DPNs)", "Yarn", "Stitch markers", "Row counter", "Tapestry needle", "Scissors", "Gauge ruler"],
     glossary: [
       ["Gauge", "Stitches per inch, key to fit"],
@@ -260,7 +260,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "beekeeping": {
-    icon: "🐝",
+    icon: "",
     tools: ["Langstroth or top-bar hive", "Bee suit and veil", "Smoker", "Hive tool", "Frame grip", "Honey extractor", "Uncapping knife"],
     glossary: [
       ["Brood", "Eggs, larvae, and pupae in the hive"],
@@ -272,7 +272,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "birdwatching": {
-    icon: "🦅",
+    icon: "",
     tools: ["Binoculars (8x42 typical)", "Spotting scope", "Field guide", "Notebook or eBird app", "Camera with telephoto", "Weather-appropriate clothing"],
     glossary: [
       ["Lifer", "First-ever sighting of a species"],
@@ -285,7 +285,7 @@ export const SPECIFIC: Record<string, Content> = {
   },
 
   "woodworking": {
-    icon: "🪵",
+    icon: "",
     tools: ["Hand planes", "Chisels", "Mallet", "Hand saw and Japanese saw", "Marking gauge", "Bench with vise", "Sharpening stones", "Clamps"],
     glossary: [
       ["Mortise and tenon", "Classic strong joinery of peg and socket"],
@@ -297,7 +297,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "blacksmithing": {
-    icon: "⚒️",
+    icon: "",
     tools: ["Forge (coal or gas)", "Anvil", "Tongs", "Hammers (cross-peen, ball-peen, rounding)", "Post vise", "Quench tank", "Chisels and punches"],
     glossary: [
       ["Heat treating", "Hardening and tempering by controlled heat and cooling"],
@@ -310,7 +310,7 @@ export const SPECIFIC: Record<string, Content> = {
   },
 
   "meditation": {
-    icon: "🧘",
+    icon: "",
     tools: ["Cushion (zafu)", "Mat (zabuton)", "Quiet space", "Timer or bell app", "Optional eye mask", "Journal"],
     glossary: [
       ["Anapanasati", "Mindfulness of breath"],
@@ -322,7 +322,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "yoga": {
-    icon: "🧘‍♀️",
+    icon: "",
     tools: ["Yoga mat", "Blocks", "Strap", "Bolster", "Blanket", "Comfortable clothing"],
     glossary: [
       ["Asana", "Physical posture"],
@@ -335,7 +335,7 @@ export const SPECIFIC: Record<string, Content> = {
   },
 
   "soldering": {
-    icon: "🔌",
+    icon: "",
     tools: ["Temperature-controlled soldering iron", "Leaded or lead-free solder", "Flux", "Solder wick", "Desoldering pump", "Helping hands", "Fume extractor"],
     glossary: [
       ["Wetting", "Solder flowing smoothly onto cleaned pad"],
@@ -347,7 +347,7 @@ export const SPECIFIC: Record<string, Content> = {
     ],
   },
   "3d printing": {
-    icon: "🖨️",
+    icon: "",
     tools: ["FDM or resin printer", "Filament or resin", "Slicer (Cura, PrusaSlicer, Bambu Studio)", "Calipers", "Scraper", "Deburring tool", "UV cure station (for resin)"],
     glossary: [
       ["Layer height", "Thickness of each deposited layer"],
@@ -369,7 +369,7 @@ export const KEYWORDS: Array<{
 }> = [
   {
     match: /\b(photography|photograph)/i,
-    icon: "📷",
+    icon: "",
     tools: ["Camera body", "Lenses", "Tripod", "Lighting kit", "Memory cards", "Editing software", "Reflector/diffuser"],
     glossary: [
       ["Exposure", "Amount of light captured; balance of aperture, shutter, ISO"],
@@ -382,7 +382,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(wrestling|grappling|jiu[- ]?jitsu|judo|sambo)/i,
-    icon: "🤼",
+    icon: "",
     tools: ["Mat area", "Grappling singlet or gi", "Mouthguard", "Ear guards", "Tape", "Cauliflower ear oil"],
     glossary: [
       ["Takedown", "Move bringing opponent from standing to the mat"],
@@ -395,7 +395,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(boxing|muay thai|kickboxing|savate|karate|taekwondo|kung fu)/i,
-    icon: "🥊",
+    icon: "",
     tools: ["Gloves", "Hand wraps", "Heavy bag", "Focus mitts", "Headgear", "Mouthguard", "Shin guards", "Jump rope"],
     glossary: [
       ["Jab", "Lead hand straight punch"],
@@ -408,7 +408,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(running|marathon|sprint|jogging)/i,
-    icon: "🏃",
+    icon: "",
     tools: ["Running shoes", "Technical apparel", "GPS watch", "Hydration bottle", "Energy gels", "Foam roller"],
     glossary: [
       ["Cadence", "Steps per minute"],
@@ -421,7 +421,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(cycling|cyclocross|gravel|mtb|mountain bik)/i,
-    icon: "🚴",
+    icon: "",
     tools: ["Bicycle for the discipline", "Helmet", "Gloves", "Eyewear", "Hydration pack", "Bike tools and spares", "GPS computer"],
     glossary: [
       ["Cadence", "Pedal revolutions per minute"],
@@ -434,7 +434,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(swimming|freediv|scuba|snorkel|surf|dive)/i,
-    icon: "🏊",
+    icon: "",
     tools: ["Swimsuit/wetsuit", "Goggles/mask", "Fins", "Snorkel", "Dive computer (scuba)", "Towel and dry bag"],
     glossary: [
       ["Drag", "Resistance water imposes on the swimmer"],
@@ -447,7 +447,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(weaving|spinning|embroidery|knitting|crochet|lace|felting|tatting|sewing|dyeing|quilting)/i,
-    icon: "🧵",
+    icon: "",
     tools: ["Fiber/yarn/thread", "Needles or hooks", "Frame or hoop", "Scissors", "Measuring gauge", "Pattern reference"],
     glossary: [
       ["Gauge", "Stitches per inch, governs fit"],
@@ -460,7 +460,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(forging|smith|metal|blacksmith)/i,
-    icon: "⚒️",
+    icon: "",
     tools: ["Forge", "Anvil", "Tongs", "Hammers", "Vise", "Quench tank", "Files and chisels"],
     glossary: [
       ["Anneal", "Soften by slow cooling from hot"],
@@ -473,7 +473,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(carving|whittling|intarsia|marquetry|turn|bodging|lath)/i,
-    icon: "🪵",
+    icon: "",
     tools: ["Carving knives and gouges", "Mallet", "Clamp or vise", "Strop and sharpening stones", "Dust mask", "Wood blanks"],
     glossary: [
       ["Grain", "Direction of wood fibers; follow to avoid tearout"],
@@ -486,7 +486,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(baking|bread|pastry|pasta|fermentation|pickling|cheese|brew)/i,
-    icon: "🥖",
+    icon: "",
     tools: ["Scale", "Mixing bowls", "Dough scraper", "Proofing baskets", "Dutch oven or baking stone", "Thermometer", "Timer"],
     glossary: [
       ["Hydration", "Ratio of water to flour by weight"],
@@ -499,7 +499,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(painting|drawing|sketch|watercolor|gouache|acrylic|oil|pastel)/i,
-    icon: "🎨",
+    icon: "",
     tools: ["Paints or drawing media", "Brushes or pencils", "Palette", "Surface (canvas, paper, board)", "Easel", "Rags and solvent"],
     glossary: [
       ["Value", "Lightness of a color"],
@@ -512,7 +512,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(dance|ballet|salsa|tango|waltz|swing|hip[- ]?hop|break)/i,
-    icon: "💃",
+    icon: "",
     tools: ["Appropriate shoes", "Fitted clothing", "Mirror or studio", "Music source", "Grip spray for floor"],
     glossary: [
       ["Lead/Follow", "Roles in partner dancing"],
@@ -525,7 +525,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(guitar|piano|violin|cello|drum|bass|saxophone|trumpet|ukulele|mandolin|banjo)/i,
-    icon: "🎸",
+    icon: "",
     tools: ["The instrument", "Tuner", "Metronome", "Method book", "Stand", "Case", "Recording device"],
     glossary: [
       ["Tempo", "Speed, measured in BPM"],
@@ -538,7 +538,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(fishing|angl)/i,
-    icon: "🎣",
+    icon: "",
     tools: ["Rod and reel", "Line and leader", "Tackle box", "Hooks, lures, bait", "Net or gaff", "Pliers"],
     glossary: [
       ["Drag", "Adjustable resistance in the reel"],
@@ -551,7 +551,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(climb|boulder|mountain|via ferrata)/i,
-    icon: "🧗",
+    icon: "",
     tools: ["Climbing shoes", "Harness", "Rope", "Quickdraws", "Belay device", "Chalk and bag", "Helmet"],
     glossary: [
       ["Crux", "Hardest section of a route"],
@@ -564,7 +564,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(horse|equestrian|dressage|rodeo)/i,
-    icon: "🐎",
+    icon: "",
     tools: ["Saddle", "Bridle and bit", "Helmet", "Riding boots", "Grooming kit", "Lead rope"],
     glossary: [
       ["Gait", "Pattern of leg movement (walk, trot, canter, gallop)"],
@@ -577,7 +577,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(sculpt|clay|ceramic|pot|porcel|raku|kiln)/i,
-    icon: "🏺",
+    icon: "",
     tools: ["Clay", "Potter's wheel or slab roller", "Kiln", "Ribs and loop tools", "Glazes", "Sponges", "Calipers"],
     glossary: [
       ["Greenware", "Unfired clay piece"],
@@ -590,7 +590,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(robotic|arduino|raspberry|cnc|laser|electronic|3d print|pcb)/i,
-    icon: "🤖",
+    icon: "",
     tools: ["Microcontroller or SBC", "Sensors and actuators", "Soldering iron", "Breadboard and jumper wires", "Power supply", "Multimeter"],
     glossary: [
       ["PWM", "Pulse-width modulation for variable output"],
@@ -603,7 +603,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(collect|collection|memorabilia|vintage|antique|numismat|phillumen|deltiolog)/i,
-    icon: "🗃️",
+    icon: "",
     tools: ["Display cases", "Archival sleeves", "Acid-free storage", "Magnifying loupe", "Reference price guide", "White cotton gloves"],
     glossary: [
       ["Mint", "Item in original unused condition"],
@@ -616,7 +616,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(writing|fiction|poetry|memoir|essay|novel|screenwrit|playwrit)/i,
-    icon: "✍️",
+    icon: "",
     tools: ["Notebook or writing software", "Dictionary and thesaurus", "Style guide", "Editing passes workflow", "Beta readers"],
     glossary: [
       ["POV", "Point of view; narrative perspective"],
@@ -629,7 +629,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(magic|mentalism|juggl|fire|poi|stilt|puppet|mime|clown|aerial|trapeze)/i,
-    icon: "🎪",
+    icon: "",
     tools: ["Props specific to the art", "Rehearsal space", "Music rig", "Safety gear", "Costume", "Mirror for practice"],
     glossary: [
       ["Blocking", "Planned stage movement"],
@@ -642,7 +642,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(model|diorama|scale|miniature|gunpla|wargam)/i,
-    icon: "🧱",
+    icon: "",
     tools: ["Hobby knife", "Plastic cement", "Sanding sticks", "Paints and primer", "Airbrush", "Pin vise", "Tweezers"],
     glossary: [
       ["Kitbash", "Combining parts from multiple kits"],
@@ -655,7 +655,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(tarot|astrology|rune|divin|dows|reiki|shaman|chakra|qigong|tai chi|breathwork)/i,
-    icon: "🔮",
+    icon: "",
     tools: ["Cards or stones", "Journal", "Candles and incense", "Altar cloth", "Reference books", "Quiet space"],
     glossary: [
       ["Spread", "Layout of cards and their positions"],
@@ -668,7 +668,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(card game|board game|tabletop|trading card|tcg|ccg)/i,
-    icon: "🎴",
+    icon: "",
     tools: ["Game sets and cards", "Sleeves and deck box", "Playmat", "Dice and counters", "Rulebook", "Timer"],
     glossary: [
       ["Meta", "Dominant strategies at a given time"],
@@ -681,7 +681,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(drone|rc |r\/c|radio control|model aircraft|rocket)/i,
-    icon: "🛩️",
+    icon: "",
     tools: ["Transmitter", "Receiver/flight controller", "Battery and charger", "Frame/airframe", "Props/motors", "Spare parts kit"],
     glossary: [
       ["LOS", "Line of sight flying"],
@@ -694,7 +694,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(coffee|tea|wine|beer|whisky|spirit|cocktail|barista)/i,
-    icon: "☕",
+    icon: "",
     tools: ["Brewing/extraction device", "Scale", "Grinder", "Timer", "Thermometer", "Glassware or cups", "Cleaning brushes"],
     glossary: [
       ["Extraction", "Soluble compounds drawn from the ingredient"],
@@ -707,7 +707,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(gard|permacul|forag|homestead|compost|mushroom|sprout)/i,
-    icon: "🌱",
+    icon: "",
     tools: ["Hand tools (trowel, pruners)", "Hose/watering can", "Soil amendments", "Seeds or starts", "Compost bin", "Garden journal"],
     glossary: [
       ["Hardiness zone", "Climate band for plant suitability"],
@@ -720,7 +720,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(game|video game|speedrun|stream|mod)/i,
-    icon: "🎮",
+    icon: "",
     tools: ["Gaming PC or console", "Controller or keyboard/mouse", "Capture card (for streaming)", "Microphone", "Multiple monitors", "High-refresh display"],
     glossary: [
       ["Frame data", "Per-frame animation timing"],
@@ -733,7 +733,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(language|linguist|etym|conlang|esperanto|polyglot)/i,
-    icon: "🗣️",
+    icon: "",
     tools: ["Textbooks and grammars", "Spaced-repetition software (Anki)", "Audio materials", "Notebook", "Dictionary", "Native-speaker interlocutors"],
     glossary: [
       ["Morpheme", "Smallest unit of meaning in a word"],
@@ -746,7 +746,7 @@ export const KEYWORDS: Array<{
   },
   {
     match: /\b(cards collect|stamp|coin|banknote)/i,
-    icon: "🪙",
+    icon: "",
     tools: ["Album or folder", "Magnifying loupe", "White gloves", "Grading reference", "Acid-free sleeves", "Tweezers"],
     glossary: [
       ["Mint condition", "As-issued, unhandled state"],
@@ -760,7 +760,7 @@ export const KEYWORDS: Array<{
 ];
 
 export const GENERIC: Content = {
-  icon: "•",
+  icon: "",
   tools: [
     "Beginner reference (book or video course)",
     "Dedicated practice space",

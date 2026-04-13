@@ -74,10 +74,7 @@ async function ActivityBody({ slug }: { slug: string }) {
       </nav>
 
       <header className="mt-2 mb-6 pb-4 border-b border-black">
-        <h1 className="m-0 font-normal text-black">
-          {activity.icon ? `${activity.icon} ` : ""}
-          {activity.name}
-        </h1>
+        <h1 className="m-0 font-normal text-black">{activity.name}</h1>
         <p className="m-0 mt-1 text-[#757575]">
           {activity.glossary.length} terms · {activity.tools.length} tools
           {activity.children.length > 0 &&
