@@ -26,9 +26,6 @@ export default function ActivityPage({
 }) {
   return (
     <div className="p-6">
-      <Link href="/" className="text-black no-underline hover:underline">
-        ← Atlas
-      </Link>
       <Suspense
         fallback={<p className="text-[#757575] mt-6">Loading…</p>}
       >
@@ -54,10 +51,14 @@ async function ActivityBody({ slug }: { slug: string }) {
 
   return (
     <>
-      <nav className="mt-6 text-[#757575]">
+      <nav className="text-black">
+        <Link href="/" className="text-black no-underline hover:underline">
+          ← Atlas
+        </Link>
+        {" / "}
         <Link
           href={`/c/${activity.categorySlug}`}
-          className="text-[#757575] no-underline hover:underline"
+          className="text-black no-underline hover:underline"
         >
           {activity.categoryName}
         </Link>
@@ -68,7 +69,7 @@ async function ActivityBody({ slug }: { slug: string }) {
               {" / "}
               <Link
                 href={`/activity/${activity.parent.slug}`}
-                className="text-[#757575] no-underline hover:underline"
+                className="text-black no-underline hover:underline"
               >
                 {activity.parent.name}
               </Link>
@@ -78,7 +79,11 @@ async function ActivityBody({ slug }: { slug: string }) {
 
       <header className="mt-2 mb-6 pb-4 border-b border-black">
         <div className="flex justify-center mb-3">
-          <CategoryIcon name={activity.name} size="lg" />
+          <CategoryIcon
+            name={activity.name}
+            categoryName={activity.categoryName}
+            size="lg"
+          />
         </div>
         <h1 className="m-0 font-normal text-black">{activity.name}</h1>
         <p className="m-0 mt-1 text-[#757575]">
@@ -121,7 +126,7 @@ async function ActivityBody({ slug }: { slug: string }) {
             {activity.tools.map((t) => (
               <li
                 key={t.id}
-                className="text-[#757575] border-t border-black py-2"
+                className="text-black border-t border-black py-2"
               >
                 {t.name}
               </li>

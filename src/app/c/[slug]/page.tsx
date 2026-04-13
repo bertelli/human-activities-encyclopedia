@@ -111,7 +111,12 @@ async function CategoryBody({ slug }: { slug: string }) {
                 href={`/activity/${p.slug}`}
                 className="flex items-center gap-3 py-3 text-black no-underline hover:underline"
               >
-                <CategoryIcon name={p.name} size="xs" animated={false} />
+                <CategoryIcon
+                  name={p.name}
+                  categoryName={cat.name}
+                  size="xs"
+                  animated={false}
+                />
                 <span>
                   {p.name}
                   {children.length > 0 && (
@@ -130,7 +135,7 @@ async function CategoryBody({ slug }: { slug: string }) {
                       <li key={c.id}>
                         <Link
                           href={`/activity/${c.slug}`}
-                          className="block pl-6 py-1 text-[#757575] no-underline hover:text-black hover:underline"
+                          className="block pl-12 py-1 text-[#757575] no-underline hover:text-black hover:underline"
                         >
                           {c.name}
                         </Link>

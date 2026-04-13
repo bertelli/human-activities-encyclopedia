@@ -158,37 +158,30 @@ const M = {
     return out;
   },
 
-  // Arts & Crafts — toolbox: shell + hinged lid + arc carry handle
+  // Arts & Crafts — toolbox: solid box body + clean arc carry handle
   arts: () => {
     const out: Vox[] = [];
-    // toolbox body shell (hollow box)
-    for (let x = -5; x <= 5; x++)
-      for (let y = -4; y <= 1; y++)
-        for (let z = -3; z <= 3; z++) {
-          const atEdge =
-            +(x === -5 || x === 5) +
-            +(y === -4) +
-            +(z === -3 || z === 3);
-          if (atEdge >= 1) out.push([x, y, z]);
-        }
-    // solid lid
-    for (let x = -5; x <= 5; x++)
-      for (let z = -3; z <= 3; z++) out.push([x, 1, z]);
-    // arc handle on top
-    for (let x = -4; x <= 4; x++) {
-      const lift = Math.round(Math.cos((x / 4) * (Math.PI / 2)) * 2.5);
-      out.push([x, 2 + lift, 0]);
-      out.push([x, 2 + lift, -1]);
-      out.push([x, 2 + lift, 1]);
+    // solid body
+    for (let x = -6; x <= 6; x++)
+      for (let y = -3; y <= 2; y++)
+        for (let z = -3; z <= 3; z++) out.push([x, y, z]);
+    // subtle lid groove (missing voxels at lid line, z = ±3 only)
+    const groove = new Set<string>();
+    for (let x = -6; x <= 6; x++) {
+      groove.add(`${x},1,3`);
+      groove.add(`${x},1,-3`);
     }
-    // handle posts connecting to lid
-    out.push([-4, 2, 0], [-4, 2, -1], [-4, 2, 1]);
-    out.push([4, 2, 0], [4, 2, -1], [4, 2, 1]);
-    // a few visible tools sticking out (a screwdriver shaft + hammer head bump)
-    for (let y = 1; y <= 3; y++) out.push([-2, y, 2]); // screwdriver shaft
-    out.push([-2, 4, 2]); // handle tip
-    for (let x = 1; x <= 3; x++) out.push([x, 2, -2]); // hammer head peeking
-    return out;
+    // clean thick arc handle (Y heights across X; 3 voxels deep in Z)
+    const arc: Array<[number, number]> = [
+      [-4, 3], [-3, 4], [-2, 5], [-1, 5],
+      [0, 5], [1, 5], [2, 5], [3, 4], [4, 3],
+    ];
+    for (const [x, y] of arc)
+      for (let z = -1; z <= 1; z++) out.push([x, y, z]);
+    // latch bump on front
+    for (let y = 0; y <= 1; y++)
+      for (let x = -1; x <= 1; x++) out.push([x, y, 4]);
+    return out.filter(([x, y, z]) => !groove.has(`${x},${y},${z}`));
   },
 
   // Collecting — three stacked crates of different sizes
@@ -888,8 +881,8 @@ const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
   [/controll|gaming|video\s*game|esport|larp|role[\s-]?play|cosplay/i, "controller"],
   [/pottery|ceramic|glassblow|sculpt|candle\s*mak/i, "vase"],
   [/knit|crochet|embroid|quilt|sew|yarn|cross[\s-]?stitch|macrame/i, "yarnBall"],
-  [/piano|keyboard|dj/i, "piano"],
-  [/guitar|violin|cello|bass|instrument|band|sing|choir|record/i, "music"],
+  [/piano|keyboard|dj|organ|accordion|harpsichord|synth/i, "piano"],
+  [/guitar|violin|cello|bass|sitar|ukulele|banjo|mandolin|harp|fiddle|lute|instrument|band|sing|choir|record|flute|clarinet|oboe|saxo|trumpet|trombone|tuba|horn|drum|percuss|tabla|bongo/i, "music"],
   [/cook|bak|bread|brew|kombucha|coffee|tea/i, "pot"],
   [/wine|beer|spirit|cocktail/i, "bottle"],
   [/draw|paint|sketch|callig|pyrograph|illustrat|anim|nail\s*art/i, "pencil"],
@@ -933,8 +926,14 @@ function seedAngle(name: string): number {
   return ((h >>> 0) % 360) * (Math.PI / 180);
 }
 
-export function getVoxelModel(name: string): Vox[] {
+export function getVoxelModel(name: string, categoryName?: string): Vox[] {
   for (const [re, key] of KEYWORDS) if (re.test(name)) return M_ALL[key]();
+  // fallback: use the parent category name if provided, so a Music
+  // subcategory reads as the guitar rather than the default cube.
+  if (categoryName) {
+    for (const [re, key] of KEYWORDS)
+      if (re.test(categoryName)) return M_ALL[key]();
+  }
   return M_ALL.games();
 }
 

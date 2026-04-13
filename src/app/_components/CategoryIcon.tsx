@@ -5,10 +5,12 @@ import { getVoxelModel, getStaticAngle } from "@/lib/voxelModels";
 
 export function CategoryIcon({
   name,
+  categoryName,
   size = "sm",
   animated = true,
 }: {
   name: string;
+  categoryName?: string;
   size?: "sm" | "lg" | "xs";
   animated?: boolean;
 }) {
@@ -21,7 +23,7 @@ export function CategoryIcon({
     if (!cv) return;
     const ctx = cv.getContext("2d");
     if (!ctx) return;
-    const model = getVoxelModel(name);
+    const model = getVoxelModel(name, categoryName);
     const vset = new Set<string>();
     for (const [x, y, z] of model) vset.add(`${x},${y},${z}`);
 
@@ -161,7 +163,7 @@ export function CategoryIcon({
     };
     loop();
     return () => cancelAnimationFrame(raf);
-  }, [name, animated]);
+  }, [name, categoryName, animated]);
 
   return (
     <canvas
