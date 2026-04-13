@@ -6,6 +6,19 @@ import { VoxelTitle } from "./_components/VoxelTitle";
 export default function Home() {
   return (
     <div className="p-6">
+      <Suspense fallback={<p className="m-0 text-[#757575]">Loading…</p>}>
+        <HomeShell />
+      </Suspense>
+    </div>
+  );
+}
+
+async function HomeShell() {
+  "use cache";
+  const categories = await getCategories();
+  const total = categories.reduce((sum, c) => sum + c.count, 0);
+  return (
+    <>
       <header className="mb-6">
         <h1
           className="atlas-title m-0 mb-8 text-black"
@@ -21,30 +34,13 @@ export default function Home() {
         </p>
       </header>
 
-      <Suspense
-        fallback={
-          <div>
-            <div className="w-full border border-black bg-white text-[#757575] pl-3 pr-10 py-2 box-border">
-              Loading…
-            </div>
-          </div>
-        }
-      >
-        <BrowserShell />
-      </Suspense>
+      <HomeBrowser categories={categories} total={total} />
 
       <footer aria-hidden className="flex flex-col gap-4 mt-16">
         {["The", "Incomplete", "Atlas", "of", "Doing"].map((word) => (
           <VoxelTitle key={word} text={word} />
         ))}
       </footer>
-    </div>
+    </>
   );
-}
-
-async function BrowserShell() {
-  "use cache";
-  const categories = await getCategories();
-  const total = categories.reduce((sum, c) => sum + c.count, 0);
-  return <HomeBrowser categories={categories} total={total} />;
 }
