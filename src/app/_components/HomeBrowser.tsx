@@ -18,7 +18,13 @@ type Category = {
   count: number;
 };
 
-export function HomeBrowser({ categories }: { categories: Category[] }) {
+export function HomeBrowser({
+  categories,
+  total,
+}: {
+  categories: Category[];
+  total: number;
+}) {
   const [q, setQ] = useState("");
   const [results, setResults] = useState<Result[]>([]);
   const [searching, setSearching] = useState(false);
@@ -61,7 +67,7 @@ export function HomeBrowser({ categories }: { categories: Category[] }) {
       <div className="relative">
         <input
           className="w-full border border-black bg-white text-black pl-3 pr-10 py-2 outline-none box-border"
-          placeholder="Search hobby..."
+          placeholder={`Search ${total.toLocaleString()} hobbies...`}
           value={q}
           onChange={(e) => setQ(e.target.value)}
         />

@@ -6,8 +6,10 @@ export default function Home() {
   return (
     <div className="p-6">
       <header className="mb-6">
-        <h1 className="m-0 font-normal text-black">Human Activity Atlas</h1>
-        <p className="m-0 mt-1 text-[#757575]">
+        <h1 className="atlas-title m-0 mb-8 font-normal text-black">
+          The Incomplete Atlas of Doing
+        </h1>
+        <p className="m-0 text-[#757575]">
           Every hobby, craft, and pursuit — tools, glossary, techniques.
         </p>
       </header>
@@ -24,5 +26,6 @@ export default function Home() {
 async function BrowserShell() {
   "use cache";
   const categories = await getCategories();
-  return <HomeBrowser categories={categories} />;
+  const total = categories.reduce((sum, c) => sum + c.count, 0);
+  return <HomeBrowser categories={categories} total={total} />;
 }

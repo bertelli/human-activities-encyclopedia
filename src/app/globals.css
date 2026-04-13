@@ -25,8 +25,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-* {
+*:not(.atlas-title) {
   font-size: 15px;
+}
+
+.atlas-title {
+  font-size: clamp(72px, 18vw, 280px);
+  line-height: 0.95;
+  letter-spacing: -4px;
+  font-weight: 500;
 }
 
 ::selection {

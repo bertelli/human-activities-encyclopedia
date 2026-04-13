@@ -933,6 +933,241 @@ const EXTRA = {
     return out;
   },
 
+  // Running shoe / sneaker
+  shoe: () => {
+    const out: Vox[] = [];
+    // sole (flat extended base)
+    for (let x = -7; x <= 5; x++)
+      for (let z = -2; z <= 2; z++) {
+        if (x >= 4 && Math.abs(z) > 1) continue; // taper toe
+        out.push([x, -2, z]);
+        out.push([x, -3, z]);
+      }
+    // upper (rounded body)
+    for (let x = -6; x <= 3; x++)
+      for (let y = -1; y <= 2; y++)
+        for (let z = -2; z <= 2; z++) {
+          const yLim = x > 1 ? 1 : x < -5 ? 2 : 3;
+          if (y > yLim) continue;
+          out.push([x, y, z]);
+        }
+    // ankle cut (heel higher)
+    for (let x = -7; x <= -5; x++)
+      for (let y = 3; y <= 5; y++)
+        for (let z = -2; z <= 2; z++) {
+          if (y > 5 - (x + 7)) continue;
+          out.push([x, y, z]);
+        }
+    // laces (stripes on top)
+    for (const xLace of [-4, -2, 0]) {
+      for (let z = -2; z <= 2; z++) out.push([xLace, 3, z]);
+    }
+    return out;
+  },
+
+  // Dart
+  dart: () => {
+    const out: Vox[] = [];
+    // shaft
+    for (let x = -5; x <= 4; x++) out.push([x, 0, 0]);
+    // flights (cross fins at back)
+    for (let dx = -5; dx <= -3; dx++) {
+      for (let d = 1; d <= 3; d++) {
+        out.push([dx, d, 0]);
+        out.push([dx, -d, 0]);
+        out.push([dx, 0, d]);
+        out.push([dx, 0, -d]);
+      }
+    }
+    // barrel (thicker middle)
+    for (let x = -2; x <= 2; x++)
+      for (let y = -1; y <= 1; y++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(y, z) > 1.3) continue;
+          out.push([x, y, z]);
+        }
+    // tip
+    out.push([5, 0, 0], [6, 0, 0], [7, 0, 0]);
+    return out;
+  },
+
+  // Microphone on a small stand
+  microphone: () => {
+    const out: Vox[] = [];
+    // head (capsule/grille)
+    for (let x = -2; x <= 2; x++)
+      for (let y = 2; y <= 7; y++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x, z) > 2.3) continue;
+          out.push([x, y, z]);
+        }
+    // grille stripes
+    for (let y = 3; y <= 6; y += 2)
+      for (let x = -3; x <= 3; x++)
+        if (x === -3 || x === 3) out.push([x, y, 0]);
+    // handle body
+    for (let x = -1; x <= 1; x++)
+      for (let y = -5; y <= 1; y++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(x, z) > 1.3) continue;
+          out.push([x, y, z]);
+        }
+    // base (round plate)
+    for (let x = -3; x <= 3; x++)
+      for (let z = -3; z <= 3; z++)
+        if (Math.hypot(x, z) <= 3) out.push([x, -6, z]);
+    return out;
+  },
+
+  // Parachute (open canopy + strings + person)
+  parachute: () => {
+    const out: Vox[] = [];
+    // canopy dome (half-sphere top)
+    for (let x = -6; x <= 6; x++)
+      for (let z = -6; z <= 6; z++) {
+        const d = Math.hypot(x, z);
+        if (d > 6) continue;
+        const y = Math.round(Math.sqrt(36 - d * d) * 0.6) + 3;
+        out.push([x, y, z]);
+        if (d > 5) out.push([x, y - 1, z]);
+      }
+    // suspension lines (diagonal strings from canopy edge to person)
+    const anchors: Array<[number, number]> = [
+      [-6, 0], [6, 0], [0, -6], [0, 6],
+      [-4, 4], [4, 4], [-4, -4], [4, -4],
+    ];
+    for (const [ax, az] of anchors) {
+      for (let t = 0; t < 8; t++) {
+        const f = t / 7;
+        const x = Math.round(ax * (1 - f));
+        const z = Math.round(az * (1 - f));
+        const y = Math.round(3 - f * 7);
+        out.push([x, y, z]);
+      }
+    }
+    // person (small figure below)
+    for (let y = -6; y <= -4; y++)
+      for (let x = -1; x <= 1; x++)
+        for (let z = -1; z <= 1; z++) out.push([x, y, z]);
+    return out;
+  },
+
+  // Sword (LARPing, fencing)
+  sword: () => {
+    const out: Vox[] = [];
+    // blade
+    for (let y = -1; y <= 8; y++)
+      for (let x = -1; x <= 1; x++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.abs(x) + Math.abs(z) > 1) continue;
+          out.push([x, y, z]);
+        }
+    // tip point
+    out.push([0, 9, 0], [0, 10, 0]);
+    // crossguard
+    for (let x = -4; x <= 4; x++)
+      for (let z = -1; z <= 1; z++)
+        out.push([x, -2, z]);
+    // grip
+    for (let y = -6; y <= -3; y++)
+      for (let x = -1; x <= 1; x++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(x, z) > 1.3) continue;
+          out.push([x, y, z]);
+        }
+    // pommel (round knob)
+    for (let x = -2; x <= 2; x++)
+      for (let y = -8; y <= -6; y++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x, y + 7, z) > 2) continue;
+          out.push([x, y, z]);
+        }
+    return out;
+  },
+
+  // Tabletop die (D20 icosahedron approximation)
+  dice: () => {
+    const out: Vox[] = [];
+    // approximate D20 as octahedron-ish (two pyramids)
+    for (let y = -4; y <= 4; y++) {
+      const r = 4 - Math.abs(y);
+      for (let x = -r; x <= r; x++)
+        for (let z = -r; z <= r; z++) {
+          if (Math.abs(x) + Math.abs(z) > r) continue;
+          out.push([x, y, z]);
+        }
+    }
+    return out;
+  },
+
+  // Candle (lit)
+  candle: () => {
+    const out: Vox[] = [];
+    // body (cylinder)
+    for (let y = -5; y <= 2; y++)
+      for (let x = -2; x <= 2; x++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x, z) > 2) continue;
+          out.push([x, y, z]);
+        }
+    // wick
+    for (let y = 3; y <= 5; y++) out.push([0, y, 0]);
+    // flame teardrop
+    for (let y = 5; y <= 9; y++) {
+      const r = Math.max(0.5, 1.8 * Math.sin(((y - 5) / 4) * Math.PI));
+      for (let x = -2; x <= 2; x++)
+        for (let z = -2; z <= 2; z++) {
+          if (Math.hypot(x, z) <= r) out.push([x, y, z]);
+        }
+    }
+    // holder base plate
+    for (let x = -3; x <= 3; x++)
+      for (let z = -3; z <= 3; z++)
+        if (Math.hypot(x, z) <= 3) out.push([x, -6, z]);
+    return out;
+  },
+
+  // Sailboat (sailing)
+  sailboat: () => {
+    const out: Vox[] = [];
+    // hull (boat body)
+    for (let x = -6; x <= 6; x++) {
+      const halfY = x === -6 || x === 6 ? 0 : Math.abs(x) >= 5 ? 1 : 2;
+      for (let y = -2; y <= -2 + halfY; y++)
+        for (let z = -3; z <= 3; z++) {
+          if (Math.abs(z) > 3 - Math.max(0, Math.abs(x) - 3)) continue;
+          out.push([x, y, z]);
+        }
+    }
+    // mast
+    for (let y = -1; y <= 9; y++) out.push([0, y, 0]);
+    // triangular main sail (biggest)
+    for (let y = 0; y <= 8; y++)
+      for (let x = 1; x <= 8 - y; x++) out.push([x, y, 0]);
+    // jib (smaller front sail)
+    for (let y = 0; y <= 6; y++)
+      for (let x = -1; x >= -(6 - y); x--) out.push([x, y, 0]);
+    return out;
+  },
+
+  // Paddle / kayak paddle (double-bladed)
+  paddle: () => {
+    const out: Vox[] = [];
+    // shaft
+    for (let x = -8; x <= 8; x++) out.push([x, 0, 0]);
+    // blade on +X end
+    for (let x = 6; x <= 11; x++) {
+      const spread = 3 - Math.abs(x - 8);
+      for (let y = -spread; y <= spread; y++) out.push([x, y, 0]);
+    }
+    // blade on -X end
+    for (let x = -11; x <= -6; x++) {
+      const spread = 3 - Math.abs(x + 8);
+      for (let y = -spread; y <= spread; y++) out.push([x, y, 0]);
+    }
+    return out;
+  },
+
   // Beer/wine bottle
   bottle: () => {
     const out: Vox[] = [];
@@ -981,7 +1216,8 @@ const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
   [/axe\s*throw|axe\b|hatchet|chop/i, "axe"],
   [/golf|baseball|cricket|hocke/i, "bat"],
   [/tennis|badminton|pickleball|squash|racquet|racket|ping\s*pong|pong/i, "racket"],
-  [/bowl|billiard|pool\b|darts/i, "ball"],
+  [/darts?\b/i, "dart"],
+  [/bowl|billiard|pool\b/i, "ball"],
   [/bow|archery|arrow/i, "bow"],
   [/box(ing)?|kickbox|judo|karate|taekwon|jiu[\s-]?jitsu|wrestl|martial|fencing/i, "fist"],
   [/fish/i, "fishing"],
@@ -993,8 +1229,11 @@ const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
   [/yoga|pilates|acroyoga/i, "mat"],
   [/meditat|mindfulness|zen/i, "stones"],
   [/plant|garden|bonsai|hydropon|mycolog|forage|aquascap/i, "plant"],
-  [/controll|gaming|video\s*game|esport|larp|role[\s-]?play|cosplay/i, "controller"],
-  [/pottery|ceramic|glassblow|sculpt|candle\s*mak/i, "vase"],
+  [/larp|fenc|sword|sabre|saber/i, "sword"],
+  [/role[\s-]?play|tabletop|dungeons|d&d|d20/i, "dice"],
+  [/controll|gaming|video\s*game|esport|cosplay/i, "controller"],
+  [/candle/i, "candle"],
+  [/pottery|ceramic|glassblow|sculpt/i, "vase"],
   [/knit|crochet|embroid|quilt|sew|yarn|cross[\s-]?stitch|macrame/i, "yarnBall"],
   [/piano|keyboard|dj|organ|accordion|harpsichord|synth/i, "piano"],
   [/guitar|violin|cello|bass|sitar|ukulele|banjo|mandolin|harp|fiddle|lute|instrument|band|sing|choir|record|flute|clarinet|oboe|saxo|trumpet|trombone|tuba|horn|drum|percuss|tabla|bongo/i, "music"],
@@ -1008,13 +1247,17 @@ const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
   [/climb|boulder/i, "stones"],
   [/alpine|downhill|ski(ing)?|nordic|cross[\s-]?country/i, "skis"],
   [/snowboard|surf|kite|wake|paddle\s*board/i, "bat"],
-  [/swim|dive|kayak|canoe|sail|paddl/i, "fishing"],
-  [/run|jog|marathon|sprint/i, "ball"],
+  [/sail|yacht|regatta/i, "sailboat"],
+  [/kayak|canoe|paddl|row(ing)?|raft/i, "paddle"],
+  [/swim|scuba|dive|snorkel/i, "fishing"],
+  [/run|jog|marathon|sprint|walk|parkour/i, "shoe"],
   [/weight|lift|gym|body|calisth|fitness|dumbbell|barbell/i, "sports"],
   [/board\s*games?|card|poker|jigsaw|puzzle/i, "games"],
   [/collect|antique|coin|stamp|ephemer/i, "collecting"],
   [/3d\s*print|blacksmith|metalwork|lockp|lego|model|electron/i, "technology"],
   [/genealogy|research|astrology|geocach|ghost|lang|learn/i, "writing"],
+  [/podcast|broadcast|radio\s*host|voice|karaoke/i, "microphone"],
+  [/skydiv|paraglid|parachut|base\s*jump|wingsuit/i, "parachute"],
   [/comed|act|stand[\s-]?up|theat|mime|danc/i, "performance"],
   [/home\s*impro|diy|woodwork|leather|soap|origami|scrapbook/i, "arts"],
 
