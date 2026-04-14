@@ -15,8 +15,8 @@ export function CategoryIcon({
   animated?: boolean;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
-  const displayPx = size === "lg" ? 260 : size === "xs" ? 36 : 56;
-  const internalPx = size === "lg" ? 200 : size === "xs" ? 60 : 96;
+  const displayPx = size === "lg" ? 420 : size === "xs" ? 36 : 56;
+  const internalPx = size === "lg" ? 320 : size === "xs" ? 60 : 96;
 
   useEffect(() => {
     const cv = ref.current;

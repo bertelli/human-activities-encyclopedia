@@ -133,41 +133,44 @@ async function ActivityBody({ slug }: { slug: string }) {
         </div>
       </header>
 
-      {(activity.description || activity.children.length > 0) && (
-        <div className="mb-8 md:grid md:grid-cols-2 md:gap-8">
-          <section>
-            {activity.description &&
-              activity.description
-                .split(/\n{2,}/)
-                .filter((p) => p.trim().length > 0)
-                .map((para, i) => (
-                  <p key={i} className="m-0 mb-3 last:mb-0 text-black">
-                    {para}
-                  </p>
-                ))}
-          </section>
-          <section>
-            {activity.children.length > 0 && (
-              <>
-                <h2 className="m-0 mb-2 font-bold text-black">
-                  Sub-activities
-                </h2>
-                <ul className="list-none p-0 m-0">
-                  {activity.children.map((c) => (
-                    <li key={c.id} className="border-t border-black">
-                      <Link
-                        href={`/activity/${c.slug}`}
-                        className="block py-2 text-black no-underline hover:underline"
-                      >
-                        {c.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-          </section>
-        </div>
+      {activity.description && (
+        <section className="mb-8 md:grid md:grid-cols-2 md:gap-8">
+          <div>
+            {activity.description
+              .split(/\n{2,}/)
+              .filter((p) => p.trim().length > 0)
+              .map((para, i) => (
+                <p key={i} className="m-0 mb-3 last:mb-0 text-black">
+                  {para}
+                </p>
+              ))}
+          </div>
+        </section>
+      )}
+
+      {activity.children.length > 0 && (
+        <section className="mb-8">
+          <h2 className="m-0 mb-2 font-normal text-black">Sub-activities</h2>
+          <ul
+            className={`list-none p-0 m-0 ${
+              activity.children.length > 8 ? "md:columns-2 md:gap-8" : ""
+            }`}
+          >
+            {activity.children.map((c) => (
+              <li
+                key={c.id}
+                className="border-t border-black break-inside-avoid"
+              >
+                <Link
+                  href={`/activity/${c.slug}`}
+                  className="block py-2 text-[#757575] no-underline hover:underline"
+                >
+                  {c.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
 
       {activity.tools.length > 0 && (
