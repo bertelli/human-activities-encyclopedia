@@ -57,9 +57,33 @@ export function HomeSearch() {
               setQ("");
               setResults([]);
             }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-black hover:bg-black hover:text-white border border-black bg-white leading-none"
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 block text-black hover:bg-black hover:text-white border border-black bg-white p-0 overflow-hidden"
           >
-            ×
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              className="block w-full h-full"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <line
+                x1="7"
+                y1="7"
+                x2="17"
+                y2="17"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+              />
+              <line
+                x1="17"
+                y1="7"
+                x2="7"
+                y2="17"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+              />
+            </svg>
           </button>
         )}
       </div>

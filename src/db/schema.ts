@@ -66,6 +66,48 @@ export const glossaryTerms = pgTable(
   (t) => [index("glossary_activity_idx").on(t.activityId)]
 );
 
+export const brands = pgTable(
+  "brands",
+  {
+    id: serial("id").primaryKey(),
+    activityId: integer("activity_id")
+      .notNull()
+      .references(() => activities.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    note: text("note").notNull().default(""),
+    position: integer("position").notNull().default(0),
+  },
+  (t) => [index("brands_activity_idx").on(t.activityId)]
+);
+
+export const techniques = pgTable(
+  "techniques",
+  {
+    id: serial("id").primaryKey(),
+    activityId: integer("activity_id")
+      .notNull()
+      .references(() => activities.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    description: text("description").notNull().default(""),
+    position: integer("position").notNull().default(0),
+  },
+  (t) => [index("techniques_activity_idx").on(t.activityId)]
+);
+
+export const masters = pgTable(
+  "masters",
+  {
+    id: serial("id").primaryKey(),
+    activityId: integer("activity_id")
+      .notNull()
+      .references(() => activities.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    note: text("note").notNull().default(""),
+    position: integer("position").notNull().default(0),
+  },
+  (t) => [index("masters_activity_idx").on(t.activityId)]
+);
+
 export const categoriesRelations = relations(categories, ({ many }) => ({
   activities: many(activities),
 }));
@@ -77,6 +119,9 @@ export const activitiesRelations = relations(activities, ({ one, many }) => ({
   }),
   tools: many(tools),
   glossary: many(glossaryTerms),
+  brands: many(brands),
+  techniques: many(techniques),
+  masters: many(masters),
 }));
 
 export const toolsRelations = relations(tools, ({ one }) => ({
@@ -93,7 +138,31 @@ export const glossaryRelations = relations(glossaryTerms, ({ one }) => ({
   }),
 }));
 
+export const brandsRelations = relations(brands, ({ one }) => ({
+  activity: one(activities, {
+    fields: [brands.activityId],
+    references: [activities.id],
+  }),
+}));
+
+export const techniquesRelations = relations(techniques, ({ one }) => ({
+  activity: one(activities, {
+    fields: [techniques.activityId],
+    references: [activities.id],
+  }),
+}));
+
+export const mastersRelations = relations(masters, ({ one }) => ({
+  activity: one(activities, {
+    fields: [masters.activityId],
+    references: [activities.id],
+  }),
+}));
+
 export type Activity = typeof activities.$inferSelect;
 export type Category = typeof categories.$inferSelect;
 export type Tool = typeof tools.$inferSelect;
 export type GlossaryTerm = typeof glossaryTerms.$inferSelect;
+export type Brand = typeof brands.$inferSelect;
+export type Technique = typeof techniques.$inferSelect;
+export type Master = typeof masters.$inferSelect;

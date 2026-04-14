@@ -87,7 +87,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         </div>
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <h1 className="m-0 font-normal text-black text-5xl leading-[0.9]">{activity.name}</h1>
+            <h1 className="m-0 font-bold text-black text-5xl leading-[0.9]">{activity.name}</h1>
             <p className="m-0 mt-1 text-[#757575]">
               {activity.glossary.length} terms · {activity.tools.length} tools
               {activity.children.length > 0 &&
@@ -133,63 +133,161 @@ async function ActivityBody({ slug }: { slug: string }) {
         </div>
       </header>
 
-      {activity.description && (
-        <section className="mb-8">
-          <p className="m-0 text-black">{activity.description}</p>
-        </section>
+      {(activity.description || activity.children.length > 0) && (
+        <div className="mb-8 md:grid md:grid-cols-2 md:gap-8">
+          <section>
+            {activity.description &&
+              activity.description
+                .split(/\n{2,}/)
+                .filter((p) => p.trim().length > 0)
+                .map((para, i) => (
+                  <p key={i} className="m-0 mb-3 last:mb-0 text-black">
+                    {para}
+                  </p>
+                ))}
+          </section>
+          <section>
+            {activity.children.length > 0 && (
+              <>
+                <h2 className="m-0 mb-2 font-bold text-black">
+                  Sub-activities
+                </h2>
+                <ul className="list-none p-0 m-0">
+                  {activity.children.map((c) => (
+                    <li key={c.id} className="border-t border-black">
+                      <Link
+                        href={`/activity/${c.slug}`}
+                        className="block py-2 text-black no-underline hover:underline"
+                      >
+                        {c.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </section>
+        </div>
       )}
 
-      {activity.children.length > 0 && (
+      {activity.tools.length > 0 && (
         <section className="mb-8">
-          <h2 className="m-0 mb-2 font-normal text-black">Sub-activities</h2>
-          <ul className="list-none p-0 m-0">
-            {activity.children.map((c) => (
-              <li key={c.id} className="border-t border-black">
-                <Link
-                  href={`/activity/${c.slug}`}
-                  className="block py-2 text-black no-underline hover:underline"
-                >
-                  {c.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <section className="mb-8">
-        <h2 className="m-0 mb-2 font-normal text-black">Tools</h2>
-        {activity.tools.length === 0 ? (
-          <p className="m-0 text-[#757575]">Not yet documented.</p>
-        ) : (
-          <ul className="list-none p-0 m-0">
+          <h2 className="m-0 mb-2 font-bold text-black">Tools</h2>
+          <ul
+            className={`list-none p-0 m-0 ${
+              activity.tools.length > 8 ? "md:columns-2 md:gap-8" : ""
+            }`}
+          >
             {activity.tools.map((t) => (
               <li
                 key={t.id}
-                className="text-black border-t border-black py-2"
+                className="text-black border-t border-black py-2 break-inside-avoid"
               >
                 {t.name}
               </li>
             ))}
           </ul>
-        )}
-      </section>
+        </section>
+      )}
 
-      <section>
-        <h2 className="m-0 mb-2 font-normal text-black">Glossary</h2>
-        {activity.glossary.length === 0 ? (
-          <p className="m-0 text-[#757575]">Not yet documented.</p>
-        ) : (
-          <ul className="list-none p-0 m-0">
+      {activity.techniques.length > 0 && (
+        <section className="mb-8">
+          <h2 className="m-0 mb-2 font-bold text-black">Techniques</h2>
+          <ul
+            className={`list-none p-0 m-0 ${
+              activity.techniques.length > 8 ? "md:columns-2 md:gap-8" : ""
+            }`}
+          >
+            {activity.techniques.map((t) => (
+              <li
+                key={t.id}
+                className="border-t border-black py-2 break-inside-avoid"
+              >
+                <span className="text-black">{t.name}</span>
+                {t.description && (
+                  <>
+                    {" "}
+                    <span className="text-[#757575]">— {t.description}</span>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {activity.brands.length > 0 && (
+        <section className="mb-8">
+          <h2 className="m-0 mb-2 font-bold text-black">Brands</h2>
+          <ul
+            className={`list-none p-0 m-0 ${
+              activity.brands.length > 8 ? "md:columns-2 md:gap-8" : ""
+            }`}
+          >
+            {activity.brands.map((b) => (
+              <li
+                key={b.id}
+                className="border-t border-black py-2 break-inside-avoid"
+              >
+                <span className="text-black">{b.name}</span>
+                {b.note && (
+                  <>
+                    {" "}
+                    <span className="text-[#757575]">— {b.note}</span>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {activity.masters.length > 0 && (
+        <section className="mb-8">
+          <h2 className="m-0 mb-2 font-bold text-black">Masters</h2>
+          <ul
+            className={`list-none p-0 m-0 ${
+              activity.masters.length > 8 ? "md:columns-2 md:gap-8" : ""
+            }`}
+          >
+            {activity.masters.map((m) => (
+              <li
+                key={m.id}
+                className="border-t border-black py-2 break-inside-avoid"
+              >
+                <span className="text-black">{m.name}</span>
+                {m.note && (
+                  <>
+                    {" "}
+                    <span className="text-[#757575]">— {m.note}</span>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {activity.glossary.length > 0 && (
+        <section>
+          <h2 className="m-0 mb-2 font-bold text-black">Glossary</h2>
+          <ul
+            className={`list-none p-0 m-0 ${
+              activity.glossary.length > 8 ? "md:columns-2 md:gap-8" : ""
+            }`}
+          >
             {activity.glossary.map((g) => (
-              <li key={g.id} className="border-t border-black py-2">
+              <li
+                key={g.id}
+                className="border-t border-black py-2 break-inside-avoid"
+              >
                 <span className="text-black">{g.term}</span>{" "}
                 <span className="text-[#757575]">— {g.definition}</span>
               </li>
             ))}
           </ul>
-        )}
-      </section>
+        </section>
+      )}
     </>
   );
 }

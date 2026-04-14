@@ -80,7 +80,7 @@ export async function getActivityBySlug(slug: string) {
 
   if (!activity) return null;
 
-  const [tools, glossary, children] = await Promise.all([
+  const [tools, glossary, brands, techniques, masters, children] = await Promise.all([
     db
       .select()
       .from(schema.tools)
@@ -91,6 +91,21 @@ export async function getActivityBySlug(slug: string) {
       .from(schema.glossaryTerms)
       .where(eq(schema.glossaryTerms.activityId, activity.id))
       .orderBy(asc(schema.glossaryTerms.position)),
+    db
+      .select()
+      .from(schema.brands)
+      .where(eq(schema.brands.activityId, activity.id))
+      .orderBy(asc(schema.brands.position)),
+    db
+      .select()
+      .from(schema.techniques)
+      .where(eq(schema.techniques.activityId, activity.id))
+      .orderBy(asc(schema.techniques.position)),
+    db
+      .select()
+      .from(schema.masters)
+      .where(eq(schema.masters.activityId, activity.id))
+      .orderBy(asc(schema.masters.position)),
     db
       .select({
         id: schema.activities.id,
@@ -139,22 +154,67 @@ export async function getActivityBySlug(slug: string) {
         }
       : null;
 
-  return { ...activity, tools, glossary, children, parent, prev, next };
+  return {
+    ...activity,
+    tools,
+    glossary,
+    brands,
+    techniques,
+    masters,
+    children,
+    parent,
+    prev,
+    next,
+  };
 }
 
 export async function searchActivities(q: string) {
-  const like = `%${q.toLowerCase()}%`;
+  const query = q.trim().toLowerCase();
+  if (query.length === 0) return [];
+
+  const like = `%${query}%`;
+  const prefix = `${query}%`;
+  const maxEdit = query.length <= 4 ? 2 : query.length <= 7 ? 3 : 4;
+
   return db.execute<{
     id: number;
     name: string;
     slug: string;
     category_name: string;
   }>(sql`
-    SELECT a.id, a.name, a.slug, c.name AS category_name
-    FROM activities a
-    JOIN categories c ON c.id = a.category_id
-    WHERE LOWER(a.name) LIKE ${like}
-    ORDER BY a.name ASC
+    WITH scored AS (
+      SELECT
+        a.id,
+        a.name,
+        a.slug,
+        c.name AS category_name,
+        LOWER(a.name) AS lname,
+        similarity(LOWER(a.name), ${query}) AS trg,
+        word_similarity(${query}, LOWER(a.name)) AS wtrg,
+        levenshtein_less_equal(LOWER(a.name), ${query}, ${maxEdit}) AS lev_full,
+        (
+          SELECT MIN(levenshtein_less_equal(w, ${query}, ${maxEdit}))
+          FROM regexp_split_to_table(LOWER(a.name), '[^a-z0-9]+') AS w
+          WHERE length(w) > 0
+        ) AS lev_word
+      FROM activities a
+      JOIN categories c ON c.id = a.category_id
+    )
+    SELECT id, name, slug, category_name
+    FROM scored
+    WHERE lname LIKE ${like}
+       OR lname % ${query}
+       OR wtrg > 0.35
+       OR lev_full <= ${maxEdit}
+       OR lev_word <= ${maxEdit}
+    ORDER BY
+      (lname = ${query})::int DESC,
+      (lname LIKE ${prefix})::int DESC,
+      (lname LIKE ${like})::int DESC,
+      lev_full ASC NULLS LAST,
+      COALESCE(lev_word, 99) ASC,
+      GREATEST(trg, wtrg) DESC,
+      name ASC
     LIMIT 50
   `);
 }
