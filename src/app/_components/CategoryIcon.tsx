@@ -2,15 +2,18 @@
 
 import { useEffect, useRef } from "react";
 import { getVoxelModel, getStaticAngle } from "@/lib/voxelModels";
+import type { VoxelSpec } from "@/lib/voxelDSL";
 
 export function CategoryIcon({
   name,
   categoryName,
+  iconVoxels,
   size = "sm",
   animated = true,
 }: {
   name: string;
   categoryName?: string;
+  iconVoxels?: VoxelSpec | null;
   size?: "sm" | "lg" | "xs";
   animated?: boolean;
 }) {
@@ -23,7 +26,7 @@ export function CategoryIcon({
     if (!cv) return;
     const ctx = cv.getContext("2d");
     if (!ctx) return;
-    const model = getVoxelModel(name, categoryName);
+    const model = getVoxelModel(name, categoryName, iconVoxels);
     const vset = new Set<string>();
     for (const [x, y, z] of model) vset.add(`${x},${y},${z}`);
 
@@ -164,7 +167,7 @@ export function CategoryIcon({
     };
     loop();
     return () => cancelAnimationFrame(raf);
-  }, [name, categoryName, animated]);
+  }, [name, categoryName, iconVoxels, animated]);
 
   return (
     <canvas

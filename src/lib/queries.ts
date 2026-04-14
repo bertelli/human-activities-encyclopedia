@@ -66,6 +66,7 @@ export async function getActivityBySlug(slug: string) {
       slug: schema.activities.slug,
       icon: schema.activities.icon,
       description: schema.activities.description,
+      iconVoxels: schema.activities.iconVoxels,
       parentSlug: schema.activities.parentSlug,
       categoryName: schema.categories.name,
       categorySlug: schema.categories.slug,

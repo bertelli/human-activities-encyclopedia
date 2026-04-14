@@ -4091,7 +4091,17 @@ function seedAngle(name: string): number {
   return ((h >>> 0) % 360) * (Math.PI / 180);
 }
 
-export function getVoxelModel(name: string, categoryName?: string): Vox[] {
+import { buildFromSpec, type VoxelSpec } from "./voxelDSL";
+
+export function getVoxelModel(
+  name: string,
+  categoryName?: string,
+  iconVoxels?: VoxelSpec | null
+): Vox[] {
+  if (iconVoxels) {
+    const built = buildFromSpec(iconVoxels);
+    if (built && built.length > 0) return built;
+  }
   for (const [re, key] of KEYWORDS) if (re.test(name)) return M_ALL[key]();
   // fallback: use the parent category name if provided, so a Music
   // subcategory reads as the guitar rather than the default cube.

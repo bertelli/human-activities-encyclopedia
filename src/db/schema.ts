@@ -5,6 +5,7 @@ import {
   integer,
   uniqueIndex,
   index,
+  jsonb,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -26,6 +27,7 @@ export const activities = pgTable(
     slug: text("slug").notNull(),
     icon: text("icon").notNull().default(""),
     description: text("description").notNull().default(""),
+    iconVoxels: jsonb("icon_voxels"),
     categoryId: integer("category_id")
       .notNull()
       .references(() => categories.id, { onDelete: "cascade" }),

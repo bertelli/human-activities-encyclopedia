@@ -82,6 +82,11 @@ async function ActivityBody({ slug }: { slug: string }) {
           <CategoryIcon
             name={activity.name}
             categoryName={activity.categoryName}
+            iconVoxels={
+              activity.iconVoxels as
+                | import("@/lib/voxelDSL").VoxelSpec
+                | null
+            }
             size="lg"
           />
         </div>
