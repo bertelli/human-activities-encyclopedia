@@ -19,7 +19,7 @@ export default function LogPage() {
         {" / "}
         <span>Fill log</span>
       </nav>
-      <h1 className="m-0 mb-4 font-bold text-black text-4xl leading-[0.9]">
+      <h1 className="m-0 mb-4 font-bold text-black text-4xl">
         Fill log
       </h1>
       <Suspense

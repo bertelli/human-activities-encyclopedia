@@ -91,7 +91,7 @@ export function HomeBrowser({
               setQ("");
               setResults([]);
             }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-black hover:bg-black hover:text-white border border-black bg-white leading-none"
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-black hover:bg-black hover:text-white border border-black bg-white"
           >
             ×
           </button>
@@ -141,7 +141,7 @@ export function HomeBrowser({
                 <span className="w-40 h-40 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.34,2.2,0.64,1)] group-hover:scale-115">
                   <CategoryIcon name={c.name} size="lg-home" />
                 </span>
-                <span className="absolute bottom-5 left-0 right-0 text-sm text-center leading-tight px-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">{c.name}</span>
+                <span className="absolute bottom-5 left-0 right-0 text-sm text-center px-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">{c.name}</span>
               </Link>
             ))}
           </div>
