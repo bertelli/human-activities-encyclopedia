@@ -29,7 +29,7 @@ async function HomeShell() {
             fontWeight: 700,
           }}
         >
-          The Incomplete Atlas of Doing
+          The Incomplete Atlas of Human Pursuits
         </h1>
       </header>
 

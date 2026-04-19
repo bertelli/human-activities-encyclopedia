@@ -131,14 +131,14 @@ export function HomeBrowser({
       )}
       {!showResults && (
         <nav>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
             {categories.map((c) => (
               <Link
                 key={c.id}
                 href={`/c/${c.slug}`}
                 className="group aspect-square relative flex items-center justify-center text-black no-underline rounded-sm hover:bg-[#f5f5f5] transition-colors"
               >
-                <span className="w-32 h-32 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.34,2.2,0.64,1)] group-hover:scale-115">
+                <span className="w-40 h-40 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.34,2.2,0.64,1)] group-hover:scale-115">
                   <CategoryIcon name={c.name} size="lg-home" />
                 </span>
                 <span className="absolute bottom-5 left-0 right-0 text-sm text-center leading-tight px-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">{c.name}</span>

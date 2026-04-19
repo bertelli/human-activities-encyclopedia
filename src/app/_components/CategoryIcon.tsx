@@ -14,12 +14,12 @@ export function CategoryIcon({
   name: string;
   categoryName?: string;
   iconVoxels?: VoxelSpec | null;
-  size?: "sm" | "md" | "lg-home" | "lg" | "xl" | "xs";
+  size?: "sm" | "md" | "lg-home" | "featured-home" | "lg" | "xl" | "xs";
   animated?: boolean;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
-  const displayPx = size === "xl" ? 700 : size === "lg" ? 420 : size === "lg-home" ? 160 : size === "md" ? 96 : size === "xs" ? 36 : 56;
-  const internalPx = size === "xl" ? 440 : size === "lg" ? 320 : size === "lg-home" ? 320 : size === "md" ? 160 : size === "xs" ? 60 : 96;
+  const displayPx = size === "xl" ? 700 : size === "lg" ? 420 : size === "featured-home" ? 400 : size === "lg-home" ? 200 : size === "md" ? 96 : size === "xs" ? 36 : 56;
+  const internalPx = size === "xl" ? 440 : size === "lg" ? 320 : size === "featured-home" ? 500 : size === "lg-home" ? 400 : size === "md" ? 160 : size === "xs" ? 60 : 96;
 
   useEffect(() => {
     const cv = ref.current;

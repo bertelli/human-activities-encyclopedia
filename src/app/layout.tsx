@@ -5,7 +5,7 @@ import "./globals.css";
 import { FooterSearch } from "./_components/FooterSearch";
 
 export const metadata: Metadata = {
-  title: "The Complete Atlas of Doing",
+  title: "The Incomplete Atlas of Human Pursuits",
   description:
     "An atlas of human pursuits — tools, glossary, and techniques for every hobby and craft.",
 };
@@ -33,7 +33,7 @@ export default function RootLayout({
             <span>
               © {year}{" "}
               <Link href="/" className="text-black no-underline hover:underline">
-                The Complete Atlas of Doing
+                The Incomplete Atlas of Human Pursuits
               </Link>
               . All rights reserved.
             </span>

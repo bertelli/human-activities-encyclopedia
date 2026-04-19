@@ -3,10 +3,6 @@ import { asc, eq, isNull, sql } from "drizzle-orm";
 import { db, schema } from "@/db";
 
 export async function getCategories() {
-  "use cache";
-  cacheLife("hours");
-  cacheTag("categories");
-
   const rows = await db.execute<{
     id: number;
     name: string;
@@ -17,7 +13,7 @@ export async function getCategories() {
     FROM categories c
     LEFT JOIN activities a ON a.category_id = c.id
     GROUP BY c.id, c.name, c.slug
-    ORDER BY COUNT(a.id) DESC, c.name ASC
+    ORDER BY c.name ASC
   `);
   return rows.map((r) => ({
     id: Number(r.id),
