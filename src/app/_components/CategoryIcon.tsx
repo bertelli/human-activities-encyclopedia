@@ -14,12 +14,12 @@ export function CategoryIcon({
   name: string;
   categoryName?: string;
   iconVoxels?: VoxelSpec | null;
-  size?: "sm" | "lg" | "xs";
+  size?: "sm" | "md" | "lg-home" | "lg" | "xs";
   animated?: boolean;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
-  const displayPx = size === "lg" ? 420 : size === "xs" ? 36 : 56;
-  const internalPx = size === "lg" ? 320 : size === "xs" ? 60 : 96;
+  const displayPx = size === "lg" ? 420 : size === "lg-home" ? 160 : size === "md" ? 96 : size === "xs" ? 36 : 56;
+  const internalPx = size === "lg" ? 320 : size === "lg-home" ? 256 : size === "md" ? 160 : size === "xs" ? 60 : 96;
 
   useEffect(() => {
     const cv = ref.current;
@@ -43,8 +43,7 @@ export function CategoryIcon({
     const render = () => {
       const W = cv.width;
       const H = cv.height;
-      ctx.fillStyle = "white";
-      ctx.fillRect(0, 0, W, H);
+      ctx.clearRect(0, 0, W, H);
 
       const cos = Math.cos(angle);
       const sin = Math.sin(angle);

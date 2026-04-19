@@ -119,12 +119,12 @@ export function HomeBrowser({
               <Link
                 key={c.id}
                 href={`/c/${c.slug}`}
-                className="aspect-square flex flex-col items-center justify-center gap-2 text-black no-underline rounded-sm hover:bg-[#f5f5f5] transition-colors"
+                className="aspect-square relative flex items-center justify-center text-black no-underline rounded-sm hover:bg-[#f5f5f5] transition-colors"
               >
-                <span className="w-16 h-16 flex items-center justify-center">
-                  <CategoryIcon name={c.name} size="sm" />
+                <span className="w-32 h-32 flex items-center justify-center">
+                  <CategoryIcon name={c.name} size="lg-home" />
                 </span>
-                <span className="text-sm text-center leading-tight px-2">{c.name}</span>
+                <span className="absolute bottom-5 left-0 right-0 text-sm text-center leading-tight px-2">{c.name}</span>
               </Link>
             ))}
           </div>

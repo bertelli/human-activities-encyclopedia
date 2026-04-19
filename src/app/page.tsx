@@ -35,12 +35,6 @@ async function HomeShell() {
       </header>
 
       <HomeBrowser categories={categories} total={total} />
-
-      <footer aria-hidden className="flex flex-col gap-4 mt-16">
-        {["The", "Incomplete", "Atlas", "of", "Doing"].map((word) => (
-          <VoxelTitle key={word} text={word} />
-        ))}
-      </footer>
     </>
   );
 }
