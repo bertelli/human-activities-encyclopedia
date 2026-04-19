@@ -3846,6 +3846,11 @@ const M_ALL = { ...M, ...EXTRA } as const;
 // specific matches before generic ones.
 // ──────────────────────────────────────────────────────────────
 const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
+  // category-level matches for split categories
+  [/nature.*outdoor|outdoor/i, "nature"],
+  [/science.*discover|discovery/i, "microscope"],
+  [/electronic.*robot|robotics/i, "circuitBoard"],
+  [/workshop.*build/i, "hammer"],
   // specific sports / activities (ORDER MATTERS: specific before generic)
   [/chess|checker|go\b|backgammon/i, "chessPiece"],
   [/mahjong|domino/i, "tile"],
