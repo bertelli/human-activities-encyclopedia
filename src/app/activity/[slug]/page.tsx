@@ -1,5 +1,27 @@
-import { Suspense } from "react";
+import { Suspense, type ReactNode } from "react";
 import Link from "next/link";
+
+function TwoColList<T>({
+  items,
+  render,
+  threshold = 8,
+}: {
+  items: T[];
+  render: (item: T) => ReactNode;
+  threshold?: number;
+}) {
+  const cls = "list-none p-0 m-0 border-t border-black";
+  if (items.length > threshold) {
+    const mid = Math.ceil(items.length / 2);
+    return (
+      <div className="md:grid md:grid-cols-2 md:gap-8">
+        <ul className={cls}>{items.slice(0, mid).map(render)}</ul>
+        <ul className={cls}>{items.slice(mid).map(render)}</ul>
+      </div>
+    );
+  }
+  return <ul className={cls}>{items.map(render)}</ul>;
+}
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getActivityBySlug } from "@/lib/queries";
@@ -156,16 +178,10 @@ async function ActivityBody({ slug }: { slug: string }) {
       {activity.children.length > 0 && (
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-normal text-black">Sub-activities</h2>
-          <ul
-            className={`list-none p-0 m-0${
-              activity.children.length > 8 ? "md:columns-2 md:gap-8" : ""
-            }`}
-          >
-            {activity.children.map((c) => (
-              <li
-                key={c.id}
-                className="border-t border-black break-inside-avoid"
-              >
+          <TwoColList
+            items={activity.children}
+            render={(c) => (
+              <li key={c.id} className="border-b border-black">
                 <Link
                   href={`/activity/${c.slug}`}
                   className="block py-2 text-[#757575] no-underline hover:underline capitalize"
@@ -173,44 +189,32 @@ async function ActivityBody({ slug }: { slug: string }) {
                   {c.name}
                 </Link>
               </li>
-            ))}
-          </ul>
+            )}
+          />
         </section>
       )}
 
       {activity.tools.length > 0 && (
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Tools</h2>
-          <ul
-            className={`list-none p-0 m-0${
-              activity.tools.length > 8 ? "md:columns-2 md:gap-8" : ""
-            }`}
-          >
-            {activity.tools.map((t) => (
-              <li
-                key={t.id}
-                className="text-black border-t border-black py-2 break-inside-avoid"
-              >
+          <TwoColList
+            items={activity.tools}
+            render={(t) => (
+              <li key={t.id} className="text-black border-b border-black py-2">
                 <span className="capitalize">{t.name}</span>
               </li>
-            ))}
-          </ul>
+            )}
+          />
         </section>
       )}
 
       {activity.techniques.length > 0 && (
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Techniques</h2>
-          <ul
-            className={`list-none p-0 m-0${
-              activity.techniques.length > 8 ? "md:columns-2 md:gap-8" : ""
-            }`}
-          >
-            {activity.techniques.map((t) => (
-              <li
-                key={t.id}
-                className="border-t border-black py-2 break-inside-avoid"
-              >
+          <TwoColList
+            items={activity.techniques}
+            render={(t) => (
+              <li key={t.id} className="border-b border-black py-2">
                 <span className="text-black capitalize">{t.name}</span>
                 {t.description && (
                   <>
@@ -219,24 +223,18 @@ async function ActivityBody({ slug }: { slug: string }) {
                   </>
                 )}
               </li>
-            ))}
-          </ul>
+            )}
+          />
         </section>
       )}
 
       {activity.brands.length > 0 && (
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Brands</h2>
-          <ul
-            className={`list-none p-0 m-0${
-              activity.brands.length > 8 ? "md:columns-2 md:gap-8" : ""
-            }`}
-          >
-            {activity.brands.map((b) => (
-              <li
-                key={b.id}
-                className="border-t border-black py-2 break-inside-avoid"
-              >
+          <TwoColList
+            items={activity.brands}
+            render={(b) => (
+              <li key={b.id} className="border-b border-black py-2">
                 <span className="text-black capitalize">{b.name}</span>
                 {b.note && (
                   <>
@@ -245,24 +243,18 @@ async function ActivityBody({ slug }: { slug: string }) {
                   </>
                 )}
               </li>
-            ))}
-          </ul>
+            )}
+          />
         </section>
       )}
 
       {activity.masters.length > 0 && (
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Masters</h2>
-          <ul
-            className={`list-none p-0 m-0${
-              activity.masters.length > 8 ? "md:columns-2 md:gap-8" : ""
-            }`}
-          >
-            {activity.masters.map((m) => (
-              <li
-                key={m.id}
-                className="border-t border-black py-2 break-inside-avoid"
-              >
+          <TwoColList
+            items={activity.masters}
+            render={(m) => (
+              <li key={m.id} className="border-b border-black py-2">
                 <span className="text-black capitalize">{m.name}</span>
                 {m.note && (
                   <>
@@ -271,29 +263,23 @@ async function ActivityBody({ slug }: { slug: string }) {
                   </>
                 )}
               </li>
-            ))}
-          </ul>
+            )}
+          />
         </section>
       )}
 
       {activity.glossary.length > 0 && (
         <section>
           <h2 className="m-0 mb-2 font-bold text-black">Glossary</h2>
-          <ul
-            className={`list-none p-0 m-0${
-              activity.glossary.length > 8 ? "md:columns-2 md:gap-8" : ""
-            }`}
-          >
-            {activity.glossary.map((g) => (
-              <li
-                key={g.id}
-                className="border-t border-black py-2 break-inside-avoid"
-              >
+          <TwoColList
+            items={activity.glossary}
+            render={(g) => (
+              <li key={g.id} className="border-b border-black py-2">
                 <span className="text-black capitalize">{g.term}</span>{" "}
                 <span className="text-[#757575]">— {g.definition}</span>
               </li>
-            ))}
-          </ul>
+            )}
+          />
         </section>
       )}
     </>

@@ -44,7 +44,7 @@ export function HomeSearch() {
     <div>
       <div className="relative">
         <input
-          className="w-full border border-black bg-white text-black pl-3 pr-10 py-2 outline-none box-border"
+          className="w-full border border-black bg-white text-black pl-4 pr-12 py-4 text-lg outline-none box-border"
           placeholder="Search hobby..."
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -57,33 +57,9 @@ export function HomeSearch() {
               setQ("");
               setResults([]);
             }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 block text-black hover:bg-black hover:text-white border border-black bg-white p-0 overflow-hidden"
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-black hover:bg-black hover:text-white border border-black bg-white"
           >
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              className="block w-full h-full"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <line
-                x1="7"
-                y1="7"
-                x2="17"
-                y2="17"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-              />
-              <line
-                x1="17"
-                y1="7"
-                x2="7"
-                y2="17"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-              />
-            </svg>
+            ×
           </button>
         )}
       </div>
