@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { CategoryIcon } from "./CategoryIcon";
+import { FeaturedActivity } from "./FeaturedActivity";
 
 type Result = {
   id: number;
@@ -18,12 +19,23 @@ type Category = {
   count: number;
 };
 
+type Featured = {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  category_name: string;
+  icon_voxels?: unknown;
+};
+
 export function HomeBrowser({
   categories,
   total,
+  featured,
 }: {
   categories: Category[];
   total: number;
+  featured?: Featured | null;
 }) {
   const [q, setQ] = useState("");
   const [results, setResults] = useState<Result[]>([]);
@@ -114,6 +126,11 @@ export function HomeBrowser({
         </section>
       ) : (
         <nav className="mt-6">
+          {featured && <FeaturedActivity activity={featured} />}
+        </nav>
+      )}
+      {!showResults && (
+        <nav>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2">
             {categories.map((c) => (
               <Link

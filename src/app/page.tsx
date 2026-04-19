@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import { getCategories } from "@/lib/queries";
+import { getCategories, getRandomActivity } from "@/lib/queries";
 import { HomeBrowser } from "./_components/HomeBrowser";
-import { VoxelTitle } from "./_components/VoxelTitle";
+import { FeaturedActivity } from "./_components/FeaturedActivity";
 
 export default function Home() {
   return (
@@ -14,8 +14,10 @@ export default function Home() {
 }
 
 async function HomeShell() {
-  "use cache";
-  const categories = await getCategories();
+  const [categories, featured] = await Promise.all([
+    getCategories(),
+    getRandomActivity(),
+  ]);
   const total = categories.reduce((sum, c) => sum + c.count, 0);
   return (
     <>
@@ -31,7 +33,7 @@ async function HomeShell() {
         </h1>
       </header>
 
-      <HomeBrowser categories={categories} total={total} />
+      <HomeBrowser categories={categories} total={total} featured={featured} />
     </>
   );
 }

@@ -222,6 +222,26 @@ export async function getFillStats() {
   };
 }
 
+export async function getRandomActivity() {
+  const rows = await db.execute<{
+    id: number;
+    name: string;
+    slug: string;
+    description: string;
+    category_name: string;
+    icon_voxels: unknown;
+  }>(sql`
+    SELECT a.id, a.name, a.slug, a.description, c.name AS category_name, a.icon_voxels
+    FROM activities a
+    JOIN categories c ON c.id = a.category_id
+    WHERE a.description IS NOT NULL AND LENGTH(TRIM(a.description)) > 100
+      AND a.icon_voxels IS NOT NULL
+    ORDER BY RANDOM()
+    LIMIT 1
+  `);
+  return rows[0] ?? null;
+}
+
 export async function searchActivities(q: string) {
   const query = q.trim().toLowerCase();
   if (query.length === 0) return [];
