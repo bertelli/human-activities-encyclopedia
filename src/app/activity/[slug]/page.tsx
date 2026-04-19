@@ -87,7 +87,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 | import("@/lib/voxelDSL").VoxelSpec
                 | null
             }
-            size="lg"
+            size="xl"
           />
         </div>
         <div className="flex items-start justify-between gap-4">
@@ -157,7 +157,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-normal text-black">Sub-activities</h2>
           <ul
-            className={`list-none p-0 m-0 ${
+            className={`list-none p-0 m-0 border-b border-black ${
               activity.children.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -182,7 +182,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Tools</h2>
           <ul
-            className={`list-none p-0 m-0 ${
+            className={`list-none p-0 m-0 border-b border-black ${
               activity.tools.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -191,7 +191,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 key={t.id}
                 className="text-black border-t border-black py-2 break-inside-avoid"
               >
-                <span className="capitalize">{t.name.toLowerCase()}</span>
+                <span className="capitalize">{t.name}</span>
               </li>
             ))}
           </ul>
@@ -202,7 +202,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Techniques</h2>
           <ul
-            className={`list-none p-0 m-0 ${
+            className={`list-none p-0 m-0 border-b border-black ${
               activity.techniques.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -211,7 +211,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 key={t.id}
                 className="border-t border-black py-2 break-inside-avoid"
               >
-                <span className="text-black capitalize">{t.name.toLowerCase()}</span>
+                <span className="text-black capitalize">{t.name}</span>
                 {t.description && (
                   <>
                     {" "}
@@ -228,7 +228,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Brands</h2>
           <ul
-            className={`list-none p-0 m-0 ${
+            className={`list-none p-0 m-0 border-b border-black ${
               activity.brands.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -237,7 +237,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 key={b.id}
                 className="border-t border-black py-2 break-inside-avoid"
               >
-                <span className="text-black capitalize">{b.name.toLowerCase()}</span>
+                <span className="text-black capitalize">{b.name}</span>
                 {b.note && (
                   <>
                     {" "}
@@ -254,7 +254,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Masters</h2>
           <ul
-            className={`list-none p-0 m-0 ${
+            className={`list-none p-0 m-0 border-b border-black ${
               activity.masters.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -263,7 +263,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 key={m.id}
                 className="border-t border-black py-2 break-inside-avoid"
               >
-                <span className="text-black capitalize">{m.name.toLowerCase()}</span>
+                <span className="text-black capitalize">{m.name}</span>
                 {m.note && (
                   <>
                     {" "}
@@ -280,7 +280,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section>
           <h2 className="m-0 mb-2 font-bold text-black">Glossary</h2>
           <ul
-            className={`list-none p-0 m-0 ${
+            className={`list-none p-0 m-0 border-b border-black ${
               activity.glossary.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -289,7 +289,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 key={g.id}
                 className="border-t border-black py-2 break-inside-avoid"
               >
-                <span className="text-black capitalize">{g.term.toLowerCase()}</span>{" "}
+                <span className="text-black capitalize">{g.term}</span>{" "}
                 <span className="text-[#757575]">— {g.definition}</span>
               </li>
             ))}

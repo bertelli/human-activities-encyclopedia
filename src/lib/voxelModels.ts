@@ -1511,30 +1511,297 @@ const EXTRA = {
   // Car — side profile chassis
   car: () => {
     const out: Vox[] = [];
-    // body (lower box)
-    for (let x = -7; x <= 7; x++)
-      for (let y = -1; y <= 1; y++)
-        for (let z = -3; z <= 3; z++) out.push([x, y, z]);
-    // cabin (upper, narrower, centered)
-    for (let x = -4; x <= 3; x++)
-      for (let y = 2; y <= 4; y++)
-        for (let z = -2; z <= 2; z++) {
-          // taper the front of the cabin
-          if (x >= 2 && y === 4) continue;
-          out.push([x, y, z]);
-        }
-    // wheels (two discs at each end, on X axis)
+    // Low, long body — sports car proportions
+    for (let x = -9; x <= 9; x++)
+      for (let z = -3; z <= 3; z++) {
+        // base slab (floor)
+        out.push([x, -1, z]);
+        out.push([x, 0, z]);
+      }
+    // Hood — low slope from front, rises toward cabin
+    for (let x = 3; x <= 9; x++)
+      for (let z = -3; z <= 3; z++) {
+        const maxY = x >= 7 ? 1 : 2;
+        for (let y = 1; y <= maxY; y++) out.push([x, y, z]);
+      }
+    // Cabin — raked windshield, low roofline, set back
+    for (let x = -3; x <= 3; x++)
+      for (let z = -2; z <= 2; z++) {
+        const roofY = x <= -2 ? 3 : x <= 1 ? 4 : 3;
+        for (let y = 1; y <= roofY; y++) out.push([x, y, z]);
+      }
+    // Rear — fastback taper
+    for (let x = -8; x <= -3; x++)
+      for (let z = -3; z <= 3; z++) {
+        const maxY = x <= -6 ? 1 : x <= -4 ? 2 : 3;
+        for (let y = 1; y <= maxY; y++) out.push([x, y, z]);
+      }
+    // Wheels — round, at the corners
     const wheel = (cx: number) => {
       for (let y = -4; y <= -1; y++)
-        for (let z = -3; z <= 3; z++) {
-          if (Math.hypot(y + 2.5, z) > 2.2) continue;
+        for (let z = -4; z <= 4; z++) {
+          if (Math.hypot(y + 2.5, z) > 2.5) continue;
           for (let x = cx - 1; x <= cx + 1; x++) out.push([x, y, z]);
         }
     };
-    wheel(-5);
-    wheel(5);
-    // headlight bump
-    out.push([7, 0, 2], [7, 0, -2]);
+    wheel(-7);
+    wheel(7);
+    return out;
+  },
+
+  // Classic car — 911 at 48-voxel resolution with stepped contours
+  classicCar: () => {
+    const out: Vox[] = [];
+    // Profile functions: height and half-width at each x position (-24..24)
+    // x: -22 = rear bumper, +22 = front nose
+    const getHeight = (x: number): number => {
+      if (x > 22 || x < -22) return 0;
+      if (x >= 18) return Math.round(1 + (22 - x) * 0.5);          // nose tapers down
+      if (x >= 8) return Math.round(3 + (x - 8) * 0.1);            // hood, low flat
+      if (x >= 4) return Math.round(4 + (8 - x) * 1.2);            // windshield rakes up
+      if (x >= -4) return 9;                                         // roof peak
+      if (x >= -8) return Math.round(9 + (x + 4) * 0.8);           // rear window slopes
+      if (x >= -14) return Math.round(5 + (x + 8) * 0.3);          // rear engine hump
+      return Math.round(3 + (x + 14) * 0.3);                        // tail tapers
+    };
+    const getHalfW = (x: number): number => {
+      if (x > 22 || x < -22) return 0;
+      if (x >= 16) return Math.round(5 + (22 - x) * 0.3);          // nose narrows
+      if (x >= 4) return 8;                                          // hood+windshield
+      if (x >= -8) return 8;                                         // cabin
+      if (x >= -16) return Math.round(8 + Math.min(2, (-8 - x) * 0.4)); // haunches widen
+      return Math.round(8 - (x + 22) * 0.2);                        // tail narrows
+    };
+    // Build body from profile
+    for (let x = -22; x <= 22; x++) {
+      const h = getHeight(x);
+      const w = getHalfW(x);
+      if (h <= 0 || w <= 0) continue;
+      for (let z = -w; z <= w; z++)
+        for (let y = -3; y <= h; y++) out.push([x, y, z]);
+    }
+    // Fender bulges — front
+    for (let x = 14; x <= 20; x++) {
+      const bulge = Math.round(2 - Math.abs(x - 17) * 0.4);
+      if (bulge <= 0) continue;
+      const w = getHalfW(x);
+      for (let dz = 0; dz <= bulge; dz++)
+        for (let y = -3; y <= 1; y++) {
+          out.push([x, y, -(w + 1 + dz)]);
+          out.push([x, y, w + 1 + dz]);
+        }
+    }
+    // Fender bulges — rear (wider, 911 haunches)
+    for (let x = -18; x <= -10; x++) {
+      const bulge = Math.round(3 - Math.abs(x + 14) * 0.5);
+      if (bulge <= 0) continue;
+      const w = getHalfW(x);
+      for (let dz = 0; dz <= bulge; dz++)
+        for (let y = -3; y <= 2; y++) {
+          out.push([x, y, -(w + 1 + dz)]);
+          out.push([x, y, w + 1 + dz]);
+        }
+    }
+    // Wheels — round discs under fender arches
+    const wheel = (cx: number) => {
+      const r = 4;
+      for (let y = -8; y <= -2; y++)
+        for (let x = cx - 2; x <= cx + 2; x++) {
+          const dy = y + 5;
+          const maxDz = Math.round(Math.sqrt(Math.max(0, r * r - dy * dy)));
+          for (let dz = -maxDz; dz <= maxDz; dz++) {
+            out.push([x, y, -10 + dz]);
+            out.push([x, y, 10 + dz]);
+          }
+        }
+    };
+    wheel(-15);
+    wheel(17);
+    return out;
+  },
+
+  // F1/open-wheel race car — narrow body, wide front+rear wings, open cockpit
+  raceCar: () => {
+    const out: Vox[] = [];
+    // Narrow nose cone
+    for (let x = 3; x <= 12; x++)
+      for (let z = -1; z <= 1; z++) out.push([x, 0, z]);
+    // Main body
+    for (let x = -8; x <= 3; x++)
+      for (let z = -2; z <= 2; z++) out.push([x, 0, z], [x, 1, z]);
+    // Cockpit opening
+    for (let z = -1; z <= 1; z++) out.push([0, 2, z], [1, 2, z]);
+    // Headrest
+    out.push([-1, 2, 0], [-1, 3, 0]);
+    // Front wing
+    for (let z = -6; z <= 6; z++) out.push([11, 0, z], [12, 0, z]);
+    // Rear wing
+    for (let z = -5; z <= 5; z++) out.push([-8, 3, z], [-9, 3, z]);
+    for (let z = -1; z <= 1; z++) out.push([-8, 2, z], [-9, 2, z]);
+    // Wheels — discs perpendicular to Z (flat on the side)
+    const wheel = (cx: number, cz: number) => {
+      for (let dy = -3; dy <= 1; dy++)
+        for (let dx = cx - 1; dx <= cx + 1; dx++) {
+          if (Math.hypot(dy, dx - cx) > 1.8) continue;
+          out.push([dx, dy, cz]);
+          out.push([dx, dy, cz + (cz > 0 ? 1 : -1)]);
+        }
+    };
+    wheel(8, -5); wheel(8, 5); wheel(-6, -4); wheel(-6, 4);
+    return out;
+  },
+
+  // NASCAR stock car — chunky body, low, number circle on side
+  stockCar: () => {
+    const out: Vox[] = [];
+    for (let x = -9; x <= 9; x++)
+      for (let z = -3; z <= 3; z++) out.push([x, -1, z], [x, 0, z]);
+    // Cabin — wide, low
+    for (let x = -3; x <= 4; x++)
+      for (let z = -3; z <= 3; z++)
+        for (let y = 1; y <= 3; y++) out.push([x, y, z]);
+    // Hood slope
+    for (let x = 5; x <= 9; x++)
+      for (let z = -3; z <= 3; z++) out.push([x, 1, z]);
+    // Trunk
+    for (let x = -7; x <= -3; x++)
+      for (let z = -3; z <= 3; z++) out.push([x, 1, z]);
+    // Spoiler
+    for (let z = -3; z <= 3; z++) out.push([-9, 2, z], [-9, 3, z]);
+    const wheel = (cx: number) => {
+      for (let y = -4; y <= -1; y++)
+        for (let z = -4; z <= 4; z++) {
+          if (Math.hypot(y + 2.5, z) > 2.5) continue;
+          for (let x = cx - 1; x <= cx + 1; x++) out.push([x, y, z]);
+        }
+    };
+    wheel(-6); wheel(7);
+    return out;
+  },
+
+  // Motorcycle — two big wheels, engine block, handlebars
+  motorcycle: () => {
+    const out: Vox[] = [];
+    // Frame
+    for (let x = -4; x <= 4; x++) out.push([x, 0, 0], [x, 1, 0]);
+    // Engine block
+    for (let x = -1; x <= 2; x++)
+      for (let z = -1; z <= 1; z++) out.push([x, -1, z], [x, 0, z]);
+    // Seat
+    for (let x = -4; x <= -1; x++) out.push([x, 2, 0]);
+    // Tank
+    for (let x = 0; x <= 3; x++) out.push([x, 2, 0], [x, 2, 1], [x, 2, -1]);
+    // Handlebars
+    out.push([5, 3, -2], [5, 3, -1], [5, 3, 0], [5, 3, 1], [5, 3, 2]);
+    out.push([5, 2, 0], [4, 2, 0]);
+    // Front forks
+    out.push([5, 1, 0], [6, 0, 0], [7, -1, 0]);
+    // Wheels
+    const wheel = (cx: number) => {
+      for (let y = -4; y <= 1; y++)
+        for (let z = -1; z <= 1; z++) {
+          if (Math.hypot(y + 1.5, z) > 3.2) continue;
+          out.push([cx, y, z]);
+        }
+    };
+    wheel(-6); wheel(7);
+    // Exhaust
+    out.push([-5, -1, 1], [-6, -1, 1], [-7, -1, 1]);
+    return out;
+  },
+
+  // Go-kart — tiny open frame, no body, steering wheel, exposed engine
+  goKart: () => {
+    const out: Vox[] = [];
+    // Frame rails
+    for (let x = -6; x <= 6; x++) { out.push([x, 0, -2]); out.push([x, 0, 2]); }
+    // Cross members
+    for (let z = -2; z <= 2; z++) { out.push([-4, 0, z]); out.push([0, 0, z]); out.push([4, 0, z]); }
+    // Seat
+    for (let z = -1; z <= 1; z++) { out.push([-2, 1, z]); out.push([-2, 2, z]); out.push([-3, 1, z]); }
+    // Steering column + wheel
+    out.push([2, 1, 0], [3, 2, 0], [3, 3, -1], [3, 3, 0], [3, 3, 1]);
+    // Engine behind seat
+    for (let z = -1; z <= 1; z++) out.push([-5, 1, z], [-5, 2, z]);
+    // Small wheels
+    const wheel = (cx: number, cz: number) => {
+      for (let y = -2; y <= 0; y++) out.push([cx, y, cz]);
+    };
+    wheel(-5, -3); wheel(-5, 3); wheel(5, -3); wheel(5, 3);
+    return out;
+  },
+
+  // Monster truck — lifted body, HUGE wheels
+  monsterTruck: () => {
+    const out: Vox[] = [];
+    // Body — lifted high
+    for (let x = -6; x <= 6; x++)
+      for (let z = -3; z <= 3; z++) out.push([x, 2, z], [x, 3, z]);
+    // Cab
+    for (let x = -2; x <= 3; x++)
+      for (let z = -2; z <= 2; z++)
+        for (let y = 4; y <= 6; y++) out.push([x, y, z]);
+    // Bed
+    for (let x = -6; x <= -3; x++)
+      for (let z = -3; z <= 3; z++) out.push([x, 4, z]);
+    // Massive wheels
+    const wheel = (cx: number) => {
+      for (let y = -5; y <= 3; y++)
+        for (let z = -5; z <= 5; z++) {
+          if (Math.hypot(y + 1, z) > 4.5) continue;
+          out.push([cx, y, z]);
+        }
+    };
+    wheel(-4); wheel(5);
+    return out;
+  },
+
+  // RC car — small car with antenna sticking up
+  rcCar: () => {
+    const out: Vox[] = [];
+    // Small body
+    for (let x = -5; x <= 5; x++)
+      for (let z = -2; z <= 2; z++) out.push([x, 0, z]);
+    // Low cabin
+    for (let x = -2; x <= 2; x++)
+      for (let z = -1; z <= 1; z++) out.push([x, 1, z], [x, 2, z]);
+    // Antenna
+    for (let y = 1; y <= 8; y++) out.push([-4, y, 0]);
+    out.push([-4, 8, -1], [-4, 8, 1]);
+    // Small wheels
+    const wheel = (cx: number) => {
+      for (let y = -2; y <= 0; y++)
+        for (let z = -3; z <= 3; z++) {
+          if (Math.hypot(y + 1, z) > 1.8) continue;
+          out.push([cx, y, z]);
+        }
+    };
+    wheel(-4); wheel(4);
+    return out;
+  },
+
+  // RV/camper — long tall box on wheels
+  rv: () => {
+    const out: Vox[] = [];
+    // Long body
+    for (let x = -10; x <= 8; x++)
+      for (let z = -3; z <= 3; z++)
+        for (let y = 0; y <= 5; y++) out.push([x, y, z]);
+    // Cab — shorter, step down in front
+    for (let x = 9; x <= 12; x++)
+      for (let z = -3; z <= 3; z++)
+        for (let y = 0; y <= 3; y++) out.push([x, y, z]);
+    // Windshield gap
+    for (let z = -2; z <= 2; z++) out.push([12, 2, z]);
+    // Wheels
+    const wheel = (cx: number) => {
+      for (let y = -3; y <= 0; y++)
+        for (let z = -4; z <= 4; z++) {
+          if (Math.hypot(y + 1.5, z) > 2.2) continue;
+          out.push([cx, y, z]);
+        }
+    };
+    wheel(-7); wheel(9);
     return out;
   },
 
@@ -2972,32 +3239,6 @@ const EXTRA = {
     return out;
   },
 
-  // Motorcycle
-  motorcycle: () => {
-    const out: Vox[] = [];
-    // two wheels
-    const wheel = (cx: number) => {
-      for (let y = -4; y <= 0; y++)
-        for (let dz = -2; dz <= 2; dz++) {
-          if (Math.hypot(y + 2, dz) > 2 || Math.hypot(y + 2, dz) < 1) continue;
-          for (let dx = -1; dx <= 1; dx++) out.push([cx + dx, y, dz]);
-        }
-    };
-    wheel(-5);
-    wheel(5);
-    // frame (diagonal)
-    for (let x = -4; x <= 4; x++) out.push([x, 1, 0]);
-    // seat
-    for (let x = -3; x <= 0; x++) out.push([x, 2, 0], [x, 2, 1], [x, 2, -1]);
-    // tank
-    for (let x = 0; x <= 3; x++)
-      for (let y = 1; y <= 3; y++) out.push([x, y, 0]);
-    // handlebar
-    for (let z = -2; z <= 2; z++) out.push([5, 3, z]);
-    for (let y = 1; y <= 3; y++) out.push([5, y, 0]);
-    return out;
-  },
-
   // Train (locomotive)
   train: () => {
     const out: Vox[] = [];
@@ -3941,7 +4182,16 @@ const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
   [/cook|cuisine|grill|bbq|barbecue|meal\s*prep|fermentation|pickling|kombucha|saucer/i, "pot"],
   [/wine|beer|spirit|cocktail|mead|mixolog|sake|whisk|distill|brew/i, "bottle"],
   [/draw|paint|sketch|callig|pyrograph|illustrat|anim(e|ation)?|nail\s*art|tattoo|lettering/i, "pencil"],
-  [/car\b|auto|drift|racing|motorcy|motor|f1\b|nascar|rally/i, "car"],
+  [/vintage\s*car\s*restor/i, "classicCar"],
+  [/vintage\s*car/i, "classicCar"],
+  [/nascar/i, "stockCar"],
+  [/auto\s*racing|f1\b|formula|rally\s*rac/i, "raceCar"],
+  [/monster\s*truck/i, "monsterTruck"],
+  [/r.c\s*car|rc\s*car|slot\s*car|remote\s*control/i, "rcCar"],
+  [/go[\s-]?kart|kart\s*rac|soap\s*box|pinewood/i, "goKart"],
+  [/motorcycle|motocross|sidecar/i, "motorcycle"],
+  [/recreational\s*vehicle|rv\b|camper\s*van|van\s*build/i, "rv"],
+  [/car\b|auto|drift|motor|racing/i, "car"],
   [/photo|camera|film|video(graphy)?|cinema(tography)?/i, "photography"],
   [/typewriter/i, "typewriter"],
   [/quill|calligraph|fountain\s*pen/i, "quill"],
@@ -4046,7 +4296,8 @@ const KEYWORDS: Array<[RegExp, keyof typeof M_ALL]> = [
   [/lucid\s*dream|dream\s*journal|astral|oob|out\s*of\s*body/i, "beads"],
   [/capsule\s*wardrobe|slow\s*living|voluntary\s*simpli|frugal|minimali|declutter|konmari|homesteading|self[\s-]?sufficient/i, "hourglass"],
   [/forag|mushroom|seed\s*sav|wildcraft|herbal|plant\s*medicine/i, "plant"],
-  [/hot\s*rod|custom\s*van|trike\s*build|pinewood|derby|ev\s*convers|penny\s*farthing|velomobile|rc\s*car|remote\s*control|rc\s*helic|rc\s*sub|pedal\s*car|cart\s*build|kart\s*build/i, "car"],
+  [/hot\s*rod|custom\s*van|trike\s*build|ev\s*convers|penny\s*farthing|velomobile|pedal\s*car/i, "car"],
+  [/rc\s*helic|rc\s*sub/i, "rcCar"],
   [/canal\s*boat|tall\s*ship|wooden\s*boat|boat\s*build|kayak\s*build|ship\s*model/i, "sailboat"],
   [/dog|cat|rabbit|ferret|rat|hedgehog|sugar\s*glider|tarantula|reptile|gecko|chameleon|snake|axolotl|octopus|canary|parrot|budgie|cockatiel|finch|pet\b|animal\s*keep|falcon|husbandry|obedience|agility|herding|schutz|canicross|flyball|disc\s*dog/i, "birdhouse"],
   [/horse|equestrian|dressage|polo\b|show\s*jump|pony|donkey|mule/i, "trophy"],

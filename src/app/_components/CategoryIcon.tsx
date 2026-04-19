@@ -14,12 +14,12 @@ export function CategoryIcon({
   name: string;
   categoryName?: string;
   iconVoxels?: VoxelSpec | null;
-  size?: "sm" | "md" | "lg-home" | "lg" | "xs";
+  size?: "sm" | "md" | "lg-home" | "lg" | "xl" | "xs";
   animated?: boolean;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
-  const displayPx = size === "lg" ? 420 : size === "lg-home" ? 160 : size === "md" ? 96 : size === "xs" ? 36 : 56;
-  const internalPx = size === "lg" ? 320 : size === "lg-home" ? 256 : size === "md" ? 160 : size === "xs" ? 60 : 96;
+  const displayPx = size === "xl" ? 700 : size === "lg" ? 420 : size === "lg-home" ? 160 : size === "md" ? 96 : size === "xs" ? 36 : 56;
+  const internalPx = size === "xl" ? 440 : size === "lg" ? 320 : size === "lg-home" ? 320 : size === "md" ? 160 : size === "xs" ? 60 : 96;
 
   useEffect(() => {
     const cv = ref.current;
@@ -136,17 +136,25 @@ export function CategoryIcon({
             const uX = dx / BLOCK; // 0 left → 1 right
 
             let color: string;
+            // Ordered 4x4 Bayer dither — maps grey levels to black/white dot patterns
+            const bayer4 = [
+              [ 0,  8,  2, 10],
+              [12,  4, 14,  6],
+              [ 3, 11,  1,  9],
+              [15,  7, 13,  5],
+            ];
+            const threshold = bayer4[dy & 3][dx & 3];
+            let grey: number; // 0 = white, 15 = black
             if (uY < 0.4 && p.topVis) {
-              // top face, dither light/medium by position
-              color = ((dx + dy) & 1) === 0 ? "#ffffff" : "#d0d0d0";
+              grey = 2;   // light — ~12% black dots
             } else if (uX < 0.5 && lFaceVis) {
-              color = ((dx + dy) & 1) === 0 ? "#888888" : "#707070";
+              grey = 8;   // medium — ~50% black
             } else if (uX >= 0.5 && rFaceVis) {
-              color = ((dx + dy) & 1) === 0 ? "#505050" : "#383838";
+              grey = 12;  // dark — ~75% black
             } else {
-              // edge / occluded corner — deep outline
-              color = "#000000";
+              grey = 15;  // edge — solid black
             }
+            color = grey > threshold ? "#000000" : "#ffffff";
 
             ctx.fillStyle = color;
             ctx.fillRect(x, y, 1, 1);

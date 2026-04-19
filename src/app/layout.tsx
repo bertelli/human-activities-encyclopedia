@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import "./globals.css";
 import { FooterSearch } from "./_components/FooterSearch";
 
@@ -25,7 +26,9 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col">
         <main className="flex-1">{children}</main>
         <footer className="px-6 py-6 mt-12">
-          <FooterSearch />
+          <Suspense fallback={null}>
+            <FooterSearch />
+          </Suspense>
           <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-black">
             <span>
               © {year}{" "}
