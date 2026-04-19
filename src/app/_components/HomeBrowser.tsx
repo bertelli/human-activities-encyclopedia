@@ -104,8 +104,8 @@ export function HomeBrowser({
                     href={`/activity/${r.slug}`}
                     className="flex justify-between items-center py-3 text-black no-underline hover:underline"
                   >
-                    <span>{r.name}</span>
-                    <span className="text-[#757575]">{r.category_name}</span>
+                    <span className="capitalize">{r.name.toLowerCase()}</span>
+                    <span className="text-[#757575] capitalize">{r.category_name.toLowerCase()}</span>
                   </Link>
                 </li>
               ))}
@@ -114,25 +114,20 @@ export function HomeBrowser({
         </section>
       ) : (
         <nav className="mt-6">
-          <h2 className="m-0 mb-2 font-normal text-black">Categories</h2>
-          <ul className="list-none p-0 m-0">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2">
             {categories.map((c) => (
-              <li key={c.id} className="border-t border-black">
-                <Link
-                  href={`/c/${c.slug}`}
-                  className="flex justify-between items-center py-3 text-black no-underline hover:underline"
-                >
-                  <span className="flex items-center gap-3">
-                    <span className="w-14 h-14 flex items-center justify-center shrink-0">
-                      <CategoryIcon name={c.name} size="sm" />
-                    </span>
-                    <span>{c.name}</span>
-                  </span>
-                  <span className="text-[#757575]">{c.count}</span>
-                </Link>
-              </li>
+              <Link
+                key={c.id}
+                href={`/c/${c.slug}`}
+                className="aspect-square flex flex-col items-center justify-center gap-2 text-black no-underline rounded-sm hover:bg-[#f5f5f5] transition-colors"
+              >
+                <span className="w-16 h-16 flex items-center justify-center">
+                  <CategoryIcon name={c.name} size="sm" />
+                </span>
+                <span className="text-sm text-center leading-tight px-2">{c.name}</span>
+              </Link>
             ))}
-          </ul>
+          </div>
         </nav>
       )}
     </div>
