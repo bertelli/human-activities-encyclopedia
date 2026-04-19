@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import "./globals.css";
-import { HomeSearch } from "./_components/HomeSearch";
+import { FooterSearch } from "./_components/FooterSearch";
 
 export const metadata: Metadata = {
   title: "The Complete Atlas of Doing",
@@ -24,10 +24,8 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen flex flex-col">
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-black px-6 py-6 mt-12">
-          <div className="mb-6">
-            <HomeSearch />
-          </div>
+        <footer className="px-6 py-6 mt-12">
+          <FooterSearch />
           <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-black">
             <span>
               © {year}{" "}

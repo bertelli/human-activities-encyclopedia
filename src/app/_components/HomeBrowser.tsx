@@ -66,8 +66,8 @@ export function HomeBrowser({
     <div>
       <div className="relative">
         <input
-          className="w-full border border-black bg-white text-black pl-3 pr-10 py-2 outline-none box-border"
-          placeholder={`Search ${total.toLocaleString()} hobbies...`}
+          className="w-full border border-black bg-white text-black pl-4 pr-12 py-4 text-lg outline-none box-border"
+          placeholder={`Search ${total.toLocaleString()} hobbies, crafts, and human pursuits`}
           value={q}
           onChange={(e) => setQ(e.target.value)}
         />
@@ -119,12 +119,12 @@ export function HomeBrowser({
               <Link
                 key={c.id}
                 href={`/c/${c.slug}`}
-                className="aspect-square relative flex items-center justify-center text-black no-underline rounded-sm hover:bg-[#f5f5f5] transition-colors"
+                className="group aspect-square relative flex items-center justify-center text-black no-underline rounded-sm hover:bg-[#f5f5f5] transition-colors"
               >
-                <span className="w-32 h-32 flex items-center justify-center">
+                <span className="w-32 h-32 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.34,2.2,0.64,1)] group-hover:scale-115">
                   <CategoryIcon name={c.name} size="lg-home" />
                 </span>
-                <span className="absolute bottom-5 left-0 right-0 text-sm text-center leading-tight px-2">{c.name}</span>
+                <span className="absolute bottom-5 left-0 right-0 text-sm text-center leading-tight px-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">{c.name}</span>
               </Link>
             ))}
           </div>

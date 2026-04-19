@@ -19,7 +19,7 @@ async function HomeShell() {
   const total = categories.reduce((sum, c) => sum + c.count, 0);
   return (
     <>
-      <header className="mb-6">
+      <header className="mb-16">
         <h1
           className="atlas-title m-0 mb-8 text-black"
           style={{
@@ -29,9 +29,6 @@ async function HomeShell() {
         >
           The Incomplete Atlas of Doing
         </h1>
-        <p className="m-0 text-[#757575]">
-          Every hobby, craft, and pursuit — tools, glossary, techniques.
-        </p>
       </header>
 
       <HomeBrowser categories={categories} total={total} />
