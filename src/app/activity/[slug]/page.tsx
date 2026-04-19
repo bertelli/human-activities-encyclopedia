@@ -191,7 +191,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 key={t.id}
                 className="text-black border-t border-black py-2 break-inside-avoid"
               >
-                {t.name}
+                <span className="capitalize">{t.name.toLowerCase()}</span>
               </li>
             ))}
           </ul>
@@ -211,7 +211,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 key={t.id}
                 className="border-t border-black py-2 break-inside-avoid"
               >
-                <span className="text-black">{t.name}</span>
+                <span className="text-black capitalize">{t.name.toLowerCase()}</span>
                 {t.description && (
                   <>
                     {" "}
@@ -237,7 +237,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 key={b.id}
                 className="border-t border-black py-2 break-inside-avoid"
               >
-                <span className="text-black">{b.name}</span>
+                <span className="text-black capitalize">{b.name.toLowerCase()}</span>
                 {b.note && (
                   <>
                     {" "}
@@ -263,7 +263,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 key={m.id}
                 className="border-t border-black py-2 break-inside-avoid"
               >
-                <span className="text-black">{m.name}</span>
+                <span className="text-black capitalize">{m.name.toLowerCase()}</span>
                 {m.note && (
                   <>
                     {" "}
@@ -289,7 +289,7 @@ async function ActivityBody({ slug }: { slug: string }) {
                 key={g.id}
                 className="border-t border-black py-2 break-inside-avoid"
               >
-                <span className="text-black">{g.term}</span>{" "}
+                <span className="text-black capitalize">{g.term.toLowerCase()}</span>{" "}
                 <span className="text-[#757575]">— {g.definition}</span>
               </li>
             ))}

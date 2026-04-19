@@ -34,7 +34,7 @@ export function FeaturedActivity({ activity }: { activity: Activity }) {
         <div className="flex flex-col justify-center gap-2 col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 2xl:col-span-5 py-4">
           <span className="text-xl font-bold">{activity.name}</span>
           <span className="text-sm text-[#555] leading-relaxed">{firstParagraph}…</span>
-          <span className="text-xs text-[#999]">{activity.category_name}</span>
+          <span className="text-sm underline">Read more</span>
         </div>
       </Link>
       <div className="border-b border-black mb-6" />
