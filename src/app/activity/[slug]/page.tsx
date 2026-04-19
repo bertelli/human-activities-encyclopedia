@@ -77,7 +77,7 @@ async function ActivityBody({ slug }: { slug: string }) {
           )}
       </nav>
 
-      <header className="mt-2 mb-6 pb-4 border-b border-black">
+      <header className="mt-2 mb-6 pb-6 border-b border-black">
         <div className="flex justify-center mb-3">
           <CategoryIcon
             name={activity.name}
@@ -157,7 +157,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-normal text-black">Sub-activities</h2>
           <ul
-            className={`list-none p-0 m-0 border-b border-black ${
+            className={`list-none p-0 m-0${
               activity.children.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -182,7 +182,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Tools</h2>
           <ul
-            className={`list-none p-0 m-0 border-b border-black ${
+            className={`list-none p-0 m-0${
               activity.tools.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -202,7 +202,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Techniques</h2>
           <ul
-            className={`list-none p-0 m-0 border-b border-black ${
+            className={`list-none p-0 m-0${
               activity.techniques.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -228,7 +228,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Brands</h2>
           <ul
-            className={`list-none p-0 m-0 border-b border-black ${
+            className={`list-none p-0 m-0${
               activity.brands.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -254,7 +254,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section className="mb-8">
           <h2 className="m-0 mb-2 font-bold text-black">Masters</h2>
           <ul
-            className={`list-none p-0 m-0 border-b border-black ${
+            className={`list-none p-0 m-0${
               activity.masters.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
@@ -280,7 +280,7 @@ async function ActivityBody({ slug }: { slug: string }) {
         <section>
           <h2 className="m-0 mb-2 font-bold text-black">Glossary</h2>
           <ul
-            className={`list-none p-0 m-0 border-b border-black ${
+            className={`list-none p-0 m-0${
               activity.glossary.length > 8 ? "md:columns-2 md:gap-8" : ""
             }`}
           >
