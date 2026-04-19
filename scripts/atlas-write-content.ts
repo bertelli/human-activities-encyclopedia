@@ -118,7 +118,11 @@ async function main() {
 
   await db
     .update(schema.activities)
-    .set({ description: data.description, iconVoxels: data.iconVoxels })
+    .set({
+      description: data.description,
+      iconVoxels: data.iconVoxels,
+      updatedAt: new Date(),
+    })
     .where(eq(schema.activities.id, data.id));
 
   await db.delete(schema.tools).where(eq(schema.tools.activityId, data.id));

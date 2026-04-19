@@ -19,7 +19,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const year = new Date().getFullYear();
+  const year = 2026;
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
@@ -37,6 +37,10 @@ export default function RootLayout({
               . All rights reserved.
             </span>
             <span className="text-[#757575]">
+              <Link href="/log" className="text-[#757575] no-underline hover:underline">
+                Fill log
+              </Link>
+              {" · "}
               An atlas of human pursuits.
             </span>
           </div>

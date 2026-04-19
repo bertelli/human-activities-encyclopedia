@@ -106,8 +106,8 @@ export function HomeSearch() {
                     href={`/activity/${r.slug}`}
                     className="flex justify-between items-center py-3 text-black no-underline hover:underline"
                   >
-                    <span>{r.name}</span>
-                    <span className="text-[#757575]">{r.category_name}</span>
+                    <span className="capitalize">{r.name.toLowerCase()}</span>
+                    <span className="text-[#757575] capitalize">{r.category_name.toLowerCase()}</span>
                   </Link>
                 </li>
               ))}

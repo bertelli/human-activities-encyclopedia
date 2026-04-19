@@ -169,6 +169,59 @@ export async function getActivityBySlug(slug: string) {
   };
 }
 
+export async function getFillLog(limit = 50) {
+  return db.execute<{
+    id: number;
+    name: string;
+    slug: string;
+    category_name: string;
+    updated_at: string;
+    tools: number;
+    glossary: number;
+    brands: number;
+    techniques: number;
+    masters: number;
+  }>(sql`
+    SELECT
+      a.id, a.name, a.slug, c.name AS category_name, a.updated_at,
+      (SELECT COUNT(*) FROM tools t WHERE t.activity_id = a.id) AS tools,
+      (SELECT COUNT(*) FROM glossary_terms g WHERE g.activity_id = a.id) AS glossary,
+      (SELECT COUNT(*) FROM brands b WHERE b.activity_id = a.id) AS brands,
+      (SELECT COUNT(*) FROM techniques tq WHERE tq.activity_id = a.id) AS techniques,
+      (SELECT COUNT(*) FROM masters m WHERE m.activity_id = a.id) AS masters
+    FROM activities a
+    JOIN categories c ON c.id = a.category_id
+    WHERE a.updated_at IS NOT NULL
+    ORDER BY a.updated_at DESC
+    LIMIT ${limit}
+  `);
+}
+
+export async function getFillStats() {
+  const rows = await db.execute<{
+    total: number;
+    filled: number;
+    last_hour: number;
+    last_day: number;
+  }>(sql`
+    SELECT
+      (SELECT COUNT(*) FROM activities) AS total,
+      (SELECT COUNT(*) FROM activities
+         WHERE COALESCE(TRIM(description),'')!='' AND icon_voxels IS NOT NULL) AS filled,
+      (SELECT COUNT(*) FROM activities
+         WHERE updated_at > NOW() - INTERVAL '1 hour') AS last_hour,
+      (SELECT COUNT(*) FROM activities
+         WHERE updated_at > NOW() - INTERVAL '1 day') AS last_day
+  `);
+  const r = rows[0];
+  return {
+    total: Number(r.total),
+    filled: Number(r.filled),
+    lastHour: Number(r.last_hour),
+    lastDay: Number(r.last_day),
+  };
+}
+
 export async function searchActivities(q: string) {
   const query = q.trim().toLowerCase();
   if (query.length === 0) return [];
@@ -211,9 +264,11 @@ export async function searchActivities(q: string) {
     ORDER BY
       (lname = ${query})::int DESC,
       (lname LIKE ${prefix})::int DESC,
+      (lname ~ ('(^|\\s)' || ${query} || '(\\s|$)'))::int DESC,
+      (lname ~ ('(^|\\s)' || ${query}))::int DESC,
       (lname LIKE ${like})::int DESC,
-      lev_full ASC NULLS LAST,
       COALESCE(lev_word, 99) ASC,
+      lev_full ASC NULLS LAST,
       GREATEST(trg, wtrg) DESC,
       name ASC
     LIMIT 50

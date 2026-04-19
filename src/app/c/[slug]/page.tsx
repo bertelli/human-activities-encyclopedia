@@ -81,7 +81,7 @@ async function CategoryBody({ slug }: { slug: string }) {
         <div className="flex justify-center mb-3">
           <CategoryIcon name={cat.name} size="lg" />
         </div>
-        <h1 className="m-0 font-normal text-black text-5xl leading-[0.9]">{cat.name}</h1>
+        <h1 className="m-0 font-normal text-black text-5xl leading-[0.9] capitalize">{cat.name}</h1>
         <p className="m-0 mt-1 text-[#757575]">
           {cat.activities.length} activities
         </p>
@@ -119,7 +119,7 @@ async function CategoryBody({ slug }: { slug: string }) {
                   size="xs"
                   animated={false}
                 />
-                <span>
+                <span className="capitalize">
                   {p.name}
                   {children.length > 0 && (
                     <span className="text-[#757575]">

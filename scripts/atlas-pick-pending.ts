@@ -14,14 +14,18 @@ async function main() {
     JOIN categories c ON c.id = a.category_id
     LEFT JOIN activities p ON p.slug = a.parent_slug
     WHERE
-      COALESCE(TRIM(a.description), '') = ''
+      a.updated_at IS NULL
+      OR LENGTH(COALESCE(TRIM(a.description), '')) < 800
       OR a.icon_voxels IS NULL
-      OR (SELECT COUNT(*) FROM tools t WHERE t.activity_id = a.id) < 5
-      OR (SELECT COUNT(*) FROM glossary_terms g WHERE g.activity_id = a.id) < 8
-      OR (SELECT COUNT(*) FROM techniques tq WHERE tq.activity_id = a.id) < 4
-      OR (SELECT COUNT(*) FROM brands b WHERE b.activity_id = a.id) < 4
-      OR (SELECT COUNT(*) FROM masters m WHERE m.activity_id = a.id) < 3
-    ORDER BY random()
+      OR (SELECT COUNT(*) FROM tools t WHERE t.activity_id = a.id) < 8
+      OR (SELECT COUNT(*) FROM glossary_terms g WHERE g.activity_id = a.id) < 15
+      OR (SELECT COUNT(*) FROM techniques tq WHERE tq.activity_id = a.id) < 8
+      OR (SELECT COUNT(*) FROM brands b WHERE b.activity_id = a.id) < 6
+      OR (SELECT COUNT(*) FROM masters m WHERE m.activity_id = a.id) < 5
+    ORDER BY
+      (a.updated_at IS NULL) DESC,
+      a.updated_at ASC NULLS FIRST,
+      random()
     LIMIT 1
   `);
 
