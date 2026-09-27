@@ -2,7 +2,7 @@
 set -uo pipefail
 
 PROJECT_DIR="/Users/francescobertelli-mini/Documents/human-activities-encyclopedia"
-OPENCLAW="/opt/homebrew/bin/openclaw"
+CLAUDE_CMD="/Users/francescobertelli-mini/.local/bin/claude"
 cd "$PROJECT_DIR"
 
 # 1. Pick a pending activity
@@ -17,7 +17,7 @@ if [ $PICK_EXIT -ne 0 ]; then
   exit 1
 fi
 
-# 2. Build prompt and invoke the agent externally (not recursively)
+# 2. Build prompt and call Claude directly (no nested agent session)
 PROMPT="You are filling the Human Activity Atlas encyclopedia.
 
 Activity data (JSON): $ACTIVITY
@@ -53,42 +53,22 @@ Examples: cake-carving = cylinderY tiers decreasing radius. Airsoft = box barrel
 
 Respond with ONLY the JSON object."
 
-SESSION_ID="atlas-fill-$(date +%s)-$$"
-REPLY=$("$OPENCLAW" agent \
-  --session-id "$SESSION_ID" \
-  --message "$PROMPT" \
-  --json \
-  --timeout 180 2>&1)
-AGENT_EXIT=$?
+CONTENT=$("$CLAUDE_CMD" -p "$PROMPT" \
+  --model claude-sonnet-4-6 \
+  --no-session-persistence \
+  --output-format text 2>/tmp/atlas-claude-err-$$.txt)
+CLAUDE_EXIT=$?
 
-if [ $AGENT_EXIT -ne 0 ]; then
-  echo "openclaw agent exit $AGENT_EXIT" >&2
-  echo "$REPLY" | tail -c 500 >&2
+if [ $CLAUDE_EXIT -ne 0 ]; then
+  echo "claude exit $CLAUDE_EXIT" >&2
+  cat /tmp/atlas-claude-err-$$.txt >&2
+  rm -f /tmp/atlas-claude-err-$$.txt
   exit 1
 fi
-
-CONTENT=$(echo "$REPLY" | python3 -c '
-import sys, json
-raw = sys.stdin.read()
-start = raw.find("{")
-if start < 0:
-    sys.stderr.write("no JSON object in reply\n"); sys.exit(1)
-try:
-    # strict=False tolerates literal control chars (newlines) inside strings
-    d = json.loads(raw[start:], strict=False)
-except Exception as e:
-    sys.stderr.write(f"parse fail: {e}\n"); sys.exit(1)
-res = d.get("result") or d
-txt = res.get("finalAssistantRawText") or res.get("finalAssistantVisibleText") or ""
-if not txt:
-    for p in res.get("payloads") or []:
-        if isinstance(p, dict) and isinstance(p.get("text"), str):
-            txt = p["text"]; break
-sys.stdout.write(txt)')
+rm -f /tmp/atlas-claude-err-$$.txt
 
 if [ -z "$CONTENT" ]; then
-  echo "empty assistant text" >&2
-  echo "$REPLY" | head -c 500 >&2
+  echo "empty claude output" >&2
   exit 1
 fi
 
@@ -100,7 +80,6 @@ if [ $WRITE_EXIT -ne 0 ]; then
 fi
 
 # 4. Trigger a Vercel prod deploy so the live site picks up the new content
-#    Deploy runs in the background — fire-and-forget, we don't block on build completion
 nohup /opt/homebrew/bin/vercel --cwd "$PROJECT_DIR" --prod --yes > /tmp/atlas-deploy-$(date +%s).log 2>&1 &
 disown
 echo "deploy triggered (background)" >&2
